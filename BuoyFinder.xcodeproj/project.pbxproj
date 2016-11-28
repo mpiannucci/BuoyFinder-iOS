@@ -11,6 +11,8 @@
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
 		34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B497671DEBC7090076EB5B /* Assets.xcassets */; };
 		34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */; };
+		34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */; };
+		34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562441DECB236006F1C67 /* ExploreViewController.swift */; };
 		6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +23,8 @@
 		34B497671DEBC7090076EB5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34B4976A1DEBC7090076EB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		34B4976C1DEBC7090076EB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBuoysViewController.swift; sourceTree = "<group>"; };
+		34E562441DECB236006F1C67 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		6FE0039DB6F7D412501CC29D /* Pods-BuoyFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.release.xcconfig"; sourceTree = "<group>"; };
 		9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA27CF0E2B8F2B3FFD98FB7F /* Pods-BuoyFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -59,11 +63,13 @@
 		34B4975F1DEBC7090076EB5B /* BuoyFinder */ = {
 			isa = PBXGroup;
 			children = (
-				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
-				34B497641DEBC7090076EB5B /* Main.storyboard */,
 				34B497671DEBC7090076EB5B /* Assets.xcassets */,
-				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
 				34B4976C1DEBC7090076EB5B /* Info.plist */,
+				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
+				34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */,
+				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
+				34B497641DEBC7090076EB5B /* Main.storyboard */,
+				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
 			);
 			path = BuoyFinder;
 			sourceTree = "<group>";
@@ -210,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */,
+				34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */,
+				34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

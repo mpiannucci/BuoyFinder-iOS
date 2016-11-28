@@ -33,7 +33,7 @@
             <objects>
                 <navigationController title="BuoyFinderNav" id="KEO-MI-fNb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" systemItem="search" id="e4S-3o-apO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o1g-ug-eNV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="o1g-ug-eNV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,7 +52,7 @@
         <!--BuoyFinder-->
         <scene sceneID="taV-i8-Hb7">
             <objects>
-                <tableViewController id="3la-7L-9cB" sceneMemberID="viewController">
+                <tableViewController id="3la-7L-9cB" customClass="FavoriteBuoysViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sqA-DS-x8p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,7 +83,7 @@
             <objects>
                 <navigationController id="mVW-L9-MnD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="SOg-Pt-Qd9"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CqI-PC-v0v">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CqI-PC-v0v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,7 +102,7 @@
         <!--BuoyFinder-->
         <scene sceneID="Ryl-9H-7C9">
             <objects>
-                <viewController id="dmf-R4-jJF" sceneMemberID="viewController">
+                <viewController id="dmf-R4-jJF" customClass="ExploreViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXf-YY-OFM"/>
                         <viewControllerLayoutGuide type="bottom" id="Kxj-QE-Pbw"/>
