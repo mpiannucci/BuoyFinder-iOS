@@ -13,8 +13,52 @@
 		34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */; };
 		34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */; };
 		34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562441DECB236006F1C67 /* ExploreViewController.swift */; };
+		34E562BE1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
+		34E562C51DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562C41DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift */; };
+		34E562C71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562B71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34E562CA1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
+		34E562CB1DECD683006F1C67 /* BuoyFinderDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		34E562D31DECD789006F1C67 /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		34E562BF1DECD683006F1C67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34E562B41DECD683006F1C67;
+			remoteInfo = "BuoyFinderDataKit-iOS";
+		};
+		34E562C11DECD683006F1C67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34B4975C1DEBC7080076EB5B;
+			remoteInfo = BuoyFinder;
+		};
+		34E562C81DECD683006F1C67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34E562B41DECD683006F1C67;
+			remoteInfo = "BuoyFinderDataKit-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		34E5628B1DECD29D006F1C67 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				34E562CB1DECD683006F1C67 /* BuoyFinderDataKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -25,6 +69,13 @@
 		34B4976C1DEBC7090076EB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBuoysViewController.swift; sourceTree = "<group>"; };
 		34E562441DECB236006F1C67 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BuoyFinderDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34E562B71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BuoyFinderDataKit-iOS.h"; sourceTree = "<group>"; };
+		34E562B81DECD683006F1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BuoyFinderDataKit-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34E562C41DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyFinderDataKit_iOSTests.swift; sourceTree = "<group>"; };
+		34E562C61DECD683006F1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuoyFinderDataKit.h; path = BuoyFinderDataKit/BuoyFinderDataKit.h; sourceTree = "<group>"; };
 		6FE0039DB6F7D412501CC29D /* Pods-BuoyFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.release.xcconfig"; sourceTree = "<group>"; };
 		9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA27CF0E2B8F2B3FFD98FB7F /* Pods-BuoyFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -35,7 +86,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E562CA1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */,
 				6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E562B11DECD683006F1C67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E562BA1DECD683006F1C67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E562BE1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				34B4975F1DEBC7090076EB5B /* BuoyFinder */,
+				34E562AF1DECD634006F1C67 /* BuoyFinderDataKit */,
+				34E562B61DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
+				34E562C31DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
 				34B4975E1DEBC7090076EB5B /* Products */,
 				6D19952AF017934D0B45A567 /* Pods */,
 				D52C73CDDCF1F6142AB9EE21 /* Frameworks */,
@@ -56,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				34B4975D1DEBC7090076EB5B /* BuoyFinder.app */,
+				34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */,
+				34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +144,32 @@
 				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
 			);
 			path = BuoyFinder;
+			sourceTree = "<group>";
+		};
+		34E562AF1DECD634006F1C67 /* BuoyFinderDataKit */ = {
+			isa = PBXGroup;
+			children = (
+				34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */,
+			);
+			name = BuoyFinderDataKit;
+			sourceTree = "<group>";
+		};
+		34E562B61DECD683006F1C67 /* BuoyFinderDataKit-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				34E562B71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h */,
+				34E562B81DECD683006F1C67 /* Info.plist */,
+			);
+			path = "BuoyFinderDataKit-iOS";
+			sourceTree = "<group>";
+		};
+		34E562C31DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				34E562C41DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift */,
+				34E562C61DECD683006F1C67 /* Info.plist */,
+			);
+			path = "BuoyFinderDataKit-iOSTests";
 			sourceTree = "<group>";
 		};
 		6D19952AF017934D0B45A567 /* Pods */ = {
@@ -93,6 +191,18 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		34E562B21DECD683006F1C67 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E562D31DECD789006F1C67 /* BuoyFinderDataKit.h in Headers */,
+				34E562C71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		34B4975C1DEBC7080076EB5B /* BuoyFinder */ = {
 			isa = PBXNativeTarget;
@@ -104,15 +214,54 @@
 				34B4975B1DEBC7080076EB5B /* Resources */,
 				C27C2470D4EE2B35AC2B21FE /* [CP] Embed Pods Frameworks */,
 				86CC263C446789361F9EA1AC /* [CP] Copy Pods Resources */,
+				34E5628B1DECD29D006F1C67 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				34E562C91DECD683006F1C67 /* PBXTargetDependency */,
 			);
 			name = BuoyFinder;
 			productName = BuoyFinder;
 			productReference = 34B4975D1DEBC7090076EB5B /* BuoyFinder.app */;
 			productType = "com.apple.product-type.application";
+		};
+		34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34E562CC1DECD683006F1C67 /* Build configuration list for PBXNativeTarget "BuoyFinderDataKit-iOS" */;
+			buildPhases = (
+				34E562B01DECD683006F1C67 /* Sources */,
+				34E562B11DECD683006F1C67 /* Frameworks */,
+				34E562B21DECD683006F1C67 /* Headers */,
+				34E562B31DECD683006F1C67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BuoyFinderDataKit-iOS";
+			productName = "BuoyFinderDataKit-iOS";
+			productReference = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		34E562BC1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34E562CF1DECD683006F1C67 /* Build configuration list for PBXNativeTarget "BuoyFinderDataKit-iOSTests" */;
+			buildPhases = (
+				34E562B91DECD683006F1C67 /* Sources */,
+				34E562BA1DECD683006F1C67 /* Frameworks */,
+				34E562BB1DECD683006F1C67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34E562C01DECD683006F1C67 /* PBXTargetDependency */,
+				34E562C21DECD683006F1C67 /* PBXTargetDependency */,
+			);
+			name = "BuoyFinderDataKit-iOSTests";
+			productName = "BuoyFinderDataKit-iOSTests";
+			productReference = 34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -128,6 +277,17 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 39L46PD99U;
 						ProvisioningStyle = Automatic;
+					};
+					34E562B41DECD683006F1C67 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 39L46PD99U;
+						ProvisioningStyle = Automatic;
+					};
+					34E562BC1DECD683006F1C67 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 39L46PD99U;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 34B4975C1DEBC7080076EB5B;
 					};
 				};
 			};
@@ -145,6 +305,8 @@
 			projectRoot = "";
 			targets = (
 				34B4975C1DEBC7080076EB5B /* BuoyFinder */,
+				34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
+				34E562BC1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -157,6 +319,20 @@
 				34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */,
 				34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */,
 				34B497661DEBC7090076EB5B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E562B31DECD683006F1C67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E562BB1DECD683006F1C67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +397,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		34E562B01DECD683006F1C67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E562B91DECD683006F1C67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E562C51DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34E562C01DECD683006F1C67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */;
+			targetProxy = 34E562BF1DECD683006F1C67 /* PBXContainerItemProxy */;
+		};
+		34E562C21DECD683006F1C67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34B4975C1DEBC7080076EB5B /* BuoyFinder */;
+			targetProxy = 34E562C11DECD683006F1C67 /* PBXContainerItemProxy */;
+		};
+		34E562C91DECD683006F1C67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */;
+			targetProxy = 34E562C81DECD683006F1C67 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		34B497641DEBC7090076EB5B /* Main.storyboard */ = {
@@ -364,6 +573,78 @@
 			};
 			name = Release;
 		};
+		34E562CD1DECD683006F1C67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "BuoyFinderDataKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mpiannucci.BuoyFinderDataKit-iOS";
+				PRODUCT_NAME = BuoyFinderDataKit;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		34E562CE1DECD683006F1C67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "BuoyFinderDataKit-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mpiannucci.BuoyFinderDataKit-iOS";
+				PRODUCT_NAME = BuoyFinderDataKit;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		34E562D01DECD683006F1C67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = "BuoyFinderDataKit-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mpiannucci.BuoyFinderDataKit-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuoyFinder.app/BuoyFinder";
+			};
+			name = Debug;
+		};
+		34E562D11DECD683006F1C67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = "BuoyFinderDataKit-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mpiannucci.BuoyFinderDataKit-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BuoyFinder.app/BuoyFinder";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -384,6 +665,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		34E562CC1DECD683006F1C67 /* Build configuration list for PBXNativeTarget "BuoyFinderDataKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34E562CD1DECD683006F1C67 /* Debug */,
+				34E562CE1DECD683006F1C67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		34E562CF1DECD683006F1C67 /* Build configuration list for PBXNativeTarget "BuoyFinderDataKit-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34E562D01DECD683006F1C67 /* Debug */,
+				34E562D11DECD683006F1C67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

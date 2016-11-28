@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "34E562761DECD29D006F1C67"
+               BuildableName = "BuoyFinderDataKit-iOSTests.xctest"
+               BlueprintName = "BuoyFinderDataKit-iOSTests"
+               ReferencedContainer = "container:BuoyFinder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
