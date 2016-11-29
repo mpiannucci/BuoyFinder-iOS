@@ -8,5 +8,10 @@ target 'BuoyFinder' do
   # Pods for BuoyFinder
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+end
+
+target 'BuoyFinderDataKit-iOS' do
+  use_frameworks!
+
   pod 'SwiftyJSON'
 end
