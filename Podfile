@@ -8,4 +8,5 @@ target 'BuoyFinder' do
   # Pods for BuoyFinder
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'SwiftyJSON'
 end
