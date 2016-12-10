@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Buoy: NSObject {
     
@@ -18,10 +19,10 @@ class Buoy: NSObject {
     var owner: String?
     var program: String?
     var buoyType: String?
-    var active: String?
-    var currents: String?
-    var waterQuality: String?
-    var dart: String?
+    var active: Bool?
+    var currents: Bool?
+    var waterQuality: Bool?
+    var dart: Bool?
     
     // Data
     var latestData: [BuoyDataItem]?
@@ -31,5 +32,21 @@ class Buoy: NSObject {
         self.location = location_
         
         super.init()
+    }
+    
+    init(jsonData: JSON) {
+        self.stationID = jsonData["StationID"].stringValue
+        self.location = Location(latitude: jsonData["Latitude"].doubleValue, longitude: jsonData["Longitude"].doubleValue, altitude: jsonData["Elevation"].doubleValue, locationName: jsonData["LocationName"].stringValue)
+        
+        self.owner = jsonData["Owner"].string
+        self.program = jsonData["PGM"].string
+        self.buoyType = jsonData["Type"].string
+        
+        self.active = (jsonData["Active"].stringValue == "y") as Bool?
+        self.currents = (jsonData["Currents"].stringValue == "y") as Bool?
+        self.waterQuality = (jsonData["WaterQuality"].stringValue == "y") as Bool?
+        self.dart = (jsonData["Dart"].stringValue == "y") as Bool?
+        
+        self.latestData = nil
     }
 }

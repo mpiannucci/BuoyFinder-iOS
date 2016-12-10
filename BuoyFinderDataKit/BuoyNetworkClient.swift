@@ -15,13 +15,20 @@ class BuoyNetworkClient: NSObject {
         let allStationsURL = URL(string: "https://buoyfinder.appspot.com/api/stations")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: allStationsURL) {
-            (data, response, error) -> Void in
+            (rawData, response, error) -> Void in
             
             if error != nil {
                 callback(nil)
             }
             
-            // TODO: Parse the buoys nad return them? IDKKKKK
+            // Parse the buoys and return them? IDKKKKK
+            let json = JSON(data: rawData!)
+            let buoys = json["Stations"].arrayValue.map({
+                (rawStation: JSON) -> Buoy in
+                Buoy(jsonData: rawStation)
+            })
+            
+            callback(buoys)
         }
         fetchTask.resume()
     }
