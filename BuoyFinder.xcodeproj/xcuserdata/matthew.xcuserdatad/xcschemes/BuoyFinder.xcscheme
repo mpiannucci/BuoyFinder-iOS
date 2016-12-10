@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "34E562761DECD29D006F1C67"
+               BlueprintIdentifier = "34E562BC1DECD683006F1C67"
                BuildableName = "BuoyFinderDataKit-iOSTests.xctest"
                BlueprintName = "BuoyFinderDataKit-iOSTests"
                ReferencedContainer = "container:BuoyFinder.xcodeproj">

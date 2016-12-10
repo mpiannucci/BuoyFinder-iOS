@@ -37,7 +37,14 @@ class Buoy: NSObject {
     init(jsonData: JSON) {
         self.stationID = jsonData["StationID"].stringValue
         self.location = Location(latitude: jsonData["Latitude"].doubleValue, longitude: jsonData["Longitude"].doubleValue, altitude: jsonData["Elevation"].doubleValue, locationName: jsonData["LocationName"].stringValue)
+        super.init()
         
+        // Load the rest of the station info
+        loadInfo(jsonData: jsonData)
+        self.latestData = nil
+    }
+    
+    internal func loadInfo(jsonData: JSON) {
         self.owner = jsonData["Owner"].string
         self.program = jsonData["PGM"].string
         self.buoyType = jsonData["Type"].string
@@ -46,7 +53,5 @@ class Buoy: NSObject {
         self.currents = (jsonData["Currents"].stringValue == "y") as Bool?
         self.waterQuality = (jsonData["WaterQuality"].stringValue == "y") as Bool?
         self.dart = (jsonData["Dart"].stringValue == "y") as Bool?
-        
-        self.latestData = nil
     }
 }
