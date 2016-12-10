@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import BuoyFinderDataKit_iOS
+@testable import BuoyFinderDataKit
 
 class BuoyFinderDataKit_iOSTests: XCTestCase {
     
@@ -21,16 +21,17 @@ class BuoyFinderDataKit_iOSTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testFetchAllStations() {
+        let fetchExpectation = expectation(description: "Wait for buoy stations to fetch and parse")
+        
+        BuoyNetworkClient.fetchAllBuoys { (buoys) in
+            XCTAssert((buoys?.count)! > 0)
+            
+            fetchExpectation.fulfill()
         }
+        
+        // Wait for the expectations to finish up
+        waitForExpectations(timeout: 10.0, handler:nil)
     }
     
 }
