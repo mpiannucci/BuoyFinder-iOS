@@ -20,6 +20,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if checkErrors(data: rawData, response: response, error: error) != nil {
                 callback(nil)
+                return
             }
             
             // Parse the buoys and return them? IDKKKKK
@@ -43,6 +44,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if checkErrors(data: rawData, response: response, error: error) != nil {
                 callback(nil)
+                return
             }
             
             // Add the new station info to the existing Buoy
@@ -64,6 +66,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if let fetchError = checkErrors(data: rawData, response: response, error: error) {
                 callback(fetchError)
+                return
             }
             
             // Add the new station info to the existing Buoy
@@ -77,7 +80,7 @@ class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyWaveData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/wave/charts/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/wave/charts/" + buoy.stationID)!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -85,6 +88,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if let fetchError = checkErrors(data: rawData, response: response, error: error) {
                 callback(fetchError)
+                return
             }
             
             // Add the latest wave data to the existing Buoy
@@ -99,7 +103,7 @@ class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyWeatherData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/weather/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/weather/" + buoy.stationID)!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -107,6 +111,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if let fetchError = checkErrors(data: rawData, response: response, error: error) {
                 callback(fetchError)
+                return
             }
             
             // Add the latest weather data to the existing Buoy
@@ -121,7 +126,7 @@ class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/" + buoy.stationID)!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -129,6 +134,7 @@ class BuoyNetworkClient: NSObject {
             // Handle Errors
             if let fetchError = checkErrors(data: rawData, response: response, error: error) {
                 callback(fetchError)
+                return
             }
             
             // Add the latest data to the existing Buoy

@@ -14,7 +14,6 @@ enum Units: String {
 }
 
 protocol UnitsProtocol {
-    var units: Units { get set }
     mutating func convertToMetric()
     mutating func convertToEnglish()
 }

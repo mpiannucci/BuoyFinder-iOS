@@ -14,6 +14,20 @@ struct Swell {
     var period: Double
     var direction: Double?
     var compassDirection: String?
+    var units: Units {
+        willSet(newUnits) {
+            if newUnits == self.units {
+                return
+            }
+            
+            switch newUnits {
+            case .Metric:
+                convertToMetric()
+            default:
+                convertToEnglish()
+            }
+        }
+    }
     
     init (jsonData: JSON) {
         waveHeight = jsonData["WaveHeight"].doubleValue
@@ -25,24 +39,6 @@ struct Swell {
 }
 
 extension Swell: UnitsProtocol {
-    public var units: Units {
-        get {
-            return self.units
-        }
-        set {
-            if units == self.units {
-                return
-            }
-            
-            self.units = units
-            switch self.units {
-            case .Metric:
-                    convertToMetric()
-            case .English:
-                    convertToEnglish()
-            }
-        }
-    }
 
     // Assumes everything is in english -> going to metric
     public mutating func convertToMetric() {
