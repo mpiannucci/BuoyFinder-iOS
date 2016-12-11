@@ -48,4 +48,25 @@ class BuoyFinderDataKit_iOSTests: XCTestCase {
         // Wait for the expectations to finish up
         waitForExpectations(timeout: 10.0, handler:nil)
     }
+    
+    func testFetchLatestData() {
+        let fetchExpectation = expectation(description: "Wait to fetch a given buoy and its latest data")
+        
+        BuoyNetworkClient.fetchBuoyStationInfo(stationID: "44017", callback: {
+            (buoy) in
+            
+            XCTAssert(buoy != nil)
+            
+            BuoyNetworkClient.fetchLatestBuoyData(buoy: buoy!, callback: {
+                (fetchError) in
+                
+                XCTAssert(fetchError == nil)
+                
+                fetchExpectation.fulfill()
+            })
+        })
+        
+        // Wait for all of our async operations to finish up
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
 }
