@@ -20,6 +20,7 @@
 		34E562CA1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
 		34E562CB1DECD683006F1C67 /* BuoyFinderDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34E562D31DECD789006F1C67 /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34F154381DFCB9F10041B072 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
 		34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
@@ -82,6 +83,7 @@
 		34E562C41DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyFinderDataKit_iOSTests.swift; sourceTree = "<group>"; };
 		34E562C61DECD683006F1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuoyFinderDataKit.h; path = BuoyFinderDataKit/BuoyFinderDataKit.h; sourceTree = "<group>"; };
+		34F154361DFCB6B60041B072 /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Units.swift; path = BuoyFinderDataKit/Units.swift; sourceTree = "<group>"; };
 		34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyDataItem.swift; path = BuoyFinderDataKit/BuoyDataItem.swift; sourceTree = "<group>"; };
 		34F5AF1D1DED1B190084AE86 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Swell.swift; path = BuoyFinderDataKit/Swell.swift; sourceTree = "<group>"; };
 		34F5AF1F1DED1E010084AE86 /* Buoy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buoy.swift; path = BuoyFinderDataKit/Buoy.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				34F5AF1F1DED1E010084AE86 /* Buoy.swift */,
 				34F5AF211DED1E690084AE86 /* Location.swift */,
 				34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */,
+				34F154361DFCB6B60041B072 /* Units.swift */,
 			);
 			name = BuoyFinderDataKit;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */,
+				34F154381DFCB9F10041B072 /* Units.swift in Sources */,
 				34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */,
 				34F5AF221DED1E690084AE86 /* Location.swift in Sources */,
 				34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */,

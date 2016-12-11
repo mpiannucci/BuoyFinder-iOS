@@ -76,6 +76,72 @@ class BuoyNetworkClient: NSObject {
         fetchTask.resume()
     }
     
+    public static func fetchLatestBuoyWaveData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
+        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/wave/charts/" + buoy.stationID)!
+        let session = URLSession.shared
+        let fetchTask = session.dataTask(with: stationInfoURL) {
+            (rawData, response, error) -> Void in
+            
+            // Handle Errors
+            if let fetchError = checkErrors(data: rawData, response: response, error: error) {
+                callback(fetchError)
+            }
+            
+            // Add the latest wave data to the existing Buoy
+            let json = JSON(data: rawData!)
+            let buoyDataJSON = json["BuoyData"]
+            buoy.loadLatestWaveData(jsonData: buoyDataJSON)
+            
+            // Let the listener know we are finished without errors
+            callback(nil)
+        }
+        fetchTask.resume()
+    }
+    
+    public static func fetchLatestBuoyWeatherData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
+        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/weather/" + buoy.stationID)!
+        let session = URLSession.shared
+        let fetchTask = session.dataTask(with: stationInfoURL) {
+            (rawData, response, error) -> Void in
+            
+            // Handle Errors
+            if let fetchError = checkErrors(data: rawData, response: response, error: error) {
+                callback(fetchError)
+            }
+            
+            // Add the latest weather data to the existing Buoy
+            let json = JSON(data: rawData!)
+            let buoyDataJSON = json["BuoyData"]
+            buoy.loadLatestWeatherData(jsonData: buoyDataJSON)
+            
+            // Let the listener know we are finished without errors
+            callback(nil)
+        }
+        fetchTask.resume()
+    }
+    
+    public static func fetchLatestBuoyData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
+        let stationInfoURL = URL(string: "http://buoyfinder.appspot.com/api/latest/" + buoy.stationID)!
+        let session = URLSession.shared
+        let fetchTask = session.dataTask(with: stationInfoURL) {
+            (rawData, response, error) -> Void in
+            
+            // Handle Errors
+            if let fetchError = checkErrors(data: rawData, response: response, error: error) {
+                callback(fetchError)
+            }
+            
+            // Add the latest data to the existing Buoy
+            let json = JSON(data: rawData!)
+            let buoyDataJSON = json["BuoyData"]
+            buoy.loadLatestData(jsonData: buoyDataJSON)
+            
+            // Let the listener know we are finished without errors
+            callback(nil)
+        }
+        fetchTask.resume()
+    }
+    
     private static func checkErrors(data: Data?, response: URLResponse?, error: Error?) -> FetchError? {
         var fetchError: FetchError?
         
