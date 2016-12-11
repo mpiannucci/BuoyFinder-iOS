@@ -124,7 +124,8 @@ class Buoy: NSObject {
         self.latestData?.windSpeed = jsonData["WindSpeed"].double
         self.latestData?.windGust = jsonData["WindGust"].double
         self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
-        self.latestData?.swellComponents = jsonData["SwellComponents"].arrayValue.map({ (swellJSON) -> Swell in
+        self.latestData?.swellComponents = jsonData["SwellComponents"].arrayValue.map({
+            (swellJSON) -> Swell in
             return Swell(jsonData: swellJSON)
         })
         self.latestData?.pressure = jsonData["Pressure"].double

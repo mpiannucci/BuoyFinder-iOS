@@ -35,8 +35,25 @@ struct BuoyDataItem {
     var pressureTendency: Double?
     var waterLevel: Double?
     
+    // Units
+    var units: Units {
+        didSet(oldValue) {
+            if oldValue == self.units {
+                return
+            }
+            
+            switch self.units {
+            case .Metric:
+                convertToMetric()
+            default:
+                convertToEnglish()
+            }
+        }
+    }
+    
     init(newDate: Date) {
         self.date = newDate
+        self.units = Units.Metric
         
         // Initialize everything else to nil as a shortcut
         self.windDirection = nil
@@ -77,5 +94,78 @@ struct BuoyDataItem {
         self.visibility = nil
         self.pressureTendency = nil
         self.waterLevel = nil
+    }
+}
+
+extension BuoyDataItem: UnitsProtocol {
+    
+    // Assumes everything is in english -> going to metric
+    public mutating func convertToMetric() {
+        if let uWindSpeed = self.windSpeed {
+            self.windSpeed = Units.mphToMetersPerSecond(mphValue: uWindSpeed)
+        }
+        if let uWindGust = self.windGust {
+            self.windGust = Units.mphToMetersPerSecond(mphValue: uWindGust)
+        }
+        if let uAirTemp = self.airTemperature {
+            self.airTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uAirTemp)
+        }
+        if let uWaterTemp = self.waterTemperature {
+            self.waterTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uWaterTemp)
+        }
+        if let uDewpointTemp = self.dewpointTemperature {
+            self.dewpointTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uDewpointTemp)
+        }
+        if let uPressure = self.pressure {
+            self.pressure = Units.inchMercuryToHpa(inhgValue: uPressure)
+        }
+        if let uPressureTendency = self.pressureTendency {
+            self.pressureTendency = Units.inchMercuryToHpa(inhgValue: uPressureTendency)
+        }
+        if let uWaterLevel = self.waterLevel {
+            self.waterLevel = Units.feetToMeters(feetValue: uWaterLevel)
+        }
+        
+        self.waveSummary?.units = self.units
+        if self.swellComponents != nil {
+            for i in self.swellComponents!.indices {
+                self.swellComponents![i].units = self.units
+            }
+        }
+    }
+    
+    // Assumes everything is in metric -> going to english
+    public mutating func convertToEnglish() {
+        if let uWindSpeed = self.windSpeed {
+            self.windSpeed = Units.metersPerSecondToMPH(mpsValue: uWindSpeed)
+        }
+        if let uWindGust = self.windGust {
+            self.windGust = Units.metersPerSecondToMPH(mpsValue: uWindGust)
+        }
+        if let uAirTemp = self.airTemperature {
+            self.airTemperature = Units.celsiusToFahrenheit(celsiusValue: uAirTemp)
+        }
+        if let uWaterTemp = self.waterTemperature {
+            self.waterTemperature = Units.celsiusToFahrenheit(celsiusValue: uWaterTemp)
+        }
+        if let uDewpointTemp = self.dewpointTemperature {
+            self.dewpointTemperature = Units.celsiusToFahrenheit(celsiusValue: uDewpointTemp)
+        }
+        if let uPressure = self.pressure {
+            self.pressure = Units.hpaToInchMercury(hpaValue: uPressure)
+        }
+        if let uPressureTendency = self.pressureTendency {
+            self.pressureTendency = Units.hpaToInchMercury(hpaValue: uPressureTendency)
+        }
+        if let uWaterLevel = self.waterLevel {
+            self.waterLevel = Units.metersToFeet(metricValue: uWaterLevel)
+        }
+        
+        self.waveSummary?.units = self.units
+        if self.swellComponents != nil {
+            for i in self.swellComponents!.indices {
+                self.swellComponents![i].units = self.units
+            }
+        }
     }
 }

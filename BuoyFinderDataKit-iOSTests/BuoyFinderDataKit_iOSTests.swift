@@ -61,6 +61,7 @@ class BuoyFinderDataKit_iOSTests: XCTestCase {
                 (fetchError) in
                 
                 XCTAssert(fetchError == nil)
+                XCTAssert(buoy?.latestData != nil)
                 
                 fetchExpectation.fulfill()
             })

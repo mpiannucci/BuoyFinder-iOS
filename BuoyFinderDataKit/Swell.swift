@@ -15,12 +15,12 @@ struct Swell {
     var direction: Double?
     var compassDirection: String?
     var units: Units {
-        willSet(newUnits) {
-            if newUnits == self.units {
+        didSet(oldValue) {
+            if oldValue == self.units {
                 return
             }
             
-            switch newUnits {
+            switch self.units {
             case .Metric:
                 convertToMetric()
             default:
@@ -42,11 +42,11 @@ extension Swell: UnitsProtocol {
 
     // Assumes everything is in english -> going to metric
     public mutating func convertToMetric() {
-        self.waveHeight = self.waveHeight / 3.28
+        self.waveHeight = Units.feetToMeters(feetValue: self.waveHeight)
     }
     
     // Assumes everything is in metric -> going to english
     public mutating func convertToEnglish() {
-        self.waveHeight = self.waveHeight * 3.28
+        self.waveHeight = Units.metersToFeet(metricValue: self.waveHeight)
     }
 }
