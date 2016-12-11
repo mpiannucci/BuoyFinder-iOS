@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BuoyDataItem {
+class BuoyDataItem: NSCoding {
     
     // Date
     var date: Date
@@ -74,7 +74,34 @@ struct BuoyDataItem {
         self.waterLevel = nil
     }
     
-    public mutating func resetWaveData() {
+    required convenience init?(coder aDecoder: NSCoder) {
+        if let unit = aDecoder.decodeObject(forKey: "units") as? Units,
+            let date_ = aDecoder.decodeObject(forKey: "date") as? Date {
+            self.init(newDate: date_)
+            self.units = unit
+        } else {
+            return nil
+        }
+        
+        self.windDirection = aDecoder.decodeObject(forKey: "windDirection") as? Double
+        self.windSpeed = aDecoder.decodeObject(forKey: "windSpeed") as? Double
+        self.windGust = aDecoder.decodeObject(forKey: "windGust") as? Double
+        self.waveSummary = aDecoder.decodeObject(forKey: "waveSummary") as? Swell
+        self.swellComponents = aDecoder.decodeObject(forKey: "swellComponents") as? [Swell]
+        self.steepness = aDecoder.decodeObject(forKey: "steepness") as? String
+        self.averagePeriod = aDecoder.decodeObject(forKey: "averagePeriod") as? Double
+        self.directionalSpectraPlotURL = aDecoder.decodeObject(forKey: "directionalSpectraPlotURL") as? String
+        self.spectralDistributionPlotURL = aDecoder.decodeObject(forKey: "spectralDistributionPlotURL") as? String
+        self.pressure = aDecoder.decodeObject(forKey: "pressure") as? Double
+        self.airTemperature = aDecoder.decodeObject(forKey: "airTemperature") as? Double
+        self.waterTemperature = aDecoder.decodeObject(forKey: "waterTemperature") as? Double
+        self.dewpointTemperature = aDecoder.decodeObject(forKey: "dewpointTemperature") as? Double
+        self.visibility = aDecoder.decodeObject(forKey: "visibility") as? Double
+        self.pressureTendency = aDecoder.decodeObject(forKey: "pressureTendency") as? Double
+        self.waterLevel = aDecoder.decodeObject(forKey: "waterLevel") as? Double
+    }
+    
+    public func resetWaveData() {
         self.waveSummary = nil
         self.swellComponents = nil
         self.steepness = nil
@@ -83,7 +110,7 @@ struct BuoyDataItem {
         self.spectralDistributionPlotURL = nil
     }
     
-    public mutating func resetWeatherData() {
+    public func resetWeatherData() {
         self.windDirection = nil
         self.windSpeed = nil
         self.windGust = nil
@@ -95,12 +122,34 @@ struct BuoyDataItem {
         self.pressureTendency = nil
         self.waterLevel = nil
     }
+    
+    // MARK: NSCoder
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.date, forKey: "date")
+        aCoder.encode(self.units, forKey: "units")
+        aCoder.encode(self.windDirection, forKey: "windDirection")
+        aCoder.encode(self.windSpeed, forKey: "windSpeed")
+        aCoder.encode(self.windGust, forKey: "windGust")
+        aCoder.encode(self.waveSummary, forKey: "waveSummary")
+        aCoder.encode(self.swellComponents, forKey: "swellComponents")
+        aCoder.encode(self.steepness, forKey: "steepness")
+        aCoder.encode(self.averagePeriod, forKey: "averagePeriod")
+        aCoder.encode(self.directionalSpectraPlotURL, forKey: "directionalSpectraPlotURL")
+        aCoder.encode(self.spectralDistributionPlotURL, forKey: "spectralDistributionPlotURL")
+        aCoder.encode(self.pressure, forKey: "pressure")
+        aCoder.encode(self.airTemperature, forKey: "airTemperature")
+        aCoder.encode(self.waterTemperature, forKey: "waterTemperature")
+        aCoder.encode(self.dewpointTemperature, forKey: "dewpointTemperature")
+        aCoder.encode(self.visibility, forKey: "visibility")
+        aCoder.encode(self.pressureTendency, forKey: "pressureTendency")
+        aCoder.encode(self.waterLevel, forKey: "waterLevel")
+    }
 }
 
 extension BuoyDataItem: UnitsProtocol {
     
     // Assumes everything is in english -> going to metric
-    public mutating func convertToMetric() {
+    public func convertToMetric() {
         if let uWindSpeed = self.windSpeed {
             self.windSpeed = Units.mphToMetersPerSecond(mphValue: uWindSpeed)
         }
@@ -135,7 +184,7 @@ extension BuoyDataItem: UnitsProtocol {
     }
     
     // Assumes everything is in metric -> going to english
-    public mutating func convertToEnglish() {
+    public func convertToEnglish() {
         if let uWindSpeed = self.windSpeed {
             self.windSpeed = Units.metersPerSecondToMPH(mpsValue: uWindSpeed)
         }
