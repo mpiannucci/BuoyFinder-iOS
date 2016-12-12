@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Buoy: NSObject {
+class Buoy: NSCoding {
     
     // Required
     var stationID: String
@@ -57,21 +57,55 @@ class Buoy: NSObject {
         }
     }
     
-    init(stationID_: String, location_: Location) {
-        self.stationID = stationID_
-        self.location = location_
-        
-        super.init()
+    init(stationID: String, location: Location) {
+        self.stationID = stationID
+        self.location = location
     }
     
-    init(jsonData: JSON) {
-        self.stationID = jsonData["StationID"].stringValue
-        self.location = Location(latitude: jsonData["Latitude"].doubleValue, longitude: jsonData["Longitude"].doubleValue, altitude: jsonData["Elevation"].doubleValue, locationName: jsonData["LocationName"].stringValue)
-        super.init()
+    convenience init(jsonData: JSON) {
+        let stationId = jsonData["StationID"].stringValue
+        let locale = Location(latitude: jsonData["Latitude"].doubleValue, longitude: jsonData["Longitude"].doubleValue, altitude: jsonData["Elevation"].doubleValue, locationName: jsonData["LocationName"].stringValue)
+        
+        self.init(stationID: stationId, location: locale)
         
         // Load the rest of the station info
         loadInfo(jsonData: jsonData)
         self.latestData = nil
+    }
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        if let station = aDecoder.decodeObject(forKey: "stationID") as? String,
+            let locale = aDecoder.decodeObject(forKey: "location") as? Location {
+            self.init(stationID: station, location: locale)
+        } else {
+            return nil
+        }
+        
+        self.owner = aDecoder.decodeObject(forKey: "owner") as? String
+        self.program = aDecoder.decodeObject(forKey: "program") as? String
+        self.buoyType = aDecoder.decodeObject(forKey: "buoyType") as? String
+        self.active = aDecoder.decodeObject(forKey: "active") as? Bool
+        self.currents = aDecoder.decodeObject(forKey: "currents") as? Bool
+        self.waterQuality = aDecoder.decodeObject(forKey: "waterQuality") as? Bool
+        self.dart = aDecoder.decodeObject(forKey: "dart") as? Bool
+        self.latestData = aDecoder.decodeObject(forKey: "latestData") as? BuoyDataItem
+        self.lastWaveUpdateTime = aDecoder.decodeObject(forKey: "lastWaveUpdateTime") as? Date
+        self.lastWeatherUpdateTime = aDecoder.decodeObject(forKey: "lastWeatherUpdateTime") as? Date
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.stationID, forKey: "stationID")
+        aCoder.encode(self.location, forKey: "location")
+        aCoder.encode(self.owner, forKey: "owner")
+        aCoder.encode(self.program, forKey: "program")
+        aCoder.encode(self.buoyType, forKey: "buoyType")
+        aCoder.encode(self.active, forKey: "active")
+        aCoder.encode(self.currents, forKey: "currents")
+        aCoder.encode(self.waterQuality, forKey: "waterQuality")
+        aCoder.encode(self.dart, forKey: "dart")
+        aCoder.encode(self.latestData, forKey: "latestData")
+        aCoder.encode(self.lastWaveUpdateTime, forKey: "lastWaveUpdateTime")
+        aCoder.encode(self.lastWeatherUpdateTime, forKey: "lastWeatherUpdateTime")
     }
     
     internal func loadInfo(jsonData: JSON) {
