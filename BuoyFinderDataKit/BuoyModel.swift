@@ -6,14 +6,49 @@
 //  Copyright © 2016 Matthew Iannucci. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class BuoyModel: NSObject {
     
-    static let sharedModel = BuoyModel()
+    public static let sharedModel = BuoyModel()
+    
+    // Notifications
+    public static let buoyStationsFetchStartedNotification = Notification.Name("buoyStationFetchStarted")
+    public static let buoyStationsUpdatedNotification = Notification.Name("buoyStationsUpdated")
+    public static let buoyStationsUpdateFailedNotification = Notification.Name("buoyStationUpdateFailed")
+    public static let buoyDataFetchStartedNotification = Notification.Name("buoyDataFetchStarted")
+    public static let buoyDataUpdatedNotification = Notification.Name("buoyDataUpdated")
+    public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
+    
+    // Buoys
+    public private(set) var buoys: [Buoy]? = nil
     
     private override init() {
         
     }
-
+    
+    // MARK: NSCoding
+    internal required init?(coder aDecoder: NSCoder) {
+        if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [Buoy] {
+            self.buoys = savedBuoys
+        }
+    }
+    
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.buoys, forKey: "buoys")
+    }
+    
+    // Fetching
+    public func fetchBuoyStations() {
+        BuoyNetworkClient.fetchAllBuoys {
+            (newBuoys) in
+            if newBuoys == nil {
+                NotificationCenter.default.post(name: BuoyModel.buoyStationsUpdateFailedNotification, object: nil)
+                return
+            }
+            
+            self.buoys = newBuoys
+            NotificationCenter.default.post(name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
+        }
+    }
 }
