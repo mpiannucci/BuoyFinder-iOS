@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
+		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
 		34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B497601DEBC7090076EB5B /* AppDelegate.swift */; };
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
 		34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B497671DEBC7090076EB5B /* Assets.xcassets */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		34B176FC1E02303F007E211E /* BuoyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyModel.swift; path = BuoyFinderDataKit/BuoyModel.swift; sourceTree = "<group>"; };
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B497601DEBC7090076EB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34B497651DEBC7090076EB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				34F5AF211DED1E690084AE86 /* Location.swift */,
 				34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */,
 				34F154361DFCB6B60041B072 /* Units.swift */,
+				34B176FC1E02303F007E211E /* BuoyModel.swift */,
 			);
 			name = BuoyFinderDataKit;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */,
 				34F5AF221DED1E690084AE86 /* Location.swift in Sources */,
 				34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */,
+				34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */,
 				34F5AF241DED236A0084AE86 /* BuoyNetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
