@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class BuoyNetworkClient: NSObject {
+public class BuoyNetworkClient: NSObject {
     
     public static func fetchAllBuoys(callback: @escaping ([String:Buoy]?) -> Void) {
         let allStationsURL = URL(string: "https://buoyfinder.appspot.com/api/stations")!
@@ -172,7 +172,7 @@ class BuoyNetworkClient: NSObject {
         return fetchError
     }
     
-    enum FetchError: Error {
+    public enum FetchError: Error {
         case urlSessionError
         case noDataReceived
         case badResponseCode

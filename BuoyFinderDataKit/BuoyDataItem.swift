@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BuoyDataItem: NSCoding {
+public class BuoyDataItem: NSCoding {
     
     // Date
     var date: Date
@@ -74,7 +74,7 @@ class BuoyDataItem: NSCoding {
         self.waterLevel = nil
     }
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         if let unit = aDecoder.decodeObject(forKey: "units") as? Units,
             let date_ = aDecoder.decodeObject(forKey: "date") as? Date {
             self.init(newDate: date_)

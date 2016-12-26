@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Buoy: NSCoding {
+public class Buoy: NSCoding {
     
     public static let buoyDataFetchStartedNotification = Notification.Name("buoyDataFetchStarted")
     public static let buoyDataUpdatedNotification = Notification.Name("buoyDataUpdated")
@@ -77,7 +77,7 @@ class Buoy: NSCoding {
         self.latestData = nil
     }
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         if let station = aDecoder.decodeObject(forKey: "stationID") as? String,
             let locale = aDecoder.decodeObject(forKey: "location") as? Location {
             self.init(stationID: station, location: locale)

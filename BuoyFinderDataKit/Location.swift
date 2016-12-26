@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Location: NSCoding {
+public class Location: NSCoding {
     var latitude: Double
     var longitude: Double
     
@@ -25,7 +25,7 @@ class Location: NSCoding {
     
     // MARK: NSCoding
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         if let lat = aDecoder.decodeObject(forKey: "latitude") as? Double,
             let lon = aDecoder.decodeObject(forKey: "longitude") as? Double {
             self.init(latitude: lat, longitude: lon)

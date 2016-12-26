@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Swell: NSCoding {
+public class Swell: NSCoding {
     var waveHeight: Double
     var period: Double
     var direction: Double?
@@ -47,7 +47,7 @@ class Swell: NSCoding {
     
     // MARK: NSCoding
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         if let height = aDecoder.decodeObject(forKey: "waveHeight") as? Double,
             let per = aDecoder.decodeObject(forKey: "period") as? Double,
             let unit = aDecoder.decodeObject(forKey: "units") as? Units {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
+		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
 		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
 		34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B497601DEBC7090076EB5B /* AppDelegate.swift */; };
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		346573B21E11D21A007E6C12 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		34B176FC1E02303F007E211E /* BuoyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyModel.swift; path = BuoyFinderDataKit/BuoyModel.swift; sourceTree = "<group>"; };
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B497601DEBC7090076EB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */,
 				34E562CA1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */,
 				6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */,
 			);
@@ -212,6 +215,7 @@
 		D52C73CDDCF1F6142AB9EE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				346573B21E11D21A007E6C12 /* CoreLocation.framework */,
 				9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */,
 				CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */,
 			);
@@ -301,7 +305,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Matthew Iannucci";
 				TargetAttributes = {
 					34B4975C1DEBC7080076EB5B = {

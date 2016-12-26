@@ -9,5 +9,4 @@
 #ifndef BuoyFinderDataKit_h
 #define BuoyFinderDataKit_h
 
-
 #endif /* BuoyFinderDataKit_h */

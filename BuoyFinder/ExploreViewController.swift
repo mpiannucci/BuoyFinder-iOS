@@ -7,13 +7,35 @@
 //
 
 import UIKit
+import GoogleMaps
+import SwiftLocation
+import BuoyFinderDataKit
 
 class ExploreViewController: UIViewController {
+    
+    @IBOutlet weak var mapView: GMSMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Setup the map settings
+        self.mapView.mapType = kGMSTypeHybrid
+        self.mapView.settings.setAllGesturesEnabled(true)
+        self.mapView.settings.compassButton = true
+        self.mapView.settings.myLocationButton = true
+        
+        // Set the default camera to be directly over america
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: 39.8, longitude: -98.6, zoom: 3)
+        
+        // Try and get the users location to give a better view of buoys around them
+        let locationRequest = Location.getLocation(withAccuracy: .city, onSuccess: { foundLocation in
+            // Change the view of the map to center around the location
+            self.mapView.camera = GMSCameraPosition.camera(withTarget: foundLocation.coordinate, zoom: 6)
+        }) { (lastValidLocation, error) in
+            // Do nothing
+            print("\(error)")
+        }
+        locationRequest.start()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +43,13 @@ class ExploreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+    }
 
     /*
     // MARK: - Navigation

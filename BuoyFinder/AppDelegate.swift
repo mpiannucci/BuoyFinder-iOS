@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import BuoyFinderDataKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Google Maps Auth
         GMSServices.provideAPIKey("AIzaSyB5StrjG3MFFOVVdd9y3c1AxNEyU1La1X4")
+        
+        // Set up the buoy model
+        let buoyModel = BuoyModel.sharedModel
         
         return true
     }

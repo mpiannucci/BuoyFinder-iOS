@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BuoyModel: NSObject {
+public class BuoyModel: NSObject {
     
     public static let sharedModel = BuoyModel()
     
@@ -25,7 +25,7 @@ class BuoyModel: NSObject {
     }
     
     // MARK: NSCoding
-    internal required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [String:Buoy] {
             self.buoys = savedBuoys
         }
