@@ -11,6 +11,10 @@ import SwiftyJSON
 
 class Buoy: NSCoding {
     
+    public static let buoyDataFetchStartedNotification = Notification.Name("buoyDataFetchStarted")
+    public static let buoyDataUpdatedNotification = Notification.Name("buoyDataUpdated")
+    public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
+    
     // Required
     var stationID: String
     var location: Location
@@ -106,6 +110,45 @@ class Buoy: NSCoding {
         aCoder.encode(self.latestData, forKey: "latestData")
         aCoder.encode(self.lastWaveUpdateTime, forKey: "lastWaveUpdateTime")
         aCoder.encode(self.lastWeatherUpdateTime, forKey: "lastWeatherUpdateTime")
+    }
+    
+    public func fetchLatestData() {
+        NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
+        
+        BuoyNetworkClient.fetchLatestBuoyData(buoy: self) {
+            (fetchError) in
+            if fetchError != nil {
+                NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
+            }
+            
+            NotificationCenter.default.post(name: Buoy.buoyDataUpdatedNotification, object: self.stationID)
+        }
+    }
+    
+    public func fetchLatestWaveData() {
+        NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
+        
+        BuoyNetworkClient.fetchLatestBuoyWaveData(buoy: self) {
+            (fetchError) in
+            if fetchError != nil {
+                NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
+            }
+            
+            NotificationCenter.default.post(name: Buoy.buoyDataUpdatedNotification, object: self.stationID)
+        }
+    }
+    
+    public func fetchLatestWeatherData() {
+        NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
+        
+        BuoyNetworkClient.fetchLatestBuoyWeatherData(buoy: self) {
+            (fetchError) in
+            if fetchError != nil {
+                NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
+            }
+            
+            NotificationCenter.default.post(name: Buoy.buoyDataUpdatedNotification, object: self.stationID)
+        }
     }
     
     internal func loadInfo(jsonData: JSON) {

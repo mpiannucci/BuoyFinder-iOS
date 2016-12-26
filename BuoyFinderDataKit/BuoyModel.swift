@@ -16,9 +16,6 @@ class BuoyModel: NSObject {
     public static let buoyStationsFetchStartedNotification = Notification.Name("buoyStationFetchStarted")
     public static let buoyStationsUpdatedNotification = Notification.Name("buoyStationsUpdated")
     public static let buoyStationsUpdateFailedNotification = Notification.Name("buoyStationUpdateFailed")
-    public static let buoyDataFetchStartedNotification = Notification.Name("buoyDataFetchStarted")
-    public static let buoyDataUpdatedNotification = Notification.Name("buoyDataUpdated")
-    public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
     
     // Buoys
     public private(set) var buoys: [String:Buoy]? = nil
