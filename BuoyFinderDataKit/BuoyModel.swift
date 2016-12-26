@@ -21,7 +21,7 @@ class BuoyModel: NSObject {
     public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
     
     // Buoys
-    public private(set) var buoys: [Buoy]? = nil
+    public private(set) var buoys: [String:Buoy]? = nil
     
     private override init() {
         
@@ -29,7 +29,7 @@ class BuoyModel: NSObject {
     
     // MARK: NSCoding
     internal required init?(coder aDecoder: NSCoder) {
-        if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [Buoy] {
+        if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [String:Buoy] {
             self.buoys = savedBuoys
         }
     }
@@ -51,4 +51,5 @@ class BuoyModel: NSObject {
             NotificationCenter.default.post(name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
         }
     }
+    
 }

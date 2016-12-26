@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class BuoyNetworkClient: NSObject {
     
-    public static func fetchAllBuoys(callback: @escaping ([Buoy]?) -> Void) {
+    public static func fetchAllBuoys(callback: @escaping ([String:Buoy]?) -> Void) {
         let allStationsURL = URL(string: "https://buoyfinder.appspot.com/api/stations")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: allStationsURL) {
@@ -28,7 +28,12 @@ class BuoyNetworkClient: NSObject {
             let buoys = json["Stations"].arrayValue.map({
                 (rawStation: JSON) -> Buoy in
                 Buoy(jsonData: rawStation)
-            })
+            }).reduce([String:Buoy]()) {
+                dict, newBuoy in
+                var newDict = dict
+                newDict[newBuoy.stationID] = newBuoy
+                return newDict
+            };
             
             callback(buoys)
         }
