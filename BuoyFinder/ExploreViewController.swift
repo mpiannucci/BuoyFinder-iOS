@@ -13,7 +13,7 @@ import BuoyFinderDataKit
 
 class ExploreViewController: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet public weak var mapView: GMSMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,6 @@ class ExploreViewController: UIViewController {
             self.mapView.camera = GMSCameraPosition.camera(withTarget: foundLocation.coordinate, zoom: 6)
         }) { (lastValidLocation, error) in
             // Do nothing
-            print("\(error)")
         }
         locationRequest.start()
     }
@@ -75,4 +74,11 @@ class ExploreViewController: UIViewController {
     }
     */
 
+}
+
+// GSMapViewDelegate
+extension ExploreViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        // TODO: Navigate to buoy page of the given marker
+    }
 }

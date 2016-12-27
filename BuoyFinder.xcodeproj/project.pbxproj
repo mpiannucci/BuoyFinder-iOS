@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
 		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
+		346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346573B51E11EEBC007E6C12 /* BuoyViewController.swift */; };
 		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
 		34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B497601DEBC7090076EB5B /* AppDelegate.swift */; };
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		346573B21E11D21A007E6C12 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinder.entitlements; sourceTree = "<group>"; };
+		346573B51E11EEBC007E6C12 /* BuoyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyViewController.swift; sourceTree = "<group>"; };
 		34B176FC1E02303F007E211E /* BuoyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyModel.swift; path = BuoyFinderDataKit/BuoyModel.swift; sourceTree = "<group>"; };
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B497601DEBC7090076EB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
 				34B497641DEBC7090076EB5B /* Main.storyboard */,
 				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
+				346573B51E11EEBC007E6C12 /* BuoyViewController.swift */,
 			);
 			path = BuoyFinder;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */,
+				346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */,
 				34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */,
 				34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */,
 			);
