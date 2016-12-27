@@ -11,29 +11,29 @@ import Foundation
 public class BuoyDataItem: NSCoding {
     
     // Date
-    var date: Date
+    public var date: Date
     
     // Wind
-    var windDirection: Double?
-    var windSpeed: Double?
-    var windGust: Double?
+    public var windDirection: Double?
+    public var windSpeed: Double?
+    public var windGust: Double?
     
     // Waves
-    var waveSummary: Swell?
-    var swellComponents: [Swell]?
-    var steepness: String?
-    var averagePeriod: Double?
-    var directionalSpectraPlotURL: String?
-    var spectralDistributionPlotURL: String?
+    public var waveSummary: Swell?
+    public var swellComponents: [Swell]?
+    public var steepness: String?
+    public var averagePeriod: Double?
+    public var directionalSpectraPlotURL: String?
+    public var spectralDistributionPlotURL: String?
     
     // Weather
-    var pressure: Double?
-    var airTemperature: Double?
-    var waterTemperature: Double?
-    var dewpointTemperature: Double?
-    var visibility: Double?
-    var pressureTendency: Double?
-    var waterLevel: Double?
+    public var pressure: Double?
+    public var airTemperature: Double?
+    public var waterTemperature: Double?
+    public var dewpointTemperature: Double?
+    public var visibility: Double?
+    public var pressureTendency: Double?
+    public var waterLevel: Double?
     
     // Units
     var units: Units {

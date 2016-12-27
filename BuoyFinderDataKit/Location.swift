@@ -9,12 +9,13 @@
 import Foundation
 
 public class Location: NSCoding {
-    var latitude: Double
-    var longitude: Double
+    
+    public var latitude: Double
+    public var longitude: Double
     
     // Optional
-    var altitude: Double?
-    var locationName: String?
+    public var altitude: Double?
+    public var locationName: String?
     
     init(latitude: Double, longitude: Double, altitude: Double? = nil, locationName: String? = nil) {
         self.latitude = latitude

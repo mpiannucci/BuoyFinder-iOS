@@ -16,24 +16,24 @@ public class Buoy: NSCoding {
     public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
     
     // Required
-    var stationID: String
-    var location: Location
+    public var stationID: String
+    public var location: Location
     
     // Optional
-    var owner: String?
-    var program: String?
-    var buoyType: String?
-    var active: Bool?
-    var currents: Bool?
-    var waterQuality: Bool?
-    var dart: Bool?
+    public var owner: String?
+    public var program: String?
+    public var buoyType: String?
+    public var active: Bool?
+    public var currents: Bool?
+    public var waterQuality: Bool?
+    public var dart: Bool?
     
     // Data
-    var latestData: BuoyDataItem?
+    public var latestData: BuoyDataItem?
     
     // Update management
-    var lastWaveUpdateTime: Date?
-    var lastWeatherUpdateTime: Date?
+    public var lastWaveUpdateTime: Date?
+    public var lastWeatherUpdateTime: Date?
     
     var needsUpdate: Bool {
         get {

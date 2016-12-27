@@ -44,11 +44,25 @@ class ExploreViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(ExploreViewController.updateBuoyStations), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func updateBuoyStations() {
+        DispatchQueue.main.sync {
+            if let stations = BuoyModel.sharedModel.buoys {
+                for (_, station) in stations {
+                    let marker = GMSMarker()
+                    marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
+                    marker.title = station.location.locationName
+                    marker.snippet = "Station: " + station.stationID + ", " + station.program!
+                    marker.map = mapView
+                }
+            }
+        }
     }
 
     /*

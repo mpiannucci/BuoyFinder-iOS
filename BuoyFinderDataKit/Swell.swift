@@ -10,10 +10,10 @@ import Foundation
 import SwiftyJSON
 
 public class Swell: NSCoding {
-    var waveHeight: Double
-    var period: Double
-    var direction: Double?
-    var compassDirection: String?
+    public var waveHeight: Double
+    public var period: Double
+    public var direction: Double?
+    public var compassDirection: String?
     var units: Units {
         didSet(oldValue) {
             if oldValue == self.units {

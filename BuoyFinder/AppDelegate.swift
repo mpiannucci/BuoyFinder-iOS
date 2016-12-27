@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Set up the buoy model
         let buoyModel = BuoyModel.sharedModel
+        buoyModel.fetchBuoyStations()
         
         return true
     }
