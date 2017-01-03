@@ -65,22 +65,21 @@ class ExploreViewController: UIViewController {
         }
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let selectedStation = self.mapView.selectedMarker?.title
     }
-    */
 
 }
 
 // GSMapViewDelegate
 extension ExploreViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        // TODO: Navigate to buoy page of the given marker
+        // Navigate to buoy page of the given marker
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
     }
 }

@@ -7,77 +7,48 @@
 //
 
 import UIKit
+import GoogleMaps
+import BuoyFinderDataKit
 
-class BuoyViewController: UITableViewController {
+class BuoyViewController: UIViewController {
+    
+    // Variables
+    public var buoy: Buoy? {
+        didSet {
+            // Set the default camera to be directly over america
+            if let newBuoy = buoy {
+                
+                // Set up the title of the view controller
+                self.title = newBuoy.location.locationName
+                
+                // Set up the map of the buoy
+                self.mapView.camera = GMSCameraPosition.camera(withLatitude: newBuoy.location.latitude, longitude: newBuoy.location.longitude, zoom: 6)
+                
+                let marker = GMSMarker()
+                marker.position = CLLocation(latitude: newBuoy.location.latitude, longitude: newBuoy.location.longitude).coordinate
+                marker.title = newBuoy.location.locationName
+                marker.snippet = "Station: " + newBuoy.stationID + ", " + newBuoy.program!
+                marker.map = mapView
+            }
+        }
+    }
+    
+    // UI Elements
+    @IBOutlet weak var mapView: GMSMapView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Nav bar text should be white
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        // Set up the map settings
+        self.mapView.mapType = kGMSTypeHybrid
+        self.mapView.settings.setAllGesturesEnabled(false)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -88,5 +59,23 @@ class BuoyViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+        // Configure the cell..
+        return cell
+    }
 }
