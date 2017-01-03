@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PNA-6z-bRV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jv1-w7-uoj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="hLh-UH-De3">
+            <objects>
+                <navigationController id="jv1-w7-uoj" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="okF-8b-jxt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PNA-6z-bRV" kind="relationship" relationship="rootViewController" id="RBa-GR-EBB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wgc-DP-2ia" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2358" y="-318"/>
+        </scene>
+        <!--TabBar-->
         <scene sceneID="NZQ-IM-r2W">
             <objects>
-                <tabBarController id="PNA-6z-bRV" sceneMemberID="viewController">
+                <tabBarController title="TabBar" id="PNA-6z-bRV" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="BuoyFinder" id="eKK-x1-vRC">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="oRb-st-ygD"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="iXF-8x-jtb">
@@ -22,41 +47,18 @@
                         <color key="selectedImageTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="KEO-MI-fNb" kind="relationship" relationship="viewControllers" id="26t-pD-d8N"/>
-                        <segue destination="mVW-L9-MnD" kind="relationship" relationship="viewControllers" id="rJx-BE-M0U"/>
+                        <segue destination="dmf-R4-jJF" kind="relationship" relationship="viewControllers" id="hc4-zB-zsw"/>
+                        <segue destination="3la-7L-9cB" kind="relationship" relationship="viewControllers" id="lBl-AV-JMe"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjh-g2-mAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1788" y="-317"/>
         </scene>
-        <!--BuoyFinderNav-->
-        <scene sceneID="dv4-3K-oyp">
-            <objects>
-                <navigationController title="BuoyFinderNav" id="KEO-MI-fNb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="e4S-3o-apO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o1g-ug-eNV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="dmf-R4-jJF" kind="relationship" relationship="rootViewController" id="htC-OX-gtp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUF-N6-8jl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-670" y="61"/>
-        </scene>
-        <!--BuoyFinder-->
+        <!--Favorites-->
         <scene sceneID="taV-i8-Hb7">
             <objects>
-                <tableViewController id="3la-7L-9cB" customClass="FavoriteBuoysViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="3la-7L-9cB" customClass="FavoriteBuoysViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sqA-DS-x8p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,13 +97,14 @@
                             <outlet property="delegate" destination="3la-7L-9cB" id="CQb-OJ-0go"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="K13-F5-Kvz"/>
                     <navigationItem key="navigationItem" title="BuoyFinder" id="qd3-qM-M9L"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elL-Q5-I1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="-939"/>
+            <point key="canvasLocation" x="-1141" y="-804"/>
         </scene>
         <!--Buoy View Controller-->
         <scene sceneID="YTs-XR-3HS">
@@ -132,35 +135,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aL-2i-hZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="834" y="-318"/>
+            <point key="canvasLocation" x="-403" y="-318"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="OGh-fe-chs">
-            <objects>
-                <navigationController id="mVW-L9-MnD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="SOg-Pt-Qd9"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CqI-PC-v0v">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.70196078429999997" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="3la-7L-9cB" kind="relationship" relationship="rootViewController" id="SxK-Rm-aFx"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lt5-ay-NsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-671" y="-938"/>
-        </scene>
-        <!--BuoyFinder-->
+        <!--Explore-->
         <scene sceneID="Ryl-9H-7C9">
             <objects>
-                <viewController id="dmf-R4-jJF" customClass="ExploreViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Explore" id="dmf-R4-jJF" customClass="ExploreViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hXf-YY-OFM"/>
                         <viewControllerLayoutGuide type="bottom" id="Kxj-QE-Pbw"/>
@@ -182,6 +162,7 @@
                             <constraint firstItem="H3r-qe-khZ" firstAttribute="top" secondItem="hXf-YY-OFM" secondAttribute="bottom" id="ftg-sT-5FP"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="02Q-pd-Uw5"/>
                     <navigationItem key="navigationItem" title="BuoyFinder" id="KEx-5x-EOy"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -192,10 +173,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kg-FB-J2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="61"/>
+            <point key="canvasLocation" x="-1140" y="36"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="W6t-Ik-lmb"/>
+        <segue reference="DiN-Sx-COW"/>
     </inferredMetricsTieBreakers>
 </document>
