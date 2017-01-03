@@ -19,6 +19,7 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
 
         // Setup the map settings
+        self.mapView.delegate = self
         self.mapView.mapType = kGMSTypeHybrid
         self.mapView.settings.setAllGesturesEnabled(true)
         self.mapView.settings.compassButton = true
@@ -80,5 +81,6 @@ class ExploreViewController: UIViewController {
 extension ExploreViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // TODO: Navigate to buoy page of the given marker
+        self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
     }
 }

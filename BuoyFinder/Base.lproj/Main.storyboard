@@ -13,6 +13,8 @@
         <scene sceneID="NZQ-IM-r2W">
             <objects>
                 <tabBarController id="PNA-6z-bRV" sceneMemberID="viewController">
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="iXF-8x-jtb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -32,7 +34,9 @@
         <scene sceneID="dv4-3K-oyp">
             <objects>
                 <navigationController title="BuoyFinderNav" id="KEO-MI-fNb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" systemItem="search" id="e4S-3o-apO"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="e4S-3o-apO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="o1g-ug-eNV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -82,7 +86,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="0Cz-G9-pIS" kind="showDetail" id="DiN-Sx-COW"/>
+                                    <segue destination="0Cz-G9-pIS" kind="show" action="showDetailViewController:sender:" id="DiN-Sx-COW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -92,15 +96,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="BuoyFinder" id="qd3-qM-M9L"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elL-Q5-I1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="-700"/>
+            <point key="canvasLocation" x="1" y="-939"/>
         </scene>
         <!--Buoy View Controller-->
         <scene sceneID="YTs-XR-3HS">
             <objects>
-                <tableViewController id="0Cz-G9-pIS" customClass="BuoyViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="currentContext" id="0Cz-G9-pIS" customClass="BuoyViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sGr-t5-z98">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,16 +126,21 @@
                             <outlet property="delegate" destination="0Cz-G9-pIS" id="bqk-94-Gls"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="CEB-vr-lnQ"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aL-2i-hZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1492" y="-317"/>
+            <point key="canvasLocation" x="834" y="-318"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OGh-fe-chs">
             <objects>
                 <navigationController id="mVW-L9-MnD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="SOg-Pt-Qd9"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CqI-PC-v0v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -144,7 +155,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lt5-ay-NsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="-700"/>
+            <point key="canvasLocation" x="-671" y="-938"/>
         </scene>
         <!--BuoyFinder-->
         <scene sceneID="Ryl-9H-7C9">
@@ -172,13 +183,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="BuoyFinder" id="KEx-5x-EOy"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="mapView" destination="H3r-qe-khZ" id="bdk-xD-zb8"/>
+                        <segue destination="0Cz-G9-pIS" kind="show" identifier="exploreShowBuoySegue" id="W6t-Ik-lmb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kg-FB-J2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="60.719640179910051"/>
+            <point key="canvasLocation" x="1" y="61"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="W6t-Ik-lmb"/>
+    </inferredMetricsTieBreakers>
 </document>
