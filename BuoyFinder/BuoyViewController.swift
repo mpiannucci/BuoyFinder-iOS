@@ -17,18 +17,7 @@ class BuoyViewController: UIViewController {
         didSet {
             // Set the default camera to be directly over america
             if let newBuoy = buoy {
-                
-                // Set up the title of the view controller
-                self.title = newBuoy.location.locationName
-                
-                // Set up the map of the buoy
-                self.mapView.camera = GMSCameraPosition.camera(withLatitude: newBuoy.location.latitude, longitude: newBuoy.location.longitude, zoom: 6)
-                
-                let marker = GMSMarker()
-                marker.position = CLLocation(latitude: newBuoy.location.latitude, longitude: newBuoy.location.longitude).coordinate
-                marker.title = newBuoy.location.locationName
-                marker.snippet = "Station: " + newBuoy.stationID + ", " + newBuoy.program!
-                marker.map = mapView
+                setupViews()
             }
         }
     }
@@ -48,6 +37,34 @@ class BuoyViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupViews()
+    }
+    
+    func setupViews() {
+        if self.buoy == nil || self.mapView == nil {
+            return
+        }
+        
+        // Set the title
+        self.title = self.buoy!.location.locationName
+        
+        // Clear the map
+        self.mapView.clear()
+        
+        // Set up the map of the buoy
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude, longitude: self.buoy!.location.longitude, zoom: 6)
+        
+        // Clear existing markers and create the marker for our location
+        let marker = GMSMarker()
+        marker.position = CLLocation(latitude: self.buoy!.location.latitude, longitude: self.buoy!.location.longitude).coordinate
+        marker.title = self.buoy!.location.locationName
+        marker.snippet = "Station: " + self.buoy!.stationID + ", " + self.buoy!.program!
+        marker.map = mapView
     }
 
     /*

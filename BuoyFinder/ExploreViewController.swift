@@ -71,7 +71,14 @@ class ExploreViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let selectedStation = self.mapView.selectedMarker?.title
+        let selectedStation = parseStationID(snippet: self.mapView.selectedMarker!.snippet!)
+        if let buoyView = segue.destination as? BuoyViewController {
+            buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedStation]
+        }
+    }
+    
+    func parseStationID(snippet: String) -> String {
+        return snippet.components(separatedBy: ",")[0].components(separatedBy: ":")[1].trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
 }
