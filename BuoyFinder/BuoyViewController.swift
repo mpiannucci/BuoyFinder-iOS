@@ -62,9 +62,11 @@ class BuoyViewController: UIViewController {
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
         marker.position = CLLocation(latitude: self.buoy!.location.latitude, longitude: self.buoy!.location.longitude).coordinate
-        marker.title = self.buoy!.location.locationName
-        marker.snippet = "Station: " + self.buoy!.stationID + ", " + self.buoy!.program!
+        marker.title = "Station: " + self.buoy!.stationID
+        marker.snippet = self.buoy!.program!
         marker.map = mapView
+        
+        mapView.selectedMarker = marker
     }
 
     /*
