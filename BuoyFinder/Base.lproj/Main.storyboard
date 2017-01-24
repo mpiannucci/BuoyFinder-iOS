@@ -17,7 +17,7 @@
                 <navigationController id="jv1-w7-uoj" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="okF-8b-jxt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="okF-8b-jxt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,12 +175,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="41" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5h-3S-vrO">
-                                                    <rect key="frame" x="8" y="8" width="359" height="51"/>
+                                                    <rect key="frame" x="15" y="8" width="359" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="42" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qke-Pi-kPS">
-                                                    <rect key="frame" x="8" y="88" width="359" height="25"/>
+                                                    <rect key="frame" x="15" y="88" width="359" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="aOE-R5-iSj"/>
                                                     </constraints>
@@ -189,7 +189,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="43" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-9Y-Y06">
-                                                    <rect key="frame" x="8" y="114" width="359" height="27"/>
+                                                    <rect key="frame" x="15" y="114" width="359" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="PJW-xp-9ll"/>
                                                     </constraints>
@@ -198,7 +198,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Components" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oI5-Xa-eRU">
-                                                    <rect key="frame" x="8" y="67" width="359" height="21"/>
+                                                    <rect key="frame" x="15" y="67" width="359" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="SII-uS-5c3"/>
                                                     </constraints>
@@ -216,10 +216,10 @@
                                                 <constraint firstItem="qke-Pi-kPS" firstAttribute="leading" secondItem="ca8-9Y-Y06" secondAttribute="leading" id="E5D-le-vNS"/>
                                                 <constraint firstItem="ca8-9Y-Y06" firstAttribute="top" secondItem="qke-Pi-kPS" secondAttribute="bottom" constant="1" id="E6c-N6-69H"/>
                                                 <constraint firstItem="L5h-3S-vrO" firstAttribute="trailing" secondItem="oI5-Xa-eRU" secondAttribute="trailing" id="Mj7-B6-wIC"/>
-                                                <constraint firstItem="L5h-3S-vrO" firstAttribute="leading" secondItem="Ify-TL-J5M" secondAttribute="leadingMargin" id="Mlb-bb-GqV"/>
+                                                <constraint firstItem="L5h-3S-vrO" firstAttribute="leading" secondItem="Ify-TL-J5M" secondAttribute="leadingMargin" constant="7" id="Mlb-bb-GqV"/>
                                                 <constraint firstItem="qke-Pi-kPS" firstAttribute="trailing" secondItem="ca8-9Y-Y06" secondAttribute="trailing" id="gew-It-AkD"/>
                                                 <constraint firstItem="L5h-3S-vrO" firstAttribute="leading" secondItem="oI5-Xa-eRU" secondAttribute="leading" id="gmP-2Z-BOH"/>
-                                                <constraint firstItem="L5h-3S-vrO" firstAttribute="trailing" secondItem="Ify-TL-J5M" secondAttribute="trailingMargin" id="kGj-4B-qS5"/>
+                                                <constraint firstItem="L5h-3S-vrO" firstAttribute="trailing" secondItem="Ify-TL-J5M" secondAttribute="trailingMargin" constant="7" id="kGj-4B-qS5"/>
                                                 <constraint firstItem="oI5-Xa-eRU" firstAttribute="top" secondItem="L5h-3S-vrO" secondAttribute="bottom" constant="8" symbolic="YES" id="tD0-Wx-Vvy"/>
                                             </constraints>
                                         </tableViewCellContentView>
