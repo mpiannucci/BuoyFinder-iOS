@@ -51,7 +51,7 @@ class BuoyViewController: UIViewController {
         }
         
         // Set the title
-        self.title = self.buoy!.location.locationName
+        self.title = self.buoy!.name
         
         // Clear the map
         self.mapView.clear()

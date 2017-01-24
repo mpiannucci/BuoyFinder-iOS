@@ -35,6 +35,25 @@ public class Buoy: NSCoding {
     public var lastWaveUpdateTime: Date?
     public var lastWeatherUpdateTime: Date?
     
+    // Convienence
+    public var fullName: String {
+        get {
+            return location.locationName!
+        }
+    }
+
+    public var name: String {
+        get {
+            var prettyName = fullName
+            if prettyName.contains("-") {
+                prettyName = prettyName.components(separatedBy: "-")[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            } else if prettyName.contains("(") {
+                prettyName = prettyName.components(separatedBy: "(")[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            }
+            return prettyName
+        }
+    }
+    
     var needsUpdate: Bool {
         get {
             if latestData == nil {

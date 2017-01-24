@@ -57,7 +57,7 @@ class ExploreViewController: UIViewController {
                 for (_, station) in stations {
                     let marker = GMSMarker()
                     marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
-                    marker.title = station.location.locationName
+                    marker.title = station.name
                     marker.snippet = "Station: " + station.stationID + ", " + station.program!
                     marker.map = mapView
                 }
