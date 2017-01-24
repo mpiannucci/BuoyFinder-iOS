@@ -170,6 +170,11 @@ public class Buoy: NSCoding {
         }
     }
     
+    public func fetchAllLatestData() {
+        fetchLatestWaveData()
+        fetchLatestWeatherData()
+    }
+    
     internal func loadInfo(jsonData: JSON) {
         self.owner = jsonData["Owner"].string
         self.program = jsonData["PGM"].string
@@ -181,7 +186,8 @@ public class Buoy: NSCoding {
         self.dart = (jsonData["Dart"].stringValue == "y") as Bool?
     }
     
-    internal func loadLatestWaveData(jsonData: JSON) {
+    internal func loadLatestWaveData(allJsonData: JSON) {
+        let jsonData = allJsonData["BuoyData"]
         prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
         
         self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
@@ -190,8 +196,8 @@ public class Buoy: NSCoding {
         })
         self.latestData?.steepness = jsonData["Steepness"].string
         self.latestData?.averagePeriod = jsonData["AveragePeriod"].double
-        self.latestData?.directionalSpectraPlotURL = jsonData["DirectionalSpectraPlot"].string
-        self.latestData?.spectralDistributionPlotURL = jsonData["SpectraDistributionPlot"].string
+        self.latestData?.directionalSpectraPlotURL = allJsonData["DirectionalSpectraPlot"].string
+        self.latestData?.spectralDistributionPlotURL = allJsonData["SpectraDistributionPlot"].string
         
         self.lastWaveUpdateTime = Date()
     }

@@ -8,9 +8,12 @@
 
 import UIKit
 import GoogleMaps
+import AsyncImageView
 import BuoyFinderDataKit
 
 class BuoyViewController: UIViewController {
+    
+    @IBOutlet weak var buoyDataTable: UITableView!
     
     // Variables
     public var buoy: Buoy? {
@@ -24,7 +27,6 @@ class BuoyViewController: UIViewController {
     
     // UI Elements
     @IBOutlet weak var mapView: GMSMapView!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,10 @@ class BuoyViewController: UIViewController {
         // Set up the map settings
         self.mapView.mapType = kGMSTypeHybrid
         self.mapView.settings.setAllGesturesEnabled(false)
+        
+        // Set up the tableview
+        self.buoyDataTable.delegate = self
+        self.buoyDataTable.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +49,16 @@ class BuoyViewController: UIViewController {
         super.viewDidAppear(animated)
         
         setupViews()
+    
+        // Register notification listeners
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: Buoy.buoyDataUpdatedNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        // Deregister notification listeners
+        NotificationCenter.default.removeObserver(self)
+        
+        super.viewDidDisappear(animated)
     }
     
     func setupViews() {
@@ -67,6 +83,15 @@ class BuoyViewController: UIViewController {
         marker.map = mapView
         
         mapView.selectedMarker = marker
+        
+        // Try to update the table...
+        buoyDataTable.reloadData()
+    }
+    
+    @objc func reloadTableData() {
+        DispatchQueue.main.async{
+            self.buoyDataTable.reloadData()
+        }
     }
 
     /*
@@ -112,8 +137,75 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.size.width
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                return 150.0
+            } else {
+                return 50.0
+            }
+        case 1:
+            return screenWidth
+        case 2:
+            return screenWidth * 2 / 3
+        default:
+            return 150.0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        var cell: UITableViewCell
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                cell = tableView.dequeueReusableCell(withIdentifier: "waveStatusCell", for: indexPath)
+                let waveSummaryView = cell.viewWithTag(41) as! UILabel
+                let primaryComponentView = cell.viewWithTag(42) as! UILabel
+                let secondaryComponentView = cell.viewWithTag(43) as! UILabel
+                
+                if let waveSummary = buoy?.latestData?.waveSummary {
+                    waveSummaryView.text = waveSummary.simpleDescription()
+                }
+                if let primaryComponent = buoy?.latestData?.swellComponents?[0] {
+                    primaryComponentView.text = primaryComponent.detailedDescription()
+                }
+                if let secondaryComponent = buoy?.latestData?.swellComponents?[1] {
+                    secondaryComponentView.text = secondaryComponent.detailedDescription()
+                }
+                
+            } else {
+                cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
+                switch indexPath.row {
+                case 1:
+                    if let waterTemp = buoy?.latestData?.waterTemperature {
+                        cell.textLabel?.text = "Water Temperature"
+                        cell.detailTextLabel?.text = String(describing: waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
+                    }
+                default:
+                    break
+                }
+            }
+            break
+        case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
+            let plotView = cell.viewWithTag(51) as! AsyncImageView
+            if let plotURL = buoy?.latestData?.directionalSpectraPlotURL {
+                plotView.imageURL = URL.init(string: plotURL)
+            }
+        case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
+            let plotView = cell.viewWithTag(51) as! AsyncImageView
+            if let plotURL = buoy?.latestData?.spectralDistributionPlotURL {
+                plotView.imageURL = URL.init(string: plotURL)
+            }
+        default:
+            // Do Nothing and give back an empty cell
+            cell = UITableViewCell()
+        }
      
         // Configure the cell..
         return cell

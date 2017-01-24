@@ -36,7 +36,7 @@ public class BuoyDataItem: NSCoding {
     public var waterLevel: Double?
     
     // Units
-    var units: Units {
+    public var units: Units {
         didSet(oldValue) {
             if oldValue == self.units {
                 return

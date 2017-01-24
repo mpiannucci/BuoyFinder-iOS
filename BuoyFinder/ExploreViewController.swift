@@ -74,6 +74,7 @@ class ExploreViewController: UIViewController {
         let selectedStation = parseStationID(snippet: self.mapView.selectedMarker!.snippet!)
         if let buoyView = segue.destination as? BuoyViewController {
             buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedStation]
+            buoyView.buoy?.fetchAllLatestData()
         }
     }
     

@@ -68,6 +68,13 @@ public class Swell: NSCoding {
         aCoder.encode(self.units, forKey: "units")
     }
     
+    public func simpleDescription() -> String {
+        return String(format: "%.01f", waveHeight) + " " + units.lengthUnit() + " @ " + String(format: "%.01f", period) + " s " + compassDirection!
+    }
+    
+    public func detailedDescription() -> String {
+        return String(format: "%.01f", waveHeight) + " " + units.lengthUnit() + " @ " + String(format: "%.01f", period) + " s " + String(format: "%3.0f", direction!) + units.degreesUnit() + " " + compassDirection!
+    }
 }
 
 extension Swell: UnitsProtocol {

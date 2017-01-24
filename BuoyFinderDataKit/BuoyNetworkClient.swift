@@ -98,8 +98,7 @@ public class BuoyNetworkClient: NSObject {
             
             // Add the latest wave data to the existing Buoy
             let json = JSON(data: rawData!)
-            let buoyDataJSON = json["BuoyData"]
-            buoy.loadLatestWaveData(jsonData: buoyDataJSON)
+            buoy.loadLatestWaveData(allJsonData: json)
             
             // Let the listener know we are finished without errors
             callback(nil)

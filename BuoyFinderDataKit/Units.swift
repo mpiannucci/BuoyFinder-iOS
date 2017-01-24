@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum Units: String {
+public enum Units: String {
     case Metric = "metric"
     case English = "english"
     
-    func lengthUnit() -> String {
+    public func lengthUnit() -> String {
         switch self {
         case .Metric:
             return "m"
@@ -21,7 +21,7 @@ enum Units: String {
         }
     }
     
-    func speedUnit() -> String {
+    public func speedUnit() -> String {
         switch self {
         case .Metric:
             return "m/s"
@@ -30,7 +30,7 @@ enum Units: String {
         }
     }
     
-    func temperatureUnit() -> String {
+    public func temperatureUnit() -> String {
         switch self {
         case .Metric:
             return "°C"
@@ -39,7 +39,7 @@ enum Units: String {
         }
     }
     
-    func pressureUnit() -> String {
+    public func pressureUnit() -> String {
         switch self {
         case .Metric:
             return "hPa"
@@ -48,11 +48,11 @@ enum Units: String {
         }
     }
     
-    func visibilityUnit() -> String {
+    public func visibilityUnit() -> String {
         return "nmi"
     }
     
-    func degreesUnit() -> String {
+    public func degreesUnit() -> String {
         return "°"
     }
     
