@@ -38,11 +38,11 @@ public class Swell: NSCoding {
     }
     
     init (jsonData: JSON) {
-        waveHeight = jsonData["WaveHeight"].doubleValue
-        period = jsonData["Period"].doubleValue
-        direction = jsonData["Direction"].doubleValue
-        compassDirection = jsonData["CompassDirection"].stringValue
-        units = Units(rawValue: jsonData["Units"].stringValue)!
+        self.waveHeight = jsonData["WaveHeight"].doubleValue
+        self.period = jsonData["Period"].doubleValue
+        self.direction = jsonData["Direction"].doubleValue
+        self.compassDirection = jsonData["CompassDirection"].stringValue
+        self.units = Units(rawValue: jsonData["Units"].stringValue)!
     }
     
     // MARK: NSCoding
@@ -69,11 +69,11 @@ public class Swell: NSCoding {
     }
     
     public func simpleDescription() -> String {
-        return String(format: "%.01f", waveHeight) + " " + units.lengthUnit() + " @ " + String(format: "%.01f", period) + " s " + compassDirection!
+        return String(format: "%.01f", self.waveHeight) + " " + self.units.lengthUnit() + " @ " + String(format: "%.01f", self.period) + " s " + self.compassDirection!
     }
     
     public func detailedDescription() -> String {
-        return String(format: "%.01f", waveHeight) + " " + units.lengthUnit() + " @ " + String(format: "%.01f", period) + " s " + String(format: "%3.0f", direction!) + units.degreesUnit() + " " + compassDirection!
+        return String(format: "%.01f", self.waveHeight) + " " + self.units.lengthUnit() + " @ " + String(format: "%.01f", self.period) + " s " + String(format: "%3.0f", self.direction!) + self.units.degreesUnit() + " " + self.compassDirection!
     }
 }
 

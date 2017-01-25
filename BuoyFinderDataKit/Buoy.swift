@@ -98,7 +98,7 @@ public class Buoy: NSCoding {
         self.init(stationID: stationId, location: locale)
         
         // Load the rest of the station info
-        loadInfo(jsonData: jsonData)
+        self.loadInfo(jsonData: jsonData)
         self.latestData = nil
     }
     
@@ -183,8 +183,8 @@ public class Buoy: NSCoding {
     }
     
     public func fetchAllLatestData() {
-        fetchLatestWaveData()
-        fetchLatestWeatherData()
+        self.fetchLatestWaveData()
+        self.fetchLatestWeatherData()
     }
     
     internal func loadInfo(jsonData: JSON) {

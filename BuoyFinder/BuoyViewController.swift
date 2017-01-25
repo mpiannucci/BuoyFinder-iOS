@@ -50,7 +50,7 @@ class BuoyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setupViews()
+        self.setupViews()
         
         if let buoy_ = self.buoy {
             if buoy_.isFetching && !self.buoyDataTable.refreshControl!.isRefreshing {
@@ -183,13 +183,13 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 let primaryComponentView = cell.viewWithTag(42) as! UILabel
                 let secondaryComponentView = cell.viewWithTag(43) as! UILabel
                 
-                if let waveSummary = buoy?.latestData?.waveSummary {
+                if let waveSummary = self.buoy?.latestData?.waveSummary {
                     waveSummaryView.text = waveSummary.simpleDescription()
                 }
-                if let primaryComponent = buoy?.latestData?.swellComponents?[0] {
+                if let primaryComponent = self.buoy?.latestData?.swellComponents?[0] {
                     primaryComponentView.text = primaryComponent.detailedDescription()
                 }
-                if let secondaryComponent = buoy?.latestData?.swellComponents?[1] {
+                if let secondaryComponent = self.buoy?.latestData?.swellComponents?[1] {
                     secondaryComponentView.text = secondaryComponent.detailedDescription()
                 }
                 
@@ -197,7 +197,7 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
                 switch indexPath.row {
                 case 1:
-                    if let waterTemp = buoy?.latestData?.waterTemperature {
+                    if let waterTemp = self.buoy?.latestData?.waterTemperature {
                         cell.textLabel?.text = "Water Temperature"
                         cell.detailTextLabel?.text = String(describing: waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
                     }
@@ -209,13 +209,13 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
             let plotView = cell.viewWithTag(51) as! AsyncImageView
-            if let plotURL = buoy?.latestData?.directionalSpectraPlotURL {
+            if let plotURL = self.buoy?.latestData?.directionalSpectraPlotURL {
                 plotView.imageURL = URL.init(string: plotURL)
             }
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
             let plotView = cell.viewWithTag(51) as! AsyncImageView
-            if let plotURL = buoy?.latestData?.spectralDistributionPlotURL {
+            if let plotURL = self.buoy?.latestData?.spectralDistributionPlotURL {
                 plotView.imageURL = URL.init(string: plotURL)
             }
         default:
