@@ -34,6 +34,12 @@ public class Buoy: NSCoding {
     // Update management
     public var lastWaveUpdateTime: Date?
     public var lastWeatherUpdateTime: Date?
+    private var fetching: Int = 0
+    public var isFetching: Bool {
+        get {
+            return self.fetching > 0
+        }
+    }
     
     // Convienence
     public var fullName: String {
@@ -132,10 +138,12 @@ public class Buoy: NSCoding {
     }
     
     public func fetchLatestData() {
+        self.fetching += 1
         NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
         
         BuoyNetworkClient.fetchLatestBuoyData(buoy: self) {
             (fetchError) in
+            self.fetching -= 1
             if fetchError != nil {
                 NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
             }
@@ -145,10 +153,12 @@ public class Buoy: NSCoding {
     }
     
     public func fetchLatestWaveData() {
+        self.fetching += 1
         NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
         
         BuoyNetworkClient.fetchLatestBuoyWaveData(buoy: self) {
             (fetchError) in
+            self.fetching -= 1
             if fetchError != nil {
                 NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
             }
@@ -158,10 +168,12 @@ public class Buoy: NSCoding {
     }
     
     public func fetchLatestWeatherData() {
+        self.fetching += 1
         NotificationCenter.default.post(name: Buoy.buoyDataFetchStartedNotification, object: self.stationID)
         
         BuoyNetworkClient.fetchLatestBuoyWeatherData(buoy: self) {
             (fetchError) in
+            self.fetching -= 1;
             if fetchError != nil {
                 NotificationCenter.default.post(name: Buoy.buoyDataUpdateFailedNotification, object: self.stationID)
             }

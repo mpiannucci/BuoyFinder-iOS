@@ -17,7 +17,7 @@
                 <navigationController id="jv1-w7-uoj" sceneMemberID="viewController">
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="okF-8b-jxt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="okF-8b-jxt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

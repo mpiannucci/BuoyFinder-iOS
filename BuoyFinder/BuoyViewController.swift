@@ -13,8 +13,6 @@ import BuoyFinderDataKit
 
 class BuoyViewController: UIViewController {
     
-    @IBOutlet weak var buoyDataTable: UITableView!
-    
     // Variables
     public var buoy: Buoy? {
         didSet {
@@ -27,6 +25,7 @@ class BuoyViewController: UIViewController {
     
     // UI Elements
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var buoyDataTable: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +37,9 @@ class BuoyViewController: UIViewController {
         // Set up the tableview
         self.buoyDataTable.delegate = self
         self.buoyDataTable.dataSource = self
+        
+        // Add a refresh control to the data table
+        self.buoyDataTable.refreshControl = UIRefreshControl()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +51,13 @@ class BuoyViewController: UIViewController {
         super.viewDidAppear(animated)
         
         setupViews()
+        
+        if let buoy_ = self.buoy {
+            if buoy_.isFetching && !self.buoyDataTable.refreshControl!.isRefreshing {
+                self.buoyDataTable.refreshControl?.beginRefreshing()
+                self.buoyDataTable.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
+            }
+        }
     
         // Register notification listeners
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: Buoy.buoyDataUpdatedNotification, object: nil)
@@ -85,12 +94,18 @@ class BuoyViewController: UIViewController {
         mapView.selectedMarker = marker
         
         // Try to update the table...
-        buoyDataTable.reloadData()
+        self.buoyDataTable.reloadData()
     }
     
     @objc func reloadTableData() {
         DispatchQueue.main.async{
             self.buoyDataTable.reloadData()
+            
+            if let buoy_ = self.buoy {
+                if !buoy_.isFetching && self.buoyDataTable.refreshControl!.isRefreshing {
+                    self.buoyDataTable.refreshControl?.endRefreshing()
+                }
+            }
         }
     }
 
@@ -111,6 +126,7 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
