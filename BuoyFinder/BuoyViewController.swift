@@ -17,8 +17,8 @@ class BuoyViewController: UIViewController {
     public var buoy: Buoy? {
         didSet {
             // Set the default camera to be directly over america
-            if buoy != nil {
-                setupViews()
+            if self.buoy != nil {
+                self.setupViews()
             }
         }
     }
