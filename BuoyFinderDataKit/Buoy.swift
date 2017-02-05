@@ -60,7 +60,7 @@ public class Buoy: NSCoding {
         }
     }
     
-    var needsUpdate: Bool {
+    public var needsUpdate: Bool {
         get {
             if latestData == nil {
                 return true

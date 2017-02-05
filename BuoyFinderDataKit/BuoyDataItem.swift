@@ -34,6 +34,21 @@ public class BuoyDataItem: NSCoding {
     public var visibility: Double?
     public var pressureTendency: Double?
     public var waterLevel: Double?
+    public var pressureTendencyString: String {
+        get {
+            if self.pressureTendency == nil {
+                return ""
+            }
+            
+            if self.pressureTendency! > 0 {
+                return "RISING"
+            } else if self.pressureTendency! < 0 {
+                return "FALLING"
+            } else {
+                return "STEADY"
+            }
+        }
+    }
     
     // Units
     public var units: Units {

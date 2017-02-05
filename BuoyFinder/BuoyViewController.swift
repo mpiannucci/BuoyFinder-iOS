@@ -82,7 +82,7 @@ class BuoyViewController: UIViewController {
         self.mapView.clear()
         
         // Set up the map of the buoy
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude, longitude: self.buoy!.location.longitude, zoom: 6)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude + 0.4, longitude: self.buoy!.location.longitude, zoom: 6)
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
@@ -126,11 +126,9 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
-            return 2
+            return 4
         case 1:
             return 1
         case 2:
@@ -197,9 +195,28 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
                 switch indexPath.row {
                 case 1:
+                    cell.textLabel?.text = "Water Temperature"
                     if let waterTemp = self.buoy?.latestData?.waterTemperature {
-                        cell.textLabel?.text = "Water Temperature"
                         cell.detailTextLabel?.text = String(describing: waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
+                    } else {
+                        cell.detailTextLabel?.text = "N/A"
+                    }
+                case 2:
+                    cell.textLabel?.text = "Air Temperature"
+                    if let airTemp = self.buoy?.latestData?.airTemperature {
+                        cell.detailTextLabel?.text = String(describing: airTemp) + " " + buoy!.latestData!.units.temperatureUnit()
+                    } else {
+                        cell.detailTextLabel?.text = "N/A"
+                    }
+                case 3:
+                    cell.textLabel?.text = "Pressure"
+                    if let pressure  = self.buoy?.latestData?.pressure {
+                        cell.detailTextLabel?.text = String(describing: pressure) + " " + buoy!.latestData!.units.pressureUnit()
+                        if let _ = self.buoy?.latestData?.pressureTendency {
+                            cell.detailTextLabel?.text = cell.detailTextLabel!.text! + " " + self.buoy!.latestData!.pressureTendencyString
+                        }
+                    } else {
+                        cell.detailTextLabel?.text = "N/A"
                     }
                 default:
                     break

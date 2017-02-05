@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jv1-w7-uoj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jv1-w7-uoj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -160,11 +160,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPt-Yv-sP8" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="174"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UEY-Xw-i2u">
-                                <rect key="frame" x="0.0" y="246" width="375" height="372"/>
+                                <rect key="frame" x="0.0" y="219" width="375" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="waveStatusCell" rowHeight="150" id="xSY-UF-m6q">
@@ -295,8 +295,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qU1-6s-95b" firstAttribute="top" secondItem="XPt-Yv-sP8" secondAttribute="bottom" constant="380" id="5Sj-K4-QSz"/>
-                            <constraint firstItem="UEY-Xw-i2u" firstAttribute="top" secondItem="XPt-Yv-sP8" secondAttribute="bottom" constant="8" symbolic="YES" id="XJL-XP-y8p"/>
+                            <constraint firstItem="qU1-6s-95b" firstAttribute="top" secondItem="XPt-Yv-sP8" secondAttribute="bottom" constant="404" id="5Sj-K4-QSz"/>
+                            <constraint firstItem="UEY-Xw-i2u" firstAttribute="top" secondItem="XPt-Yv-sP8" secondAttribute="bottom" constant="5" id="XJL-XP-y8p"/>
                             <constraint firstItem="UEY-Xw-i2u" firstAttribute="trailing" secondItem="XPt-Yv-sP8" secondAttribute="trailing" id="dLI-P0-heH"/>
                             <constraint firstItem="UEY-Xw-i2u" firstAttribute="bottom" secondItem="qU1-6s-95b" secondAttribute="top" id="lLq-LP-mRG"/>
                             <constraint firstAttribute="trailing" secondItem="XPt-Yv-sP8" secondAttribute="trailing" id="nJu-I3-b36"/>
