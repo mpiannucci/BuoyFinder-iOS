@@ -15,6 +15,7 @@
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
 		34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B497671DEBC7090076EB5B /* Assets.xcassets */; };
 		34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */; };
+		34CA92481E5775BF00D11B51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34CA92471E5775BF00D11B51 /* GoogleService-Info.plist */; };
 		34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */; };
 		34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562441DECB236006F1C67 /* ExploreViewController.swift */; };
 		34E562BE1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
@@ -81,6 +82,7 @@
 		34B497671DEBC7090076EB5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34B4976A1DEBC7090076EB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		34B4976C1DEBC7090076EB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34CA92471E5775BF00D11B51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBuoysViewController.swift; sourceTree = "<group>"; };
 		34E562441DECB236006F1C67 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BuoyFinderDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 		34B4975F1DEBC7090076EB5B /* BuoyFinder */ = {
 			isa = PBXGroup;
 			children = (
+				34CA92471E5775BF00D11B51 /* GoogleService-Info.plist */,
 				346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */,
 				34B497671DEBC7090076EB5B /* Assets.xcassets */,
 				34B4976C1DEBC7090076EB5B /* Info.plist */,
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */,
+				34CA92481E5775BF00D11B51 /* GoogleService-Info.plist in Resources */,
 				34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */,
 				34B497661DEBC7090076EB5B /* Main.storyboard in Resources */,
 			);

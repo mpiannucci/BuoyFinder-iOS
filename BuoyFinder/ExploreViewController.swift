@@ -20,7 +20,7 @@ class ExploreViewController: UIViewController {
 
         // Setup the map settings
         self.mapView.delegate = self
-        self.mapView.mapType = kGMSTypeHybrid
+        self.mapView.mapType = GMSMapViewType.hybrid
         self.mapView.settings.setAllGesturesEnabled(true)
         self.mapView.settings.compassButton = true
         self.mapView.settings.myLocationButton = true

@@ -10,6 +10,7 @@ target 'BuoyFinder' do
   pod 'GooglePlaces'
   pod 'SwiftLocation'
   pod 'AsyncImageView'
+  pod 'Firebase/Core'
 end
 
 target 'BuoyFinderDataKit-iOS' do

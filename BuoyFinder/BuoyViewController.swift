@@ -31,7 +31,7 @@ class BuoyViewController: UIViewController {
         super.viewDidLoad()
         
         // Set up the map settings
-        self.mapView.mapType = kGMSTypeHybrid
+        self.mapView.mapType = GMSMapViewType.hybrid
         self.mapView.settings.setAllGesturesEnabled(false)
         
         // Set up the tableview
