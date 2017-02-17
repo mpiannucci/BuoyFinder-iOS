@@ -7,17 +7,21 @@
 //
 
 import UIKit
+import GoogleSignIn
+import Firebase
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        FIRAuth.auth()?.addStateDidChangeListener({ (_, _) in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,59 +35,131 @@ class SettingsViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 3
+        default:
+            return 0
+        }
+    }
+    
+    override func  tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "User Interface"
+        case 1:
+            return "Account"
+        case 2:
+            return "About"
+        default:
+            return ""
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        var reuseIdentifier = "subtitleCell"
+        if indexPath.section == 2 {
+            reuseIdentifier = "basicCell"
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
-        // Configure the cell...
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Units"
+                cell.detailTextLabel?.text = "Metric"
+                break
+            default:
+                break
+            }
+            break
+        case 1:
+            switch indexPath.row {
+            case 0:
+                if let user = FIRAuth.auth()?.currentUser {
+                    cell.textLabel?.text = "Logged in as \(user.email!)"
+                    cell.detailTextLabel?.text = "Click to log out"
+                } else {
+                    cell.textLabel?.text = "Not Logged In"
+                    cell.detailTextLabel?.text = "Click to log in and sync your favorites"
+                }
+               break
+            default:
+                break
+            }
+            break
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Contact Developer"
+                break
+            case 1:
+                cell.textLabel?.text = "Rate On The App Store"
+                break
+            case 2:
+                cell.textLabel?.text = "Copyright 2017 Matthew Iannucci"
+            default:
+                break;
+            }
+            break
+        default:
+            break
+        }
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            switch indexPath.row {
+            case 0:
+                if let _ = FIRAuth.auth()?.currentUser {
+                    do {
+                        try FIRAuth.auth()?.signOut()
+                    } catch let signOutError as NSError {
+                        print ("Error signing out: %@", signOutError)
+                    }
+                } else {
+                    GIDSignIn.sharedInstance().signIn()
+                }
+                break
+            default:
+                break
+            }
+            break
+        case 2:
+            switch indexPath.row {
+            case 0:
+                let email = "rhodysurf13@gmail.com"
+                let url = URL(string: "mailto:\(email)?subject=BuoyFinder for iOS")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                break
+            case 1:
+                let url = URL(string: "itms-apps://itunes.apple.com/app/id945847570")!
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                break
+            default:
+                break
+            }
+            break
+        default:
+            break
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation

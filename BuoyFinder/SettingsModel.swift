@@ -13,9 +13,6 @@ public class SettingsModel {
     
     public static let sharedModel = SettingsModel()
     
-    
-    
     private init() {
-        
     }
 }
