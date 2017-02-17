@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import Firebase
 import BuoyFinderDataKit
 
 @UIApplicationMain
@@ -21,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Google Maps Auth
         GMSServices.provideAPIKey("AIzaSyB5StrjG3MFFOVVdd9y3c1AxNEyU1La1X4")
+        
+        // Initialize Firebase
+        FIRApp.configure()
         
         // Set up the buoy model
         let buoyModel = BuoyModel.sharedModel
