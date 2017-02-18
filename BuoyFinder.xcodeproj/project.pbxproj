@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
+		344C479C1E58A24B006D4D17 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C479B1E58A24B006D4D17 /* FavoritesManager.swift */; };
+		344C479E1E58A7CB006D4D17 /* LocalSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 344C479D1E58A7CB006D4D17 /* LocalSettings.plist */; };
 		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
 		346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346573B51E11EEBC007E6C12 /* BuoyViewController.swift */; };
 		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
@@ -16,7 +18,6 @@
 		34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B497671DEBC7090076EB5B /* Assets.xcassets */; };
 		34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */; };
 		34CA92481E5775BF00D11B51 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34CA92471E5775BF00D11B51 /* GoogleService-Info.plist */; };
-		34CA924A1E57836400D11B51 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CA92491E57836400D11B51 /* SettingsModel.swift */; };
 		34CA924E1E578C3200D11B51 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CA924D1E578C3200D11B51 /* SettingsViewController.swift */; };
 		34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */; };
 		34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E562441DECB236006F1C67 /* ExploreViewController.swift */; };
@@ -74,6 +75,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		344C479B1E58A24B006D4D17 /* FavoritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
+		344C479D1E58A7CB006D4D17 /* LocalSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LocalSettings.plist; sourceTree = "<group>"; };
 		346573B21E11D21A007E6C12 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinder.entitlements; sourceTree = "<group>"; };
 		346573B51E11EEBC007E6C12 /* BuoyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +88,6 @@
 		34B4976A1DEBC7090076EB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		34B4976C1DEBC7090076EB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34CA92471E5775BF00D11B51 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		34CA92491E57836400D11B51 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		34CA924D1E578C3200D11B51 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteBuoysViewController.swift; sourceTree = "<group>"; };
 		34E562441DECB236006F1C67 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -176,8 +178,9 @@
 				34B497641DEBC7090076EB5B /* Main.storyboard */,
 				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
 				346573B51E11EEBC007E6C12 /* BuoyViewController.swift */,
-				34CA92491E57836400D11B51 /* SettingsModel.swift */,
 				34CA924D1E578C3200D11B51 /* SettingsViewController.swift */,
+				344C479B1E58A24B006D4D17 /* FavoritesManager.swift */,
+				344C479D1E58A7CB006D4D17 /* LocalSettings.plist */,
 			);
 			path = BuoyFinder;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344C479E1E58A7CB006D4D17 /* LocalSettings.plist in Resources */,
 				34B4976B1DEBC7090076EB5B /* LaunchScreen.storyboard in Resources */,
 				34CA92481E5775BF00D11B51 /* GoogleService-Info.plist in Resources */,
 				34B497681DEBC7090076EB5B /* Assets.xcassets in Resources */,
@@ -477,7 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */,
-				34CA924A1E57836400D11B51 /* SettingsModel.swift in Sources */,
+				344C479C1E58A24B006D4D17 /* FavoritesManager.swift in Sources */,
 				346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */,
 				34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */,
 				34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */,

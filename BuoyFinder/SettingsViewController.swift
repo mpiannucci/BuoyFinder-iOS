@@ -9,15 +9,39 @@
 import UIKit
 import GoogleSignIn
 import Firebase
+import BuoyFinderDataKit
 
 class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
 
+    private var userRef: FIRDatabaseReference? = nil
+    private var latestSnapshot: FIRDataSnapshot? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        FIRAuth.auth()?.addStateDidChangeListener({ (_, _) in
+        FIRAuth.auth()?.addStateDidChangeListener({ (_, user) in
+            if user != nil {
+                self.userRef = FIRDatabase.database().reference(withPath: "user/" + user!.uid)
+                self.userRef?.observe(.value, with: {
+                    snapshot in
+                    self.latestSnapshot = snapshot
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                })
+            } else {
+                if self.userRef != nil {
+                    self.userRef?.removeAllObservers()
+                    self.userRef = nil
+                    self.latestSnapshot = nil
+                }
+                
+                // TODO: Observe UserDefaults changes
+            }
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -76,7 +100,15 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Units"
-                cell.detailTextLabel?.text = "Metric"
+                var units: Units = Units.Metric
+                if let rawUnits = self.latestSnapshot?.childSnapshot(forPath: "units").value as? String {
+                    units = Units(rawValue: rawUnits)!
+                } else {
+                    if let rawUnits = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")?.string(forKey: "units") {
+                        units = Units(rawValue: rawUnits)!
+                    }
+                }
+                cell.detailTextLabel?.text = units.rawValue.capitalized
                 break
             default:
                 break
@@ -121,6 +153,45 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
+            let unitPicker = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) in
+                unitPicker.dismiss(animated: true, completion: nil)
+            })
+            unitPicker.addAction(cancelAction)
+            
+            let metricAction = UIAlertAction.init(title: Units.Metric.rawValue.capitalized, style: .default, handler: {
+                (_) in
+                
+                if self.userRef != nil {
+                    self.userRef!.child("units").setValue(Units.Metric.rawValue as NSString)
+                } else{
+                    if let defaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder") {
+                        defaults.setValue(Units.Metric.rawValue, forKey: "units")
+                        defaults.synchronize()
+                    }
+                }
+                
+                unitPicker.dismiss(animated: true, completion: nil)
+            })
+            unitPicker.addAction(metricAction)
+            
+            let englishAction = UIAlertAction.init(title: Units.English.rawValue.capitalized, style: .default, handler: {
+                (_) in
+                
+                if self.userRef != nil {
+                    self.userRef!.child("units").setValue(Units.English.rawValue as NSString)
+                } else{
+                    if let defaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder") {
+                        defaults.setValue(Units.English.rawValue, forKey: "units")
+                        defaults.synchronize()
+                    }
+                }
+                
+                unitPicker.dismiss(animated: true, completion: nil)
+            })
+            unitPicker.addAction(englishAction)
+            
+            self.present(unitPicker, animated: true, completion: nil)
             break
         case 1:
             switch indexPath.row {
@@ -170,5 +241,4 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

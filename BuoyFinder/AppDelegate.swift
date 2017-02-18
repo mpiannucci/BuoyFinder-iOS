@@ -35,6 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let buoyModel = BuoyModel.sharedModel
         buoyModel.fetchBuoyStations()
         
+        // Set up the user settings
+        let defaultPreferences = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
+        let defaultPrefsFile = Bundle.main.path(forResource: "LocalSettings", ofType: "plist")
+        if let defaultsDict = NSDictionary.init(contentsOfFile: defaultPrefsFile!) as? [String: AnyObject] {
+            defaultPreferences?.register(defaults: defaultsDict)
+            defaultPreferences?.synchronize()
+        }
+        
         return true
     }
     
