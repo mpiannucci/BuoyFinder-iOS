@@ -21,7 +21,7 @@ public class Swell: NSCoding {
             }
             
             switch self.units {
-            case .Metric:
+            case .metric:
                 convertToMetric()
             default:
                 convertToEnglish()

@@ -58,7 +58,7 @@ public class BuoyDataItem: NSCoding {
             }
             
             switch self.units {
-            case .Metric:
+            case .metric:
                 convertToMetric()
             default:
                 convertToEnglish()
@@ -68,7 +68,7 @@ public class BuoyDataItem: NSCoding {
     
     init(newDate: Date) {
         self.date = newDate
-        self.units = Units.Metric
+        self.units = Units.metric
         
         // Initialize everything else to nil as a shortcut
         self.windDirection = nil

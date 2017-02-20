@@ -31,10 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
-        // Set up the buoy model
-        let buoyModel = BuoyModel.sharedModel
-        buoyModel.fetchBuoyStations()
-        
         // Set up the user settings
         let defaultPreferences = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
         let defaultPrefsFile = Bundle.main.path(forResource: "LocalSettings", ofType: "plist")
@@ -42,6 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             defaultPreferences?.register(defaults: defaultsDict)
             defaultPreferences?.synchronize()
         }
+        
+        // Set up the buoy model
+        let buoyModel = BuoyModel.sharedModel
+        buoyModel.fetchBuoyStations()
+        
+        // Initialize the Sync Manager
+        SyncManager.instance
         
         return true
     }

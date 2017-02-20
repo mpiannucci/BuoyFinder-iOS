@@ -20,32 +20,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().uiDelegate = self
-        
-        FIRAuth.auth()?.addStateDidChangeListener({ (_, user) in
-            if user != nil {
-                self.userRef = FIRDatabase.database().reference(withPath: "user/" + user!.uid)
-                self.userRef?.observe(.value, with: {
-                    snapshot in
-                    self.latestSnapshot = snapshot
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                })
-            } else {
-                if self.userRef != nil {
-                    self.userRef?.removeAllObservers()
-                    self.userRef = nil
-                    self.latestSnapshot = nil
-                }
-                
-                // TODO: Observe UserDefaults changes
-            }
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,8 +27,26 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadSettingsTable), name: SyncManager.syncDataUpdatedNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @IBAction func done(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func reloadSettingsTable() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -100,15 +92,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Units"
-                var units: Units = Units.Metric
-                if let rawUnits = self.latestSnapshot?.childSnapshot(forPath: "units").value as? String {
-                    units = Units(rawValue: rawUnits)!
-                } else {
-                    if let rawUnits = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")?.string(forKey: "units") {
-                        units = Units(rawValue: rawUnits)!
-                    }
-                }
-                cell.detailTextLabel?.text = units.rawValue.capitalized
+                cell.detailTextLabel?.text = SyncManager.instance.units.rawValue.capitalized
                 break
             default:
                 break
@@ -159,34 +143,16 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             })
             unitPicker.addAction(cancelAction)
             
-            let metricAction = UIAlertAction.init(title: Units.Metric.rawValue.capitalized, style: .default, handler: {
+            let metricAction = UIAlertAction.init(title: Units.metric.rawValue.capitalized, style: .default, handler: {
                 (_) in
-                
-                if self.userRef != nil {
-                    self.userRef!.child("units").setValue(Units.Metric.rawValue as NSString)
-                } else{
-                    if let defaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder") {
-                        defaults.setValue(Units.Metric.rawValue, forKey: "units")
-                        defaults.synchronize()
-                    }
-                }
-                
+                SyncManager.instance.changeUnits(newUnits: Units.metric)
                 unitPicker.dismiss(animated: true, completion: nil)
             })
             unitPicker.addAction(metricAction)
             
-            let englishAction = UIAlertAction.init(title: Units.English.rawValue.capitalized, style: .default, handler: {
+            let englishAction = UIAlertAction.init(title: Units.english.rawValue.capitalized, style: .default, handler: {
                 (_) in
-                
-                if self.userRef != nil {
-                    self.userRef!.child("units").setValue(Units.English.rawValue as NSString)
-                } else{
-                    if let defaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder") {
-                        defaults.setValue(Units.English.rawValue, forKey: "units")
-                        defaults.synchronize()
-                    }
-                }
-                
+                SyncManager.instance.changeUnits(newUnits: Units.english)
                 unitPicker.dismiss(animated: true, completion: nil)
             })
             unitPicker.addAction(englishAction)

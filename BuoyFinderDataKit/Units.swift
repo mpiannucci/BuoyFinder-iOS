@@ -9,41 +9,41 @@
 import Foundation
 
 public enum Units: String {
-    case Metric = "metric"
-    case English = "english"
+    case metric = "metric"
+    case english = "english"
     
     public func lengthUnit() -> String {
         switch self {
-        case .Metric:
+        case .metric:
             return "m"
-        case .English:
+        case .english:
             return "ft"
         }
     }
     
     public func speedUnit() -> String {
         switch self {
-        case .Metric:
+        case .metric:
             return "m/s"
-        case .English:
+        case .english:
             return "mph"
         }
     }
     
     public func temperatureUnit() -> String {
         switch self {
-        case .Metric:
+        case .metric:
             return "°C"
-        case .English:
+        case .english:
             return "°F"
         }
     }
     
     public func pressureUnit() -> String {
         switch self {
-        case .Metric:
+        case .metric:
             return "hPa"
-        case .English:
+        case .english:
             return "inHG"
         }
     }
