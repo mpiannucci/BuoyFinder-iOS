@@ -43,6 +43,7 @@ public class SyncManager {
             if user != nil {
                 self.favoriteBuoys.removeAll()
                 self.userRef = FIRDatabase.database().reference(withPath: "user/" + user!.uid)
+                
                 self.userRef?.observe(.value, with: {
                     snapshot in
                     self.latestSnapshot = snapshot
@@ -62,6 +63,8 @@ public class SyncManager {
             
             NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
         })
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newBuoysLoaded), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
     }
     
     public func changeUnits(newUnits: Units) {
@@ -113,6 +116,14 @@ public class SyncManager {
         })
     }
     
+    @objc private func newBuoysLoaded() {
+        if self.userRef != nil {
+            self.loadFromRemote()
+        } else {
+            self.loadFromLocal()
+        }
+    }
+    
     private func loadFromRemote() {
         if self.latestSnapshot == nil {
             return
@@ -127,11 +138,14 @@ public class SyncManager {
             }
         }
         
-        if let newFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? [String] {
+        if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
+            let newFavoriteBuoys = rawFavoriteBuoys as! [String]
             for favoriteBuoyID in newFavoriteBuoys {
-                if !self.favoriteBuoys.contains(where: { (buoy) -> Bool in
+                if self.favoriteBuoys.contains(where: { (buoy) -> Bool in
                     buoy.stationID == favoriteBuoyID
                 }) {
+                    continue
+                } else {
                     if let newBuoy = BuoyModel.sharedModel.buoys?[favoriteBuoyID] {
                         self.favoriteBuoys.append(newBuoy)
                         changed = true
