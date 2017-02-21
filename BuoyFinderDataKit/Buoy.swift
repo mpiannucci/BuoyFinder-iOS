@@ -221,6 +221,9 @@ public class Buoy: NSCoding {
     }
     
     internal func loadLatestWaveData(allJsonData: JSON) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
         let jsonData = allJsonData["BuoyData"]
         prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
         
@@ -238,6 +241,9 @@ public class Buoy: NSCoding {
     }
     
     internal func loadLatestWeatherData(jsonData: JSON) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
         prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
         
         self.latestData?.windDirection = jsonData["WindDirection"].double
@@ -256,6 +262,9 @@ public class Buoy: NSCoding {
     }
     
     internal func loadLatestData(jsonData: JSON) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
         prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
         
         self.latestData?.windDirection = jsonData["WindDirection"].double

@@ -40,6 +40,9 @@ class BuoyViewController: UIViewController {
         
         // Add a refresh control to the data table
         self.buoyDataTable.refreshControl = UIRefreshControl()
+        self.buoyDataTable.refreshControl?.backgroundColor = UIColor.white
+        self.buoyDataTable.refreshControl?.tintColor = UIColor(colorLiteralRed: 0, green: 179.0/255.0, blue: 134.0/255.0, alpha: 255.0/255.0)
+        self.buoyDataTable.refreshControl?.addTarget(self, action: #selector(self.fetchNewBuoyData), for: .valueChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,6 +141,10 @@ class BuoyViewController: UIViewController {
         }
         self.navigationItem.rightBarButtonItem = barButtonItem
     }
+    
+    @objc func fetchNewBuoyData() {
+        self.buoy?.fetchAllLatestData()
+    }
 
     /*
     // MARK: - Navigation
@@ -227,21 +234,21 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 case 1:
                     cell.textLabel?.text = "Water Temperature"
                     if let waterTemp = self.buoy?.latestData?.waterTemperature {
-                        cell.detailTextLabel?.text = String(describing: waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
+                        cell.detailTextLabel?.text = String(format: "%.2f", waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
                     } else {
                         cell.detailTextLabel?.text = "N/A"
                     }
                 case 2:
                     cell.textLabel?.text = "Air Temperature"
                     if let airTemp = self.buoy?.latestData?.airTemperature {
-                        cell.detailTextLabel?.text = String(describing: airTemp) + " " + buoy!.latestData!.units.temperatureUnit()
+                        cell.detailTextLabel?.text = String(format: "%.2f", airTemp) + " " + buoy!.latestData!.units.temperatureUnit()
                     } else {
                         cell.detailTextLabel?.text = "N/A"
                     }
                 case 3:
                     cell.textLabel?.text = "Pressure"
                     if let pressure  = self.buoy?.latestData?.pressure {
-                        cell.detailTextLabel?.text = String(describing: pressure) + " " + buoy!.latestData!.units.pressureUnit()
+                        cell.detailTextLabel?.text = String(format: "%.2f", pressure) + " " + buoy!.latestData!.units.pressureUnit()
                         if let _ = self.buoy?.latestData?.pressureTendency {
                             cell.detailTextLabel?.text = cell.detailTextLabel!.text! + " " + self.buoy!.latestData!.pressureTendencyString
                         }
