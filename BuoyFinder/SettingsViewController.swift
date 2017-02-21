@@ -138,19 +138,19 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         switch indexPath.section {
         case 0:
             let unitPicker = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let cancelAction = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) in
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { (_) in
                 unitPicker.dismiss(animated: true, completion: nil)
             })
             unitPicker.addAction(cancelAction)
             
-            let metricAction = UIAlertAction.init(title: Units.metric.rawValue.capitalized, style: .default, handler: {
+            let metricAction = UIAlertAction(title: Units.metric.rawValue.capitalized, style: .default, handler: {
                 (_) in
                 SyncManager.instance.changeUnits(newUnits: Units.metric)
                 unitPicker.dismiss(animated: true, completion: nil)
             })
             unitPicker.addAction(metricAction)
             
-            let englishAction = UIAlertAction.init(title: Units.english.rawValue.capitalized, style: .default, handler: {
+            let englishAction = UIAlertAction(title: Units.english.rawValue.capitalized, style: .default, handler: {
                 (_) in
                 SyncManager.instance.changeUnits(newUnits: Units.english)
                 unitPicker.dismiss(animated: true, completion: nil)

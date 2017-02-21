@@ -78,6 +78,9 @@ class BuoyViewController: UIViewController {
         // Set the title
         self.title = self.buoy!.name
         
+        // Set the favorites button
+        self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!))
+        
         // Clear the map
         self.mapView.clear()
         
@@ -93,6 +96,9 @@ class BuoyViewController: UIViewController {
         
         mapView.selectedMarker = marker
         
+        // Set the units to match the settings
+        self.buoy?.units = SyncManager.instance.units
+        
         // Try to update the table...
         self.buoyDataTable.reloadData()
     }
@@ -107,6 +113,30 @@ class BuoyViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc func toggleBuoyFavorite() {
+        if self.buoy == nil {
+            return
+        }
+        
+        if SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!) {
+            SyncManager.instance.removeFavoriteBuoy(buoy: self.buoy!)
+            setFavoriteBuoyIcon(isFavorite: false)
+        } else {
+            SyncManager.instance.addFavoriteBuoy(newBuoy: self.buoy!)
+            setFavoriteBuoyIcon(isFavorite: true)
+        }
+    }
+    
+    func setFavoriteBuoyIcon(isFavorite: Bool) {
+        let barButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(self.toggleBuoyFavorite))
+        if isFavorite {
+            barButtonItem.image = UIImage(named: "ic_star_white")
+        } else {
+            barButtonItem.image = UIImage(named: "ic_star_border_white")
+        }
+        self.navigationItem.rightBarButtonItem = barButtonItem
     }
 
     /*

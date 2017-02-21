@@ -172,6 +172,7 @@
 				346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */,
 				34B497671DEBC7090076EB5B /* Assets.xcassets */,
 				34B4976C1DEBC7090076EB5B /* Info.plist */,
+				344C479D1E58A7CB006D4D17 /* LocalSettings.plist */,
 				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
 				34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */,
 				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
@@ -179,7 +180,6 @@
 				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
 				346573B51E11EEBC007E6C12 /* BuoyViewController.swift */,
 				34CA924D1E578C3200D11B51 /* SettingsViewController.swift */,
-				344C479D1E58A7CB006D4D17 /* LocalSettings.plist */,
 				347F21F71E5B4308008553C9 /* SyncManager.swift */,
 			);
 			path = BuoyFinder;

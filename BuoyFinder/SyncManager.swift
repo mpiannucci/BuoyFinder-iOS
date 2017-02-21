@@ -30,7 +30,7 @@ public class SyncManager {
     public private(set) var units: Units = Units.metric
     
     // Data cache states
-    private let userDefaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
+    private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
     private var userRef: FIRDatabaseReference? = nil
     private var latestSnapshot: FIRDataSnapshot? = nil
     
@@ -41,6 +41,7 @@ public class SyncManager {
     private init() {
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil {
+                self.favoriteBuoys.removeAll()
                 self.userRef = FIRDatabase.database().reference(withPath: "user/" + user!.uid)
                 self.userRef?.observe(.value, with: {
                     snapshot in
@@ -55,6 +56,7 @@ public class SyncManager {
                     self.latestSnapshot = nil
                 }
                 
+                self.favoriteBuoys.removeAll()
                 self.loadFromLocal()
             }
             
@@ -103,6 +105,12 @@ public class SyncManager {
         if let buoy = BuoyModel.sharedModel.buoys?[buoyID] {
             removeFavoriteBuoy(buoy: buoy)
         }
+    }
+    
+    public func isBuoyAFavorite(buoy: Buoy) -> Bool {
+        return self.favoriteBuoys.contains(where: { (oldBuoy) -> Bool in
+            return oldBuoy.stationID == buoy.stationID
+        })
     }
     
     private func loadFromRemote() {

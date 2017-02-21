@@ -41,6 +41,17 @@ public class Buoy: NSCoding {
         }
     }
     
+    // Units
+    public var units: Units {
+        didSet(oldValue) {
+            if oldValue == self.units {
+                return
+            }
+            
+            self.latestData?.units = self.units
+        }
+    }
+    
     // Convienence
     public var fullName: String {
         get {
@@ -89,6 +100,7 @@ public class Buoy: NSCoding {
     init(stationID: String, location: Location) {
         self.stationID = stationID
         self.location = location
+        self.units = .metric
     }
     
     convenience init(jsonData: JSON) {
@@ -187,6 +199,16 @@ public class Buoy: NSCoding {
         self.fetchLatestWeatherData()
     }
     
+    public func fetchAllDataIfNeeded() {
+        if let interval = self.latestData?.date.timeIntervalSinceNow {
+            if interval > 50 * 60 {
+                fetchAllLatestData()
+            }
+        } else {
+            fetchAllLatestData()
+        }
+    }
+    
     internal func loadInfo(jsonData: JSON) {
         self.owner = jsonData["Owner"].string
         self.program = jsonData["PGM"].string
@@ -212,6 +234,7 @@ public class Buoy: NSCoding {
         self.latestData?.spectralDistributionPlotURL = allJsonData["SpectraDistributionPlot"].string
         
         self.lastWaveUpdateTime = Date()
+        self.latestData?.units = self.units
     }
     
     internal func loadLatestWeatherData(jsonData: JSON) {
@@ -229,6 +252,7 @@ public class Buoy: NSCoding {
         self.latestData?.waterLevel = jsonData["WaterLevel"].double
         
         self.lastWeatherUpdateTime = Date()
+        self.latestData?.units = self.units
     }
     
     internal func loadLatestData(jsonData: JSON) {
@@ -252,6 +276,8 @@ public class Buoy: NSCoding {
         
         self.lastWaveUpdateTime = Date()
         self.lastWeatherUpdateTime = Date()
+        
+        self.latestData?.units = self.units
     }
     
     private func prepareForDataUpdate(rawTime: String) {
@@ -281,5 +307,8 @@ public class Buoy: NSCoding {
                 self.latestData?.resetWaveData()
             }
         }
+        
+        // Set the units to metric for standardized loading
+        self.latestData?.units = .metric
     }
 }
