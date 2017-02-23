@@ -67,7 +67,7 @@ public class Buoy: NSCoding {
             } else if prettyName.contains("(") {
                 prettyName = prettyName.components(separatedBy: "(")[0].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             }
-            return prettyName
+            return prettyName.capitalized
         }
     }
     

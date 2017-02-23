@@ -140,16 +140,25 @@ public class SyncManager {
         
         if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
             let newFavoriteBuoys = rawFavoriteBuoys as! [String]
-            for favoriteBuoyID in newFavoriteBuoys {
-                if self.favoriteBuoys.contains(where: { (buoy) -> Bool in
-                    buoy.stationID == favoriteBuoyID
-                }) {
+            for newFavoriteBuoyID in newFavoriteBuoys {
+                if self.favoriteBuoyIDs.contains(newFavoriteBuoyID) {
                     continue
-                } else {
-                    if let newBuoy = BuoyModel.sharedModel.buoys?[favoriteBuoyID] {
-                        self.favoriteBuoys.append(newBuoy)
-                        changed = true
-                    }
+                }
+                if let newBuoy = BuoyModel.sharedModel.buoys?[newFavoriteBuoyID] {
+                    self.favoriteBuoys.append(newBuoy)
+                    changed = true
+                }
+            }
+            
+            let currentFavorites = self.favoriteBuoyIDs
+            for currentFavorite in currentFavorites.reversed() {
+                if newFavoriteBuoys.contains(currentFavorite) {
+                    continue
+                }
+                
+                if let index = currentFavorites.index(of: currentFavorite) {
+                    self.favoriteBuoys.remove(at: index)
+                    changed = true
                 }
             }
         }
@@ -171,14 +180,26 @@ public class SyncManager {
         }
         
         if let newFavoriteBuoyIDs = userDefaults?.value(forKey: self.favoriteBuoysKey) as? [String] {
-            for favoriteBuoyID in newFavoriteBuoyIDs {
-                if !self.favoriteBuoys.contains(where: { (buoy) -> Bool in
-                    buoy.stationID == favoriteBuoyID
-                }) {
-                    if let newBuoy = BuoyModel.sharedModel.buoys?[favoriteBuoyID] {
-                        self.favoriteBuoys.append(newBuoy)
-                        changed = true
-                    }
+            for newFavoriteBuoyID in newFavoriteBuoyIDs {
+                if self.favoriteBuoyIDs.contains(newFavoriteBuoyID) {
+                    continue
+                }
+                
+                if let newBuoy = BuoyModel.sharedModel.buoys?[newFavoriteBuoyID] {
+                    self.favoriteBuoys.append(newBuoy)
+                    changed = true
+                }
+            }
+            
+            let currentFavorites = self.favoriteBuoyIDs
+            for currentFavorite in currentFavorites.reversed() {
+                if newFavoriteBuoyIDs.contains(currentFavorite) {
+                    continue
+                }
+                
+                if let index = currentFavorites.index(of: currentFavorite) {
+                    self.favoriteBuoys.remove(at: index)
+                    changed = true
                 }
             }
         }
