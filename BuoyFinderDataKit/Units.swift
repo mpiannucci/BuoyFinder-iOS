@@ -44,7 +44,7 @@ public enum Units: String {
         case .metric:
             return "hPa"
         case .english:
-            return "inHG"
+            return "in HG"
         }
     }
     

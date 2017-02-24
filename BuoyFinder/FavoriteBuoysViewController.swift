@@ -90,14 +90,21 @@ class FavoriteBuoysViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier != "favoriteBuoySegue" {
+            return
+        }
+        
+        // Get the buoy view
+        if let buoyView = segue.destination as? BuoyViewController, let index = self.tableView.indexPathForSelectedRow {
+            buoyView.buoy = SyncManager.instance.favoriteBuoys[index.row]
+            buoyView.buoy?.fetchAllDataIfNeeded()
+        }
     }
-    */
 
 }
