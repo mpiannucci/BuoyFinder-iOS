@@ -8,12 +8,18 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 import SwiftLocation
 import BuoyFinderDataKit
 
 class ExploreViewController: UIViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet public weak var mapView: GMSMapView!
+    @IBOutlet weak var nearbyBuoysTable: UITableView!
+    
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,27 @@ class ExploreViewController: UIViewController {
         
         // Set the default camera to be directly over america
         self.mapView.camera = GMSCameraPosition.camera(withLatitude: 39.8, longitude: -98.6, zoom: 3)
+        
+        // Set up the nearby buoys list and searching
+        self.nearbyBuoysTable.dataSource = self
+        self.nearbyBuoysTable.delegate = self
+        
+        // Set up the search controllers
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        
+        // Set up the search bar
+        let subView = UIView(frame: CGRect(x: 0, y: 65.0, width: UIScreen.main.bounds.width, height: 45.0))
+        subView.addSubview((searchController?.searchBar)!)
+        view.addSubview(subView)
+        searchController?.searchBar.sizeToFit()
+        searchController?.hidesNavigationBarDuringPresentation = false
+        
+        // When UISearchController presents the results view, present it in
+        // this view controller, not one further up the chain.
+        definesPresentationContext = true
         
         // Try and get the users location to give a better view of buoys around them
         let locationRequest = Location.getLocation(withAccuracy: .city, onSuccess: { foundLocation in
@@ -89,5 +116,50 @@ extension ExploreViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // Navigate to buoy page of the given marker
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
+    }
+}
+
+// Google Places Autocompletion Delegate
+extension ExploreViewController: GMSAutocompleteResultsViewControllerDelegate {
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didAutocompleteWith place: GMSPlace) {
+        searchController?.isActive = false
+        // Do something with the selected place.
+        print("Place name: \(place.name)")
+        print("Latitude: \(place.coordinate.latitude)")
+        print("Longitude: \(place.coordinate.longitude)")
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                           didFailAutocompleteWithError error: Error){
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+
+// Table View Delegate
+extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nearbyBuoyCell", for: indexPath)
+        
+        return cell
     }
 }

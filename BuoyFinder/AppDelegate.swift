@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 import Firebase
 import GoogleSignIn
 import BuoyFinderDataKit
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // Google Maps Auth
         GMSServices.provideAPIKey("AIzaSyB5StrjG3MFFOVVdd9y3c1AxNEyU1La1X4")
+        GMSPlacesClient.provideAPIKey("AIzaSyB5StrjG3MFFOVVdd9y3c1AxNEyU1La1X4")
         
         // Initialize Firebase
         FIRApp.configure()
