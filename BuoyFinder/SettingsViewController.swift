@@ -165,6 +165,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 if let _ = FIRAuth.auth()?.currentUser {
                     do {
                         try FIRAuth.auth()?.signOut()
+                        GIDSignIn.sharedInstance().signOut()
                     } catch let signOutError as NSError {
                         print ("Error signing out: %@", signOutError)
                     }
