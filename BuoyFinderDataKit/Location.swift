@@ -44,4 +44,15 @@ public class Location: NSCoding {
         aCoder.encode(self.altitude, forKey: "altitude")
         aCoder.encode(self.locationName, forKey: "locationName")
     }
+    
+    public func distance(location: Location) -> Double {
+        let latDist = self.latitude - location.latitude
+        let lonDist = self.longitude - location.longitude
+        
+        // Haversine formula
+        let a = pow(sin(latDist/2.0), 2.0) + cos(self.latitude) * cos(location.longitude) * pow(sin(lonDist/2), 2)
+        let c = 2 * asin(sqrt(a))
+        let r = 6371.0
+        return abs(c * r)
+    }
 }

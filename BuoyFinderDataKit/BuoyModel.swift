@@ -49,4 +49,17 @@ public class BuoyModel: NSObject {
         }
     }
     
+    public func nearbyBuoys(location: Location, radius: Double) -> [Buoy] {
+        if let resolvedBuoys = self.buoys {
+            return resolvedBuoys.filter({ (key, value) -> Bool in
+                return value.location.distance(location: location) < radius
+            }).map({ (key, value) -> Buoy in
+                return value
+            }).sorted(by: { (buoy1, buoy2) -> Bool in
+                return buoy1.location.distance(location:  location) < buoy2.location.distance(location: location)
+            })
+        } else {
+            return []
+        }
+    }
 }
