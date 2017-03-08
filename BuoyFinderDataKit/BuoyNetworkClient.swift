@@ -30,6 +30,12 @@ public class BuoyNetworkClient: NSObject {
                 Buoy(jsonData: rawStation)
             }).reduce([String:Buoy]()) {
                 dict, newBuoy in
+                if let buoyType = newBuoy.buoyType {
+                    if buoyType != "buoy" {
+                        return dict
+                    }
+                }
+                
                 var newDict = dict
                 newDict[newBuoy.stationID] = newBuoy
                 return newDict

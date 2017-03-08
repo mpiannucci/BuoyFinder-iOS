@@ -56,6 +56,15 @@ public enum Units: String {
         return "°"
     }
     
+    public func earthRadius() -> Double {
+        switch self {
+        case .metric:
+            return 6373
+        case .english:
+            return 3961
+        }
+    }
+    
     static func metersToFeet(metricValue: Double) -> Double {
         return metricValue * 3.28
     }

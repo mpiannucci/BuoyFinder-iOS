@@ -20,6 +20,7 @@ class ExploreViewController: UIViewController {
     
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
+    var nearbyBuoys: [Buoy] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +118,17 @@ extension ExploreViewController: GMSMapViewDelegate {
         // Navigate to buoy page of the given marker
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
     }
+
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        DispatchQueue.global().async {
+            let location = Location(latitude: position.target.latitude, longitude: position.target.longitude)
+            self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 120, units: SyncManager.instance.units)
+            
+            DispatchQueue.main.sync {
+                self.nearbyBuoysTable.reloadData()
+            }
+        }
+    }
 }
 
 // Google Places Autocompletion Delegate
@@ -124,10 +136,7 @@ extension ExploreViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
-        // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Latitude: \(place.coordinate.latitude)")
-        print("Longitude: \(place.coordinate.longitude)")
+        self.mapView.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 6)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
@@ -150,15 +159,23 @@ extension ExploreViewController: GMSAutocompleteResultsViewControllerDelegate {
 extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.nearbyBuoys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nearbyBuoyCell", for: indexPath)
+        
+        if indexPath.row >= self.nearbyBuoys.count {
+            return cell
+        }
+        
+        let buoy = self.nearbyBuoys[indexPath.row]
+        cell.textLabel?.text = buoy.name
+        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + buoy.program!
         
         return cell
     }
