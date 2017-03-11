@@ -14,8 +14,7 @@ import BuoyFinderDataKit
 
 class ExploreViewController: UIViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet public weak var mapView: GMSMapView!
+    @IBOutlet weak var exploreMapView: GMSMapView!
     @IBOutlet weak var nearbyBuoysTable: UITableView!
     
     var resultsViewController: GMSAutocompleteResultsViewController?
@@ -26,14 +25,11 @@ class ExploreViewController: UIViewController {
         super.viewDidLoad()
 
         // Setup the map settings
-        self.mapView.delegate = self
-        self.mapView.mapType = GMSMapViewType.hybrid
-        self.mapView.settings.setAllGesturesEnabled(true)
-        self.mapView.settings.compassButton = true
-        self.mapView.settings.myLocationButton = true
-        
-        // Set the default camera to be directly over america
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: 39.8, longitude: -98.6, zoom: 3)
+        self.exploreMapView.delegate = self
+        self.exploreMapView.mapType = GMSMapViewType.hybrid
+        self.exploreMapView.settings.setAllGesturesEnabled(true)
+        self.exploreMapView.settings.compassButton = true
+        self.exploreMapView.settings.myLocationButton = true
         
         // Set up the nearby buoys list and searching
         self.nearbyBuoysTable.dataSource = self
@@ -55,13 +51,15 @@ class ExploreViewController: UIViewController {
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
-        
+    
         // Try and get the users location to give a better view of buoys around them
         let locationRequest = Location.getLocation(withAccuracy: .city, onSuccess: { foundLocation in
             // Change the view of the map to center around the location
-            self.mapView.camera = GMSCameraPosition.camera(withTarget: foundLocation.coordinate, zoom: 6)
+            self.exploreMapView.camera = GMSCameraPosition.camera(withTarget: foundLocation.coordinate, zoom: 6)
+            self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
         }) { (lastValidLocation, error) in
-            // Do nothing
+            self.exploreMapView.camera = GMSCameraPosition.camera(withLatitude: 39.8, longitude: -98.6, zoom: 3)
+            self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
         }
         locationRequest.start()
     }
@@ -87,9 +85,11 @@ class ExploreViewController: UIViewController {
                     marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
                     marker.title = station.name
                     marker.snippet = "Station: " + station.stationID + ", " + station.program!
-                    marker.map = mapView
+                    marker.map = exploreMapView
                 }
             }
+            
+            self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
         }
     }
 
@@ -99,7 +99,7 @@ class ExploreViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let selectedStation = parseStationID(snippet: self.mapView.selectedMarker!.snippet!)
+        let selectedStation = parseStationID(snippet: self.exploreMapView.selectedMarker!.snippet!)
         if let buoyView = segue.destination as? BuoyViewController {
             buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedStation]
             buoyView.buoy?.fetchAllDataIfNeeded()
@@ -136,7 +136,7 @@ extension ExploreViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
-        self.mapView.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 6)
+        self.exploreMapView.camera = GMSCameraPosition.camera(withTarget: place.coordinate, zoom: 6)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
@@ -160,6 +160,10 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Nearby Buoys"
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

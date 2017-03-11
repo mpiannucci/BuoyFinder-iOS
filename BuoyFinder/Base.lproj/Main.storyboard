@@ -37,7 +37,7 @@
         <!--TabBar-->
         <scene sceneID="NZQ-IM-r2W">
             <objects>
-                <tabBarController title="TabBar" id="PNA-6z-bRV" sceneMemberID="viewController">
+                <tabBarController title="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="PNA-6z-bRV" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="BuoyFinder" id="eKK-x1-vRC">
                         <barButtonItem key="backBarButtonItem" title="Back" id="oRb-st-ygD"/>
                         <barButtonItem key="leftBarButtonItem" image="ic_settings_white" style="plain" id="pCH-vL-4nL">
@@ -218,11 +218,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MVj-cX-UeC">
-                                <rect key="frame" x="0.0" y="441" width="375" height="177"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="H3r-qe-khZ" customClass="GMSMapView">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="333"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="nearbyBuoyCell" textLabel="c36-S4-gkv" detailTextLabel="XwZ-Wd-G1a" style="IBUITableViewCellStyleSubtitle" id="SCw-hJ-4CN">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="361" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SCw-hJ-4CN" id="FnM-zt-ztD">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
@@ -247,21 +252,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3r-qe-khZ" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="108" width="375" height="333"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="H3r-qe-khZ" secondAttribute="trailing" id="Dhk-ay-kji"/>
-                            <constraint firstItem="H3r-qe-khZ" firstAttribute="leading" secondItem="etW-Il-eJo" secondAttribute="leading" id="IPh-KG-zzd"/>
-                            <constraint firstItem="MVj-cX-UeC" firstAttribute="leading" secondItem="H3r-qe-khZ" secondAttribute="leading" id="UXO-ee-vgN"/>
-                            <constraint firstItem="Kxj-QE-Pbw" firstAttribute="top" secondItem="H3r-qe-khZ" secondAttribute="bottom" constant="177" id="W8o-Dh-Vvg"/>
-                            <constraint firstItem="H3r-qe-khZ" firstAttribute="top" secondItem="hXf-YY-OFM" secondAttribute="bottom" constant="44" id="keu-0K-nQV"/>
-                            <constraint firstItem="Kxj-QE-Pbw" firstAttribute="top" secondItem="MVj-cX-UeC" secondAttribute="bottom" id="qqq-Jz-de7"/>
-                            <constraint firstItem="MVj-cX-UeC" firstAttribute="top" secondItem="H3r-qe-khZ" secondAttribute="bottom" id="qsS-ch-AOR"/>
-                            <constraint firstItem="MVj-cX-UeC" firstAttribute="trailing" secondItem="H3r-qe-khZ" secondAttribute="trailing" id="rfg-lJ-gyC"/>
+                            <constraint firstItem="MVj-cX-UeC" firstAttribute="leading" secondItem="etW-Il-eJo" secondAttribute="leading" id="6A0-te-zsT"/>
+                            <constraint firstAttribute="trailing" secondItem="MVj-cX-UeC" secondAttribute="trailing" id="8hF-na-PAl"/>
+                            <constraint firstItem="MVj-cX-UeC" firstAttribute="bottom" secondItem="Kxj-QE-Pbw" secondAttribute="top" id="Ea8-tO-ecJ"/>
+                            <constraint firstItem="MVj-cX-UeC" firstAttribute="top" secondItem="hXf-YY-OFM" secondAttribute="bottom" constant="44" id="y0N-Ml-JFR"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="02Q-pd-Uw5"/>
@@ -269,7 +266,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
-                        <outlet property="mapView" destination="H3r-qe-khZ" id="bdk-xD-zb8"/>
+                        <outlet property="exploreMapView" destination="H3r-qe-khZ" id="qLR-gX-p5p"/>
                         <outlet property="nearbyBuoysTable" destination="MVj-cX-UeC" id="9Dm-gA-RU0"/>
                         <segue destination="OgC-rd-YbK" kind="show" identifier="exploreShowBuoySegue" id="YGD-3v-Xq6"/>
                     </connections>
