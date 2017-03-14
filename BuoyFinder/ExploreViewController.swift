@@ -20,6 +20,8 @@ class ExploreViewController: UIViewController {
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var nearbyBuoys: [Buoy] = []
+    
+    var selectedBuoyStation: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,7 @@ class ExploreViewController: UIViewController {
         searchController?.searchResultsUpdater = resultsViewController
         
         // Set up the search bar
-        let subView = UIView(frame: CGRect(x: 0, y: 65.0, width: UIScreen.main.bounds.width, height: 45.0))
+        let subView = UIView(frame: CGRect(x: 0, y: 64.0, width: UIScreen.main.bounds.width, height: 45.0))
         subView.addSubview((searchController?.searchBar)!)
         view.addSubview(subView)
         searchController?.searchBar.sizeToFit()
@@ -69,7 +71,7 @@ class ExploreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {        
         NotificationCenter.default.addObserver(self, selector: #selector(ExploreViewController.updateBuoyStations), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
     }
     
@@ -99,9 +101,8 @@ class ExploreViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let selectedStation = parseStationID(snippet: self.exploreMapView.selectedMarker!.snippet!)
         if let buoyView = segue.destination as? BuoyViewController {
-            buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedStation]
+            buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedBuoyStation]
             buoyView.buoy?.fetchAllDataIfNeeded()
         }
     }
@@ -116,6 +117,7 @@ class ExploreViewController: UIViewController {
 extension ExploreViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // Navigate to buoy page of the given marker
+        self.selectedBuoyStation = parseStationID(snippet: self.exploreMapView.selectedMarker!.snippet!)
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
     }
 
@@ -182,5 +184,16 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + buoy.program!
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row >= self.nearbyBuoys.count {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        
+        self.selectedBuoyStation = self.nearbyBuoys[indexPath.row].stationID
+        self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

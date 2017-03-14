@@ -19,9 +19,15 @@ class FavoriteBuoysViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         self.tableView.reloadData()
         
         NotificationCenter.default.addObserver(self.tableView, selector: #selector(self.tableView.reloadData), name: SyncManager.syncDataUpdatedNotification, object: nil)
