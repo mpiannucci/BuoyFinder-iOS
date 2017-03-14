@@ -34,6 +34,24 @@ public class Buoy: NSCoding {
     // Update management
     public var lastWaveUpdateTime: Date?
     public var lastWeatherUpdateTime: Date?
+    public var latestUpdateTime: Date? {
+        get {
+            if self.lastWaveUpdateTime == nil || self.lastWeatherUpdateTime == nil {
+                return nil
+            } else if self.lastWaveUpdateTime == nil {
+                return nil
+            } else if self.lastWeatherUpdateTime == nil {
+                return nil
+            }
+            
+            if self.lastWaveUpdateTime! > self.lastWeatherUpdateTime! {
+                return self.lastWaveUpdateTime
+            } else {
+                return self.lastWeatherUpdateTime
+            }
+        }
+    }
+    
     private var fetching: Int = 0
     public var isFetching: Bool {
         get {

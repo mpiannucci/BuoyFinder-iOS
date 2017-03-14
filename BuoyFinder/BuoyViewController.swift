@@ -88,7 +88,7 @@ class BuoyViewController: UIViewController {
         self.mapView.clear()
         
         // Set up the map of the buoy
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude + 0.4, longitude: self.buoy!.location.longitude, zoom: 6)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude + 0.5, longitude: self.buoy!.location.longitude, zoom: 6)
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
@@ -97,7 +97,7 @@ class BuoyViewController: UIViewController {
         marker.snippet = self.buoy!.program!
         marker.map = mapView
         
-        mapView.selectedMarker = marker
+        self.mapView.selectedMarker = marker
         
         // Set the units to match the settings
         self.buoy?.units = SyncManager.instance.units
@@ -113,6 +113,11 @@ class BuoyViewController: UIViewController {
             if let buoy_ = self.buoy {
                 if !buoy_.isFetching && self.buoyDataTable.refreshControl!.isRefreshing {
                     self.buoyDataTable.refreshControl?.endRefreshing()
+                }
+                
+                if let updateDate = buoy_.latestUpdateTime {
+                    let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
+                    self.mapView.selectedMarker?.snippet = "\(self.mapView.selectedMarker!.snippet!)\nUpdated \(dateString)"
                 }
             }
         }
