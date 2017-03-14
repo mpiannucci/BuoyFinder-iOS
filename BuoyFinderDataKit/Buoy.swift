@@ -299,23 +299,23 @@ public class Buoy: NSCoding {
             return
         }
         
-        let existingInterval = self.latestData?.date.timeIntervalSince(timestamp!)
-        if existingInterval! > 60*60 {
-            self.latestData = BuoyDataItem(newDate: timestamp!)
-            return
-        }
-
-        if let weatherInterval = self.lastWeatherUpdateTime?.timeIntervalSince(timestamp!) {
-            if weatherInterval > 60*60 {
-                self.latestData?.resetWeatherData()
-            }
-        }
-        
-        if let waveInterval = self.lastWaveUpdateTime?.timeIntervalSince(timestamp!) {
-            if waveInterval > 60*60 {
-                self.latestData?.resetWaveData()
-            }
-        }
+//        let existingInterval = self.latestData?.date.timeIntervalSince(timestamp!)
+//        if existingInterval! > 60*60 {
+//            self.latestData = BuoyDataItem(newDate: timestamp!)
+//            return
+//        }
+//
+//        if let weatherInterval = self.lastWeatherUpdateTime?.timeIntervalSince(timestamp!) {
+//            if weatherInterval > 60*60 {
+//                self.latestData?.resetWeatherData()
+//            }
+//        }
+//        
+//        if let waveInterval = self.lastWaveUpdateTime?.timeIntervalSince(timestamp!) {
+//            if waveInterval > 60*60 {
+//                self.latestData?.resetWaveData()
+//            }
+//        }
         
         // Set the units to metric for standardized loading
         self.latestData?.units = .metric
