@@ -170,7 +170,7 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 4
+            return 6
         case 1:
             return 1
         case 2:
@@ -237,20 +237,30 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
                 switch indexPath.row {
                 case 1:
+                    cell.textLabel?.text = "Wind"
+                    if let windSpeed = self.buoy?.latestData?.windSpeed, let windDir = self.buoy?.latestData?.windDirection {
+                        cell.detailTextLabel?.text = String(format: "%.1f \(self.buoy!.units.speedUnit()) %.0f\(self.buoy!.units.degreesUnit())", windSpeed, windDir)
+                    }
+                case 2:
+                    cell.textLabel?.text = "Wind Gust"
+                    if let windGust = self.buoy?.latestData?.windGust {
+                        cell.detailTextLabel?.text = String(format: "%.1f \(self.buoy!.units.speedUnit())", windGust)
+                    }
+                case 3:
                     cell.textLabel?.text = "Water Temperature"
                     if let waterTemp = self.buoy?.latestData?.waterTemperature {
                         cell.detailTextLabel?.text = String(format: "%.2f", waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
                     } else {
                         cell.detailTextLabel?.text = "N/A"
                     }
-                case 2:
+                case 4:
                     cell.textLabel?.text = "Air Temperature"
                     if let airTemp = self.buoy?.latestData?.airTemperature {
                         cell.detailTextLabel?.text = String(format: "%.2f", airTemp) + " " + buoy!.latestData!.units.temperatureUnit()
                     } else {
                         cell.detailTextLabel?.text = "N/A"
                     }
-                case 3:
+                case 5:
                     cell.textLabel?.text = "Pressure"
                     if let pressure  = self.buoy?.latestData?.pressure {
                         cell.detailTextLabel?.text = String(format: "%.2f", pressure) + " " + buoy!.latestData!.units.pressureUnit()

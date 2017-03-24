@@ -93,7 +93,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 0:
                 cell.textLabel?.text = "Units"
                 cell.detailTextLabel?.text = SyncManager.instance.units.rawValue.capitalized
-                break
             default:
                 break
             }
@@ -108,7 +107,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                     cell.textLabel?.text = "Not Logged In"
                     cell.detailTextLabel?.text = "Click to log in and sync your favorites"
                 }
-               break
             default:
                 break
             }
@@ -117,16 +115,13 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Contact Developer"
-                break
             case 1:
                 cell.textLabel?.text = "Rate On The App Store"
-                break
             case 2:
                 cell.textLabel?.text = "Copyright 2017 Matthew Iannucci"
             default:
-                break;
+                break
             }
-            break
         default:
             break
         }
@@ -158,7 +153,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             unitPicker.addAction(englishAction)
             
             self.present(unitPicker, animated: true, completion: nil)
-            break
         case 1:
             switch indexPath.row {
             case 0:
@@ -172,7 +166,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 } else {
                     GIDSignIn.sharedInstance().signIn()
                 }
-                break
             default:
                 break
             }
@@ -183,15 +176,12 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 let email = "rhodysurf13@gmail.com"
                 let url = URL(string: "mailto:\(email)?subject=BuoyFinder for iOS")!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                break
             case 1:
                 let url = URL(string: "itms-apps://itunes.apple.com/app/id945847570")!
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                break
             default:
                 break
             }
-            break
         default:
             break
         }
