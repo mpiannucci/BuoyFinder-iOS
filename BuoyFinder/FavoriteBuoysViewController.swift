@@ -84,6 +84,10 @@ class FavoriteBuoysViewController: UITableViewController {
             SyncManager.instance.removeFavoriteBuoy(buoy: SyncManager.instance.favoriteBuoys[indexPath.row])
         }
     }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Remove"
+    }
 
     // MARK: - Navigation
 
