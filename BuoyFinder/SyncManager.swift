@@ -107,8 +107,13 @@ public class SyncManager {
     
     public func removeFavoriteBuoy(buoyID: String) {
         if let buoy = BuoyModel.sharedModel.buoys?[buoyID] {
-            removeFavoriteBuoy(buoy: buoy)
+            self.removeFavoriteBuoy(buoy: buoy)
         }
+    }
+    
+    public func moveFavoriteBuoy(currentIndex: Int, newIndex: Int) {
+        self.favoriteBuoys.insert(self.favoriteBuoys.remove(at: currentIndex), at: newIndex)
+        self.saveFavoriteBuoys()
     }
     
     public func isBuoyAFavorite(buoy: Buoy) -> Bool {
