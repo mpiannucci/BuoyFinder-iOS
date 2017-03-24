@@ -100,11 +100,12 @@ public class SyncManager {
             oldBuoy.stationID == buoy.stationID
         }) {
             self.favoriteBuoys.remove(at: index)
+            self.saveFavoriteBuoys()
             NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
         }
     }
     
-    public func remoteFavoriteBuoy(buoyID: String) {
+    public func removeFavoriteBuoy(buoyID: String) {
         if let buoy = BuoyModel.sharedModel.buoys?[buoyID] {
             removeFavoriteBuoy(buoy: buoy)
         }
