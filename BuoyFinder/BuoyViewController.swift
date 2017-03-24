@@ -259,6 +259,8 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             }
             if let primaryComponent = self.buoy?.latestData?.swellComponents?[0] {
                 primaryComponentView.text = primaryComponent.detailedDescription()
+            } else {
+                primaryComponentView.text = "No Component Information Available"
             }
             if let secondaryComponent = self.buoy?.latestData?.swellComponents?[1] {
                 secondaryComponentView.text = secondaryComponent.detailedDescription()

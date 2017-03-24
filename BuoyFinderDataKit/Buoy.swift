@@ -264,6 +264,7 @@ public class Buoy: NSCoding {
         
         prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
         
+        self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
         self.latestData?.windDirection = jsonData["WindDirection"].double
         self.latestData?.windSpeed = jsonData["WindSpeed"].double
         self.latestData?.windGust = jsonData["WindGust"].double
