@@ -22,6 +22,8 @@ class BuoyViewController: UIViewController {
             }
         }
     }
+    var weatherKeys: [String] = []
+    var weatherData: [String:String] = [:]
     
     // UI Elements
     @IBOutlet weak var mapView: GMSMapView!
@@ -103,11 +105,19 @@ class BuoyViewController: UIViewController {
         self.buoy?.units = SyncManager.instance.units
         
         // Try to update the table...
+        if let newWeatherData = self.buoy?.latestData?.weatherData {
+            self.weatherData = newWeatherData
+            self.weatherKeys = Array(self.weatherData.keys)
+        }
         self.buoyDataTable.reloadData()
     }
     
     @objc func reloadTableData() {
         DispatchQueue.main.async{
+            if let newWeatherData = self.buoy?.latestData?.weatherData {
+                self.weatherData = newWeatherData
+                self.weatherKeys = Array(self.weatherData.keys)
+            }
             self.buoyDataTable.reloadData()
             
             if let buoy_ = self.buoy {
@@ -164,17 +174,31 @@ class BuoyViewController: UIViewController {
 
 extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 6
+            if self.buoy?.latestData?.waveSummary != nil {
+                return 1
+            } else {
+                return 0
+            }
         case 1:
-            return 1
+            return self.weatherData.count
         case 2:
-            return 1
+            if self.buoy?.latestData?.directionalSpectraPlotURL != nil {
+                return 1
+            } else {
+                return 0
+            }
+        case 3:
+            if self.buoy?.latestData?.spectralDistributionPlotURL != nil {
+                return 1
+            } else {
+                return 0
+            }
         default:
             return 0
         }
@@ -183,10 +207,12 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Latest Buoy Data";
+            return "Waves"
         case 1:
-            return "Directional Wave Spectra"
+            return "Weather";
         case 2:
+            return "Directional Wave Spectra"
+        case 3:
             return "Wave Energy Distribution"
         default:
             return nil
@@ -198,17 +224,23 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch indexPath.section {
         case 0:
-            if indexPath.row == 0 {
-                return 150.0
-            } else {
-                return 50.0
-            }
+            return 150.0
         case 1:
-            return screenWidth
+            return 50.0
         case 2:
+            return screenWidth
+        case 3:
             return screenWidth * 2 / 3
         default:
-            return 150.0
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (self.tableView(tableView, numberOfRowsInSection: section) == 0) {
+            return 0.0
+        } else {
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -217,71 +249,32 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch indexPath.section {
         case 0:
-            if indexPath.row == 0 {
-                cell = tableView.dequeueReusableCell(withIdentifier: "waveStatusCell", for: indexPath)
-                let waveSummaryView = cell.viewWithTag(41) as! UILabel
-                let primaryComponentView = cell.viewWithTag(42) as! UILabel
-                let secondaryComponentView = cell.viewWithTag(43) as! UILabel
-                
-                if let waveSummary = self.buoy?.latestData?.waveSummary {
-                    waveSummaryView.text = waveSummary.simpleDescription()
-                }
-                if let primaryComponent = self.buoy?.latestData?.swellComponents?[0] {
-                    primaryComponentView.text = primaryComponent.detailedDescription()
-                }
-                if let secondaryComponent = self.buoy?.latestData?.swellComponents?[1] {
-                    secondaryComponentView.text = secondaryComponent.detailedDescription()
-                }
-                
-            } else {
-                cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
-                switch indexPath.row {
-                case 1:
-                    cell.textLabel?.text = "Wind"
-                    if let windSpeed = self.buoy?.latestData?.windSpeed, let windDir = self.buoy?.latestData?.windDirection {
-                        cell.detailTextLabel?.text = String(format: "%.1f \(self.buoy!.units.speedUnit()) %.0f\(self.buoy!.units.degreesUnit())", windSpeed, windDir)
-                    }
-                case 2:
-                    cell.textLabel?.text = "Wind Gust"
-                    if let windGust = self.buoy?.latestData?.windGust {
-                        cell.detailTextLabel?.text = String(format: "%.1f \(self.buoy!.units.speedUnit())", windGust)
-                    }
-                case 3:
-                    cell.textLabel?.text = "Water Temperature"
-                    if let waterTemp = self.buoy?.latestData?.waterTemperature {
-                        cell.detailTextLabel?.text = String(format: "%.2f", waterTemp) + " " + buoy!.latestData!.units.temperatureUnit()
-                    } else {
-                        cell.detailTextLabel?.text = "N/A"
-                    }
-                case 4:
-                    cell.textLabel?.text = "Air Temperature"
-                    if let airTemp = self.buoy?.latestData?.airTemperature {
-                        cell.detailTextLabel?.text = String(format: "%.2f", airTemp) + " " + buoy!.latestData!.units.temperatureUnit()
-                    } else {
-                        cell.detailTextLabel?.text = "N/A"
-                    }
-                case 5:
-                    cell.textLabel?.text = "Pressure"
-                    if let pressure  = self.buoy?.latestData?.pressure {
-                        cell.detailTextLabel?.text = String(format: "%.2f", pressure) + " " + buoy!.latestData!.units.pressureUnit()
-                        if let _ = self.buoy?.latestData?.pressureTendency {
-                            cell.detailTextLabel?.text = cell.detailTextLabel!.text! + " " + self.buoy!.latestData!.pressureTendencyString
-                        }
-                    } else {
-                        cell.detailTextLabel?.text = "N/A"
-                    }
-                default:
-                    break
-                }
+            cell = tableView.dequeueReusableCell(withIdentifier: "waveStatusCell", for: indexPath)
+            let waveSummaryView = cell.viewWithTag(41) as! UILabel
+            let primaryComponentView = cell.viewWithTag(42) as! UILabel
+            let secondaryComponentView = cell.viewWithTag(43) as! UILabel
+            
+            if let waveSummary = self.buoy?.latestData?.waveSummary {
+                waveSummaryView.text = waveSummary.simpleDescription()
             }
-            break
+            if let primaryComponent = self.buoy?.latestData?.swellComponents?[0] {
+                primaryComponentView.text = primaryComponent.detailedDescription()
+            }
+            if let secondaryComponent = self.buoy?.latestData?.swellComponents?[1] {
+                secondaryComponentView.text = secondaryComponent.detailedDescription()
+            }
         case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
+            let key = self.weatherKeys[indexPath.row]
+            cell.textLabel?.text = key
+            cell.detailTextLabel?.text = self.weatherData[key]
+        case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
             let plotView = cell.viewWithTag(51) as! AsyncImageView
             if let plotURL = self.buoy?.latestData?.directionalSpectraPlotURL {
                 plotView.imageURL = URL.init(string: plotURL)
             }
-        case 2:
+        case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
             let plotView = cell.viewWithTag(51) as! AsyncImageView
             if let plotURL = self.buoy?.latestData?.spectralDistributionPlotURL {

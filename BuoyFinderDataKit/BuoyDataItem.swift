@@ -50,6 +50,36 @@ public class BuoyDataItem: NSCoding {
         }
     }
     
+    public var weatherData: [String:String] {
+        get {
+            var data: [String:String] = [:]
+            
+            if let windSpd = self.windSpeed, let windDir = self.windDirection {
+                data["Wind"] = String(format: "%.1f \(self.units.speedUnit()) %.0f\(self.units.degreesUnit())", windSpd, windDir)
+            }
+            if let windGst = self.windGust {
+                data["Wind Gust"] = String(format: "%.1f \(self.units.speedUnit())", windGst)
+            }
+            if let waterTemp = self.waterTemperature {
+                data["Water Temperature"] = String(format: "%.2f \(self.units.temperatureUnit())", waterTemp)
+            }
+            if let airTemp = self.airTemperature {
+                data["Air Temperature"] = String(format: "%.2f \(self.units.temperatureUnit())", airTemp)
+            }
+            if let press = self.pressure {
+                data["Pressure"] = String(format: "%.2f \(self.units.pressureUnit()) \(self.pressureTendencyString)", press)
+            }
+            if let vis = self.visibility {
+                data["Visibility"] = String(format: "%.1f \(self.units.visibilityUnit())", vis)
+            }
+            if let level = self.waterLevel {
+                data["Water Level"] = String(format: "%.1f ft", level)
+            }
+            
+            return data
+        }
+    }
+    
     // Units
     public var units: Units {
         didSet(oldValue) {
