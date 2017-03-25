@@ -45,7 +45,9 @@ class ExploreViewController: UIViewController {
         
         // Set up the search bar
         let subView = UIView(frame: CGRect(x: 0, y: 64.0, width: UIScreen.main.bounds.width, height: 45.0))
-        subView.addSubview((searchController?.searchBar)!)
+        if let searchBar = searchController?.searchBar {
+            subView.addSubview(searchBar)
+        }
         view.addSubview(subView)
         searchController?.searchBar.sizeToFit()
         searchController?.hidesNavigationBarDuringPresentation = false
@@ -86,7 +88,7 @@ class ExploreViewController: UIViewController {
                     let marker = GMSMarker()
                     marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
                     marker.title = station.name
-                    marker.snippet = "Station: " + station.stationID + ", " + station.program!
+                    marker.snippet = "Station: " + station.stationID + ", " + (station.program ?? "")
                     marker.map = exploreMapView
                 }
             }
@@ -117,7 +119,9 @@ class ExploreViewController: UIViewController {
 extension ExploreViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // Navigate to buoy page of the given marker
-        self.selectedBuoyStation = parseStationID(snippet: self.exploreMapView.selectedMarker!.snippet!)
+        if let snippet = self.exploreMapView.selectedMarker?.snippet {
+            self.selectedBuoyStation = parseStationID(snippet: snippet)
+        }
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
     }
 
@@ -181,7 +185,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         
         let buoy = self.nearbyBuoys[indexPath.row]
         cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + buoy.program!
+        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
         
         return cell
     }

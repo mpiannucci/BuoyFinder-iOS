@@ -60,7 +60,7 @@ class FavoriteBuoysViewController: UITableViewController {
 
         let buoy = SyncManager.instance.favoriteBuoys[indexPath.row]
         cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + buoy.program!
+        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
 
         return cell
     }

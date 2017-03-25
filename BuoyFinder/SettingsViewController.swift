@@ -21,11 +21,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         
         GIDSignIn.sharedInstance().uiDelegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -101,7 +96,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 if let user = FIRAuth.auth()?.currentUser {
-                    cell.textLabel?.text = "Logged in as \(user.email!)"
+                    cell.textLabel?.text = "Logged in as \(user.email ?? "")"
                     cell.detailTextLabel?.text = "Click to log out"
                 } else {
                     cell.textLabel?.text = "Not Logged In"
@@ -176,14 +171,14 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 let email = "rhodysurf13@gmail.com"
-                let url = URL(string: "mailto:\(email)?subject=BuoyFinder for iOS")!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let url = URL(string: "mailto:\(email)?subject=BuoyFinder for iOS")
+                self.openURL(url)
             case 1:
-                let url = URL(string: "itms-apps://itunes.apple.com/app/id945847570")!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let url = URL(string: "itms-apps://itunes.apple.com/app/id945847570")
+                self.openURL(url)
             case 2:
-                let url = URL(string: "https://mpiannucci.appspot.com")!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                let url = URL(string: "https://mpiannucci.appspot.com")
+                self.openURL(url)
             case 3:
                 self.performSegue(withIdentifier: "showLicensesSegue", sender: self)
             default:
@@ -196,13 +191,9 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    fileprivate func openURL(_ url: URL?) {
+        guard let url = url else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    */
+
 }
