@@ -76,12 +76,10 @@ class BuoyViewController: UIViewController {
     }
     
     func setupViews() {
-        if self.buoy == nil || self.mapView == nil {
-            return
-        }
+        guard let buoy = self.buoy, let mapView = self.mapView else { return }
         
         // Set the title
-        self.title = self.buoy!.name
+        self.title = buoy.name
         
         // Set the favorites button
         self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!))
@@ -90,13 +88,13 @@ class BuoyViewController: UIViewController {
         self.mapView.clear()
         
         // Set up the map of the buoy
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: self.buoy!.location.latitude + 0.5, longitude: self.buoy!.location.longitude, zoom: 6)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: buoy.location.latitude + 0.5, longitude: buoy.location.longitude, zoom: 6)
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
-        marker.position = CLLocation(latitude: self.buoy!.location.latitude, longitude: self.buoy!.location.longitude).coordinate
-        marker.title = "Station: " + self.buoy!.stationID
-        marker.snippet = self.buoy!.program!
+        marker.position = CLLocation(latitude: self.buoy!.location.latitude, longitude: buoy.location.longitude).coordinate
+        marker.title = "Station: " + buoy.stationID
+        marker.snippet = buoy.program ?? ""
         marker.map = mapView
         
         self.mapView.selectedMarker = marker
@@ -134,15 +132,13 @@ class BuoyViewController: UIViewController {
     }
     
     @objc func toggleBuoyFavorite() {
-        if self.buoy == nil {
-            return
-        }
+        guard let buoy = self.buoy else { return }
         
-        if SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!) {
-            SyncManager.instance.removeFavoriteBuoy(buoy: self.buoy!)
+        if SyncManager.instance.isBuoyAFavorite(buoy: buoy) {
+            SyncManager.instance.removeFavoriteBuoy(buoy: buoy)
             setFavoriteBuoyIcon(isFavorite: false)
         } else {
-            SyncManager.instance.addFavoriteBuoy(newBuoy: self.buoy!)
+            SyncManager.instance.addFavoriteBuoy(newBuoy: buoy)
             setFavoriteBuoyIcon(isFavorite: true)
         }
     }
@@ -250,10 +246,10 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.section {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveStatusCell", for: indexPath)
-            let waveSummaryView = cell.viewWithTag(41) as! UILabel
-            let primaryComponentView = cell.viewWithTag(42) as! UILabel
-            let secondaryComponentView = cell.viewWithTag(43) as! UILabel
-            
+            guard let waveSummaryView = cell.viewWithTag(41) as? UILabel,
+                let primaryComponentView = cell.viewWithTag(42) as? UILabel,
+                let secondaryComponentView = cell.viewWithTag(43) as? UILabel else { return cell }
+
             if let waveSummary = self.buoy?.latestData?.waveSummary {
                 waveSummaryView.text = waveSummary.simpleDescription()
             }
@@ -272,13 +268,13 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.text = self.weatherData[key]
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
-            let plotView = cell.viewWithTag(51) as! AsyncImageView
+            guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
             if let plotURL = self.buoy?.latestData?.directionalSpectraPlotURL {
                 plotView.imageURL = URL.init(string: plotURL)
             }
         case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
-            let plotView = cell.viewWithTag(51) as! AsyncImageView
+            guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
             if let plotURL = self.buoy?.latestData?.spectralDistributionPlotURL {
                 plotView.imageURL = URL.init(string: plotURL)
             }
