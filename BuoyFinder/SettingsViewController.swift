@@ -56,7 +56,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         case 1:
             return 1
         case 2:
-            return 4
+            return 3
         default:
             return 0
         }
@@ -114,8 +114,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 cell.textLabel?.text = "Rate On The App Store"
             case 2:
                 cell.textLabel?.text = "Copyright 2017 Matthew Iannucci"
-            case 3:
-                cell.textLabel?.text = "Open Source Licenses"
             default:
                 break
             }
@@ -179,8 +177,6 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 2:
                 let url = URL(string: "https://mpiannucci.appspot.com")
                 self.openURL(url)
-            case 3:
-                self.performSegue(withIdentifier: "showLicensesSegue", sender: self)
             default:
                 break
             }
