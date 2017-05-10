@@ -38,11 +38,11 @@ public class Swell: NSCoding {
     }
     
     init (jsonData: JSON) {
-        self.waveHeight = jsonData["WaveHeight"].doubleValue
-        self.period = jsonData["Period"].doubleValue
-        self.direction = jsonData["Direction"].doubleValue
-        self.compassDirection = jsonData["CompassDirection"].stringValue
-        self.units = Units(rawValue: jsonData["Units"].stringValue)!
+        self.waveHeight = jsonData["wave_height"].doubleValue
+        self.period = jsonData["period"].doubleValue
+        self.direction = jsonData["direction"].double
+        self.compassDirection = jsonData["compass_direction"].string
+        self.units = Units(rawValue: jsonData["unit"].stringValue)!
     }
     
     // MARK: NSCoding

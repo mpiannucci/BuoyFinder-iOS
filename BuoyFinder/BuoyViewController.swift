@@ -226,7 +226,7 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         case 2:
             return screenWidth
         case 3:
-            return screenWidth * 2 / 3
+            return screenWidth * 3.0 / 4.0
         default:
             return UITableViewAutomaticDimension
         }

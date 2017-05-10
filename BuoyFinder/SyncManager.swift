@@ -29,6 +29,14 @@ public class SyncManager {
     }
     public private(set) var units: Units = Units.metric
     
+    public enum InitialView: String {
+        case explore = "explore"
+        case favorites = "favorites"
+        case buoy = "specific Buoy"
+    }
+    public private(set) var initialView: InitialView = InitialView.explore
+    public private(set) var initialBuoy: String = ""
+    
     // Data cache states
     private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
     private var userRef: FIRDatabaseReference? = nil
@@ -37,6 +45,7 @@ public class SyncManager {
     // Settings keys
     let favoriteBuoysKey = "favoriteBuoys"
     let unitsKey = "units"
+    let initialViewKey = "initialView"
     
     private init() {
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
@@ -75,6 +84,15 @@ public class SyncManager {
         self.units = newUnits
         self.saveUnits()
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
+    }
+    
+    public func changeInitialView(newInitialView: InitialView) {
+        if self.initialView == newInitialView {
+            return
+        }
+        
+        self.initialView = newInitialView
+        self.saveInitialView()
     }
     
     public func addFavoriteBuoy(newBuoy: Buoy) {
@@ -144,6 +162,13 @@ public class SyncManager {
             }
         }
         
+        if let newInitialView = self.latestSnapshot?.childSnapshot(forPath: self.initialViewKey).value as? String {
+            if newInitialView != self.initialView.rawValue {
+                self.initialView = InitialView(rawValue: newInitialView)!
+                changed = true
+            }
+        }
+        
         if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
             let newFavoriteBuoys = rawFavoriteBuoys as! [String]
             for newFavoriteBuoyID in newFavoriteBuoys {
@@ -181,6 +206,13 @@ public class SyncManager {
         if let newUnits = userDefaults?.value(forKey: self.unitsKey) as? String {
             if newUnits != self.units.rawValue {
                 self.units = Units(rawValue: newUnits)!
+                changed = true
+            }
+        }
+        
+        if let newInitialView = userDefaults?.value(forKey: self.initialViewKey) as? String {
+            if newInitialView != self.initialView.rawValue {
+                self.initialView = InitialView(rawValue: newInitialView)!
                 changed = true
             }
         }
@@ -232,9 +264,18 @@ public class SyncManager {
         }
     }
     
+    private func saveInitialView() {
+        if self.userRef != nil {
+            self.userRef!.child(self.initialViewKey).setValue(self.initialView.rawValue as NSString)
+        } else {
+            self.userDefaults?.setValue(self.initialView.rawValue, forKey: self.initialViewKey)
+        }
+    }
+    
     private func saveData() {
         self.saveFavoriteBuoys()
         self.saveUnits()
+        self.saveInitialView()
     }
     
     @objc private func userDefaultsChanged(notification: NSNotification) {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class Location: NSCoding {
     
@@ -22,6 +23,13 @@ public class Location: NSCoding {
         self.longitude = longitude
         self.altitude = altitude
         self.locationName = locationName
+    }
+    
+    public init(jsonData: JSON) {
+        self.latitude = jsonData["latitude"].doubleValue
+        self.longitude = jsonData["longitude"].doubleValue
+        self.locationName = jsonData["name"].stringValue
+        self.altitude = jsonData["altitude"].double
     }
     
     // MARK: NSCoding

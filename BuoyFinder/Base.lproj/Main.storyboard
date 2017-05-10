@@ -189,7 +189,7 @@
         <scene sceneID="7Hp-fQ-QES">
             <objects>
                 <navigationController title="Settings Navigation Controller" id="2Ug-jM-UNJ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MTG-3V-fFZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MTG-3V-fFZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -407,9 +407,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="51" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hqq-15-Dj1" customClass="AsyncImageView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="281.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Hqq-15-Dj1" secondAttribute="height" multiplier="3:2" id="306-dR-YMj"/>
+                                                        <constraint firstAttribute="width" secondItem="Hqq-15-Dj1" secondAttribute="height" multiplier="4:3" id="306-dR-YMj"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>

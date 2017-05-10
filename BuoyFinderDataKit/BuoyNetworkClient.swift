@@ -12,7 +12,7 @@ import SwiftyJSON
 public class BuoyNetworkClient: NSObject {
     
     public static func fetchAllBuoys(callback: @escaping ([String:Buoy]?) -> Void) {
-        let allStationsURL = URL(string: "https://buoyfinder.appspot.com/api/stations")!
+        let allStationsURL = URL(string: "https://mpitester-13.appspot.com/api/stations")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: allStationsURL) {
             (rawData, response, error) -> Void in
@@ -25,7 +25,7 @@ public class BuoyNetworkClient: NSObject {
             
             // Parse the buoys and return them? IDKKKKK
             let json = JSON(data: rawData!)
-            let buoys = json["Stations"].arrayValue.map({
+            let buoys = json["stations"].arrayValue.map({
                 (rawStation: JSON) -> Buoy in
                 Buoy(jsonData: rawStation)
             }).reduce([String:Buoy]()) {
@@ -47,7 +47,7 @@ public class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchBuoyStationInfo(stationID: String, callback: @escaping (Buoy?) -> Void) {
-        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/stationinfo/" + stationID)!
+        let stationInfoURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + stationID + "/info")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -69,7 +69,7 @@ public class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchBuoyStationInfo(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/stationinfo/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + buoy.stationID + "/info")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -91,7 +91,7 @@ public class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyWaveData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/wave/charts/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + buoy.stationID + "/data/latest/spectra")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -104,7 +104,7 @@ public class BuoyNetworkClient: NSObject {
             
             // Add the latest wave data to the existing Buoy
             let json = JSON(data: rawData!)
-            buoy.loadLatestWaveData(allJsonData: json)
+            buoy.loadLatestWaveData(jsonData: json)
             
             // Let the listener know we are finished without errors
             callback(nil)
@@ -113,7 +113,7 @@ public class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyWeatherData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/weather/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + buoy.stationID + "/data/latest/weather")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -126,8 +126,7 @@ public class BuoyNetworkClient: NSObject {
             
             // Add the latest weather data to the existing Buoy
             let json = JSON(data: rawData!)
-            let buoyDataJSON = json["BuoyData"]
-            buoy.loadLatestWeatherData(jsonData: buoyDataJSON)
+            buoy.loadLatestWeatherData(jsonData: json)
             
             // Let the listener know we are finished without errors
             callback(nil)
@@ -136,7 +135,7 @@ public class BuoyNetworkClient: NSObject {
     }
     
     public static func fetchLatestBuoyData(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
-        let stationInfoURL = URL(string: "https://buoyfinder.appspot.com/api/latest/" + buoy.stationID)!
+        let stationInfoURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + buoy.stationID + "/data/latest")!
         let session = URLSession.shared
         let fetchTask = session.dataTask(with: stationInfoURL) {
             (rawData, response, error) -> Void in
@@ -149,8 +148,7 @@ public class BuoyNetworkClient: NSObject {
             
             // Add the latest data to the existing Buoy
             let json = JSON(data: rawData!)
-            let buoyDataJSON = json["BuoyData"]
-            buoy.loadLatestData(jsonData: buoyDataJSON)
+            buoy.loadLatestData(jsonData: json)
             
             // Let the listener know we are finished without errors
             callback(nil)

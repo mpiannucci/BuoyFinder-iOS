@@ -122,8 +122,8 @@ public class Buoy: NSCoding {
     }
     
     convenience init(jsonData: JSON) {
-        let stationId = jsonData["StationID"].stringValue
-        let locale = Location(latitude: jsonData["Latitude"].doubleValue, longitude: jsonData["Longitude"].doubleValue, altitude: jsonData["Elevation"].doubleValue, locationName: jsonData["LocationName"].stringValue)
+        let stationId = jsonData["station_id"].stringValue
+        let locale = Location(jsonData: jsonData["location"])
         
         self.init(stationID: stationId, location: locale)
         
@@ -228,53 +228,54 @@ public class Buoy: NSCoding {
     }
     
     internal func loadInfo(jsonData: JSON) {
-        self.owner = jsonData["Owner"].string
-        self.program = jsonData["PGM"].string
-        self.buoyType = jsonData["Type"].string
+        self.owner = jsonData["owner"].string
+        self.program = jsonData["program"].string
+        self.buoyType = jsonData["type"].string
         
-        self.active = (jsonData["Active"].stringValue == "y") as Bool?
-        self.currents = (jsonData["Currents"].stringValue == "y") as Bool?
-        self.waterQuality = (jsonData["WaterQuality"].stringValue == "y") as Bool?
-        self.dart = (jsonData["Dart"].stringValue == "y") as Bool?
+        self.active = jsonData["active"].bool
+        self.currents = jsonData["currents"].bool
+        self.waterQuality = jsonData["water_quality"].bool
+        self.dart = jsonData["dart"].bool
     }
     
-    internal func loadLatestWaveData(allJsonData: JSON) {
+    internal func loadLatestWaveData(jsonData: JSON) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
         
-        let jsonData = allJsonData["BuoyData"]
-        prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
+        prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
         
-        self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
-        self.latestData?.swellComponents = jsonData["SwellComponents"].arrayValue.map({ (swellJSON) -> Swell in
+        self.latestData?.waveSummary = Swell(jsonData: jsonData["wave_summary"])
+        self.latestData?.swellComponents = jsonData["swell_components"].arrayValue.map({ (swellJSON) -> Swell in
             return Swell(jsonData: swellJSON)
         })
-        self.latestData?.steepness = jsonData["Steepness"].string
-        self.latestData?.averagePeriod = jsonData["AveragePeriod"].double
-        self.latestData?.directionalSpectraPlotURL = allJsonData["DirectionalSpectraPlot"].string
-        self.latestData?.spectralDistributionPlotURL = allJsonData["SpectraDistributionPlot"].string
+        self.latestData?.steepness = jsonData["steepness"].string
+        self.latestData?.averagePeriod = jsonData["average_period"].double
         
         self.lastWaveUpdateTime = Date()
         self.latestData?.units = self.units
+        
+        self.latestData?.directionalSpectraPlotURL = "https://mpitester-13.appspot.com/api/station/" + self.stationID + "/plot/direction"
+        self.latestData?.spectralDistributionPlotURL = "https://mpitester-13.appspot.com/api/station/" + self.stationID + "/plot/energy"
     }
     
     internal func loadLatestWeatherData(jsonData: JSON) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
         
-        prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
+        prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
         
-        self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
-        self.latestData?.windDirection = jsonData["WindDirection"].double
-        self.latestData?.windSpeed = jsonData["WindSpeed"].double
-        self.latestData?.windGust = jsonData["WindGust"].double
-        self.latestData?.pressure = jsonData["Pressure"].double
-        self.latestData?.airTemperature = jsonData["AirTemperature"].double
-        self.latestData?.waterTemperature = jsonData["WaterTemperature"].double
-        self.latestData?.dewpointTemperature = jsonData["DewpointTemperature"].double
-        self.latestData?.visibility = jsonData["Visibility"].double
-        self.latestData?.pressureTendency = jsonData["PressureTendency"].double
-        self.latestData?.waterLevel = jsonData["WaterLevel"].double
+        if self.latestData?.waveSummary == nil {
+            self.latestData?.waveSummary = Swell(jsonData: jsonData["wave_summary"])
+        }
+        self.latestData?.windDirection = jsonData["wind_direction"].double
+        self.latestData?.windSpeed = jsonData["wind_speed"].double
+        self.latestData?.windGust = jsonData["wind_gust"].double
+        self.latestData?.pressure = jsonData["pressure"].double
+        self.latestData?.airTemperature = jsonData["air_temperature"].double
+        self.latestData?.waterTemperature = jsonData["water_temperature"].double
+        self.latestData?.dewpointTemperature = jsonData["dewpoint_temperature"].double
+        self.latestData?.pressureTendency = jsonData["pressure_tendency"].double
+        self.latestData?.waterLevel = jsonData["water_level"].double
         
         self.lastWeatherUpdateTime = Date()
         self.latestData?.units = self.units
@@ -284,23 +285,22 @@ public class Buoy: NSCoding {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
         
-        prepareForDataUpdate(rawTime: jsonData["Date"].stringValue)
+        prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
         
-        self.latestData?.windDirection = jsonData["WindDirection"].double
-        self.latestData?.windSpeed = jsonData["WindSpeed"].double
-        self.latestData?.windGust = jsonData["WindGust"].double
-        self.latestData?.waveSummary = Swell(jsonData: jsonData["WaveSummary"])
-        self.latestData?.swellComponents = jsonData["SwellComponents"].arrayValue.map({
+        self.latestData?.windDirection = jsonData["wind_direction"].double
+        self.latestData?.windSpeed = jsonData["wind_speed"].double
+        self.latestData?.windGust = jsonData["wind_gust"].double
+        self.latestData?.waveSummary = Swell(jsonData: jsonData["wave_summary"])
+        self.latestData?.swellComponents = jsonData["swell_components"].arrayValue.map({
             (swellJSON) -> Swell in
             return Swell(jsonData: swellJSON)
         })
-        self.latestData?.pressure = jsonData["Pressure"].double
-        self.latestData?.airTemperature = jsonData["AirTemperature"].double
-        self.latestData?.waterTemperature = jsonData["WaterTemperature"].double
-        self.latestData?.dewpointTemperature = jsonData["DewpointTemperature"].double
-        self.latestData?.visibility = jsonData["Visibility"].double
-        self.latestData?.pressureTendency = jsonData["PressureTendency"].double
-        self.latestData?.waterLevel = jsonData["WaterLevel"].double
+        self.latestData?.pressure = jsonData["pressure"].double
+        self.latestData?.airTemperature = jsonData["air_temperature"].double
+        self.latestData?.waterTemperature = jsonData["water_temperature"].double
+        self.latestData?.dewpointTemperature = jsonData["dewpoint_temperature"].double
+        self.latestData?.pressureTendency = jsonData["pressure_tendency"].double
+        self.latestData?.waterLevel = jsonData["water_level"].double
         
         self.lastWaveUpdateTime = Date()
         self.lastWeatherUpdateTime = Date()
@@ -310,7 +310,8 @@ public class Buoy: NSCoding {
     
     private func prepareForDataUpdate(rawTime: String) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         let timestamp = dateFormatter.date(from: rawTime)
         
         if self.latestData == nil {
