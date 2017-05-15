@@ -65,7 +65,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
+            return 3
         case 1:
             return 1
         case 2:
@@ -91,6 +91,14 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 1:
                 cell.textLabel?.text = "Initial View"
                 cell.detailTextLabel?.text = SyncManager.instance.initialView.rawValue.capitalized
+                
+            case 2:
+                cell.textLabel?.text = "Default Buoy"
+                if let defaultBuoy = SyncManager.instance.defaultbuoy {
+                    cell.detailTextLabel?.text =  defaultBuoy.name
+                } else {
+                    cell.detailTextLabel?.text = "Click to choose a default buoy"
+                }
             default:
                 break
             }
@@ -172,7 +180,30 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 initialViewPicker.addAction(favoritesAction)
                 
+                let defaultBuoyAction = UIAlertAction(title: SyncManager.InitialView.defaultBuoy.rawValue.capitalized, style: .default, handler: { (_) in
+                    SyncManager.instance.changeInitialView(newInitialView: SyncManager.InitialView.defaultBuoy)
+                    initialViewPicker.dismiss(animated: true, completion: nil)
+                })
+                initialViewPicker.addAction(defaultBuoyAction)
+                
                 self.present(initialViewPicker, animated: true, completion: nil)
+            case 2:
+                let defaultBuoyPicker = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                    defaultBuoyPicker.dismiss(animated: true, completion: nil)
+                })
+                defaultBuoyPicker.addAction(cancelAction)
+                
+                let favoriteBuoys = SyncManager.instance.favoriteBuoys
+                favoriteBuoys.forEach({ (buoy) in
+                    let buoyAction = UIAlertAction(title: buoy.name, style: .default, handler: { (_) in
+                        SyncManager.instance.changeDefaultBuoy(buoyID: buoy.stationID)
+                        defaultBuoyPicker.dismiss(animated: true, completion: nil)
+                    })
+                    defaultBuoyPicker.addAction(buoyAction)
+                })
+                
+                self.present(defaultBuoyPicker, animated: true, completion: nil)
             default:
                 break
             }

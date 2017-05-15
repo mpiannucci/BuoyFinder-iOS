@@ -21,8 +21,9 @@ class BuoyTabBarController : UITabBarController {
             self.selectedIndex = 0
         case .favorites:
             self.selectedIndex = 1
-        default:
-            break
+        case .defaultBuoy:
+            self.selectedIndex = 1
+            // TODO: call segue to navigate to buoyb
         }
     }
 }

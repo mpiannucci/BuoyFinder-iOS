@@ -35,6 +35,10 @@ public class BuoyModel: NSObject {
         aCoder.encode(self.buoys, forKey: "buoys")
     }
     
+    public func isBuoyIdValid(buoyID: String) -> Bool {
+        return self.buoys?[buoyID] != nil
+    }
+    
     // Fetching
     public func fetchBuoyStations() {
         BuoyNetworkClient.fetchAllBuoys {

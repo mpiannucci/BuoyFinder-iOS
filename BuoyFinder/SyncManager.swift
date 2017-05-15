@@ -32,10 +32,16 @@ public class SyncManager {
     public enum InitialView: String {
         case explore = "explore"
         case favorites = "favorites"
-        case buoy = "specific Buoy"
+        case defaultBuoy = "default buoy"
     }
     public private(set) var initialView: InitialView = InitialView.explore
-    public private(set) var initialBuoy: String = ""
+
+    public private(set) var defaultBuoyID: String = ""
+    public var defaultbuoy: Buoy? {
+        get {
+            return BuoyModel.sharedModel.buoys?[self.defaultBuoyID]
+        }
+    }
     
     // Data cache states
     private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
@@ -46,6 +52,7 @@ public class SyncManager {
     let favoriteBuoysKey = "favoriteBuoys"
     let unitsKey = "units"
     let initialViewKey = "initialView"
+    let defaultBuoyKey = "defaultBuoy"
     
     private init() {
         self.loadFromLocal()
@@ -95,6 +102,16 @@ public class SyncManager {
         
         self.initialView = newInitialView
         self.saveInitialView()
+        NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
+    }
+    
+    public func changeDefaultBuoy(buoyID: String) {
+        if self.defaultBuoyID == buoyID {
+            return
+        }
+        
+        self.defaultBuoyID = buoyID
+        self.saveDefaultBuoy()
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
@@ -172,6 +189,13 @@ public class SyncManager {
             }
         }
         
+        if let newDefaultBuoyID = self.latestSnapshot?.childSnapshot(forPath: self.defaultBuoyKey).value as? String {
+            if newDefaultBuoyID != self.defaultBuoyID {
+                self.defaultBuoyID = newDefaultBuoyID
+                changed = true
+            }
+        }
+        
         if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
             let newFavoriteBuoys = rawFavoriteBuoys as! [String]
             for newFavoriteBuoyID in newFavoriteBuoys {
@@ -216,6 +240,13 @@ public class SyncManager {
         if let newInitialView = userDefaults?.value(forKey: self.initialViewKey) as? String {
             if newInitialView != self.initialView.rawValue {
                 self.initialView = InitialView(rawValue: newInitialView)!
+                changed = true
+            }
+        }
+        
+        if let newDefaultBuoyID = userDefaults?.value(forKey: self.defaultBuoyKey) as? String {
+            if newDefaultBuoyID != self.defaultBuoyID {
+                self.defaultBuoyID = newDefaultBuoyID
                 changed = true
             }
         }
@@ -271,6 +302,13 @@ public class SyncManager {
         self.userDefaults?.setValue(self.initialView.rawValue, forKey: self.initialViewKey)
         if self.userRef != nil {
             self.userRef!.child(self.initialViewKey).setValue(self.initialView.rawValue as NSString)
+        }
+    }
+    
+    private func saveDefaultBuoy() {
+        self.userDefaults?.setValue(self.defaultBuoyID, forKey: self.defaultBuoyKey)
+        if self.userRef != nil {
+            self.userRef!.child(self.defaultBuoyKey).setValue(self.defaultBuoyID as NSString)
         }
     }
     
