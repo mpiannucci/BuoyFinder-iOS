@@ -35,7 +35,6 @@ class FavoriteBuoysViewController: UITableViewController {
         self.tableView.reloadData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableData), name: SyncManager.syncDataUpdatedNotification, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableData), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
