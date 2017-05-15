@@ -175,13 +175,13 @@
 				34B497671DEBC7090076EB5B /* Assets.xcassets */,
 				34B4976C1DEBC7090076EB5B /* Info.plist */,
 				344C479D1E58A7CB006D4D17 /* LocalSettings.plist */,
-				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
-				342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */,
-				34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */,
-				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
 				34B497641DEBC7090076EB5B /* Main.storyboard */,
 				34B497691DEBC7090076EB5B /* LaunchScreen.storyboard */,
+				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
+				342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */,
 				346573B51E11EEBC007E6C12 /* BuoyViewController.swift */,
+				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
+				34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */,
 				34CA924D1E578C3200D11B51 /* SettingsViewController.swift */,
 				347F21F71E5B4308008553C9 /* SyncManager.swift */,
 			);
@@ -191,14 +191,14 @@
 		34E562AF1DECD634006F1C67 /* BuoyFinderDataKit */ = {
 			isa = PBXGroup;
 			children = (
-				34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */,
-				34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */,
-				34F5AF1D1DED1B190084AE86 /* Swell.swift */,
 				34F5AF1F1DED1E010084AE86 /* Buoy.swift */,
-				34F5AF211DED1E690084AE86 /* Location.swift */,
-				34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */,
-				34F154361DFCB6B60041B072 /* Units.swift */,
+				34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */,
+				34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */,
 				34B176FC1E02303F007E211E /* BuoyModel.swift */,
+				34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */,
+				34F5AF211DED1E690084AE86 /* Location.swift */,
+				34F5AF1D1DED1B190084AE86 /* Swell.swift */,
+				34F154361DFCB6B60041B072 /* Units.swift */,
 			);
 			name = BuoyFinderDataKit;
 			sourceTree = "<group>";
