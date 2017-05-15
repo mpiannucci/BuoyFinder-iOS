@@ -125,7 +125,7 @@ class BuoyViewController: UIViewController {
                 
                 if let updateDate = buoy_.latestUpdateTime {
                     let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
-                    self.mapView.selectedMarker?.snippet = "\(self.mapView.selectedMarker!.snippet!)\nUpdated \(dateString)"
+                    self.mapView.selectedMarker?.snippet = "\(buoy_.program ?? "")\nUpdated \(dateString)"
                 }
             }
         }
@@ -283,7 +283,6 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             cell = UITableViewCell()
         }
      
-        // Configure the cell..
         return cell
     }
 }
