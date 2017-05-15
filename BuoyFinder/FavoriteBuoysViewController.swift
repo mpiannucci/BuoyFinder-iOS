@@ -12,6 +12,8 @@ import BuoyFinderDataKit
 
 class FavoriteBuoysViewController: UITableViewController {
     
+    private var initialLoad: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -48,6 +50,19 @@ class FavoriteBuoysViewController: UITableViewController {
     @objc func updateTableData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            
+            // Check to see if we should navigate to the users default buoy
+            if self.initialLoad && SyncManager.instance.favoriteBuoys.count > 0 {
+                if SyncManager.instance.initialView == SyncManager.InitialView.defaultBuoy {
+                    if let buoyIndex = SyncManager.instance.favoriteBuoyIDs.index(of: SyncManager.instance.defaultBuoyID) {
+                        let indexPath = IndexPath(row: buoyIndex, section: 0)
+                        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
+                        self.performSegue(withIdentifier: "favoriteBuoySegue", sender: self)
+                    }
+                }
+                
+                self.initialLoad = false
+            }
         }
     }
     
