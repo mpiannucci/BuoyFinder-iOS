@@ -32,7 +32,7 @@ class FavoriteBuoysViewController: UITableViewController {
 
         self.tableView.reloadData()
         
-        NotificationCenter.default.addObserver(self.tableView, selector: #selector(self.tableView.reloadData), name: SyncManager.syncDataUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableData), name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,6 +41,12 @@ class FavoriteBuoysViewController: UITableViewController {
         self.parent?.navigationItem.rightBarButtonItem = nil
         
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateTableData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Table view data source

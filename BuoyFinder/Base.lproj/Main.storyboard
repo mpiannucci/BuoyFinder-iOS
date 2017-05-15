@@ -37,7 +37,7 @@
         <!--TabBar-->
         <scene sceneID="NZQ-IM-r2W">
             <objects>
-                <tabBarController title="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="PNA-6z-bRV" sceneMemberID="viewController">
+                <tabBarController title="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="PNA-6z-bRV" customClass="BuoyTabBarController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="BuoyFinder" id="eKK-x1-vRC">
                         <barButtonItem key="backBarButtonItem" title="Back" id="oRb-st-ygD"/>
                         <barButtonItem key="leftBarButtonItem" image="ic_settings_white" style="plain" id="pCH-vL-4nL">
@@ -189,7 +189,7 @@
         <scene sceneID="7Hp-fQ-QES">
             <objects>
                 <navigationController title="Settings Navigation Controller" id="2Ug-jM-UNJ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MTG-3V-fFZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MTG-3V-fFZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

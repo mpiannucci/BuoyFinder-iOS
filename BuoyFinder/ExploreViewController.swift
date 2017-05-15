@@ -73,23 +73,27 @@ class ExploreViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.updateBuoyStations()
         NotificationCenter.default.addObserver(self, selector: #selector(ExploreViewController.updateBuoyStations), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
     
     func updateBuoyStations() {
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             if let stations = BuoyModel.sharedModel.buoys {
                 for (_, station) in stations {
                     let marker = GMSMarker()
                     marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
                     marker.title = station.name
                     marker.snippet = "Station: " + station.stationID + ", " + (station.program ?? "")
-                    marker.map = exploreMapView
+                    marker.map = self.exploreMapView
                 }
             }
             

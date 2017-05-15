@@ -48,6 +48,8 @@ public class SyncManager {
     let initialViewKey = "initialView"
     
     private init() {
+        self.loadFromLocal()
+        
         FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if user != nil {
                 self.favoriteBuoys.removeAll()
@@ -93,6 +95,7 @@ public class SyncManager {
         
         self.initialView = newInitialView
         self.saveInitialView()
+        NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
     public func addFavoriteBuoy(newBuoy: Buoy) {
@@ -265,10 +268,9 @@ public class SyncManager {
     }
     
     private func saveInitialView() {
+        self.userDefaults?.setValue(self.initialView.rawValue, forKey: self.initialViewKey)
         if self.userRef != nil {
             self.userRef!.child(self.initialViewKey).setValue(self.initialView.rawValue as NSString)
-        } else {
-            self.userDefaults?.setValue(self.initialView.rawValue, forKey: self.initialViewKey)
         }
     }
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
+		342EED7B1EC92EBE0076A8E2 /* BuoyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */; };
 		344C479E1E58A7CB006D4D17 /* LocalSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 344C479D1E58A7CB006D4D17 /* LocalSettings.plist */; };
 		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
 		346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346573B51E11EEBC007E6C12 /* BuoyViewController.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyTabBarController.swift; sourceTree = "<group>"; };
 		344C479D1E58A7CB006D4D17 /* LocalSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LocalSettings.plist; sourceTree = "<group>"; };
 		346573B21E11D21A007E6C12 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinder.entitlements; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				34B4976C1DEBC7090076EB5B /* Info.plist */,
 				344C479D1E58A7CB006D4D17 /* LocalSettings.plist */,
 				34B497601DEBC7090076EB5B /* AppDelegate.swift */,
+				342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */,
 				34E562421DECB21D006F1C67 /* FavoriteBuoysViewController.swift */,
 				34E562441DECB236006F1C67 /* ExploreViewController.swift */,
 				34B497641DEBC7090076EB5B /* Main.storyboard */,
@@ -485,6 +488,7 @@
 				346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */,
 				34E562431DECB21D006F1C67 /* FavoriteBuoysViewController.swift in Sources */,
 				34E562451DECB236006F1C67 /* ExploreViewController.swift in Sources */,
+				342EED7B1EC92EBE0076A8E2 /* BuoyTabBarController.swift in Sources */,
 				34CA924E1E578C3200D11B51 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
