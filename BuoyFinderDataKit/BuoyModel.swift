@@ -49,6 +49,14 @@ public class BuoyModel: NSObject {
         }
     }
     
+    public func fetchLatestDataForBuoys(ids: [String]) {
+        ids.forEach { (stationId) in
+            if let buoy = self.buoys?[stationId] {
+                buoy.fetchAllDataIfNeeded()
+            }
+        }
+    }
+    
     public func nearbyBuoys(location: Location, radius: Double, units: Units) -> [Buoy] {
         if let resolvedBuoys = self.buoys {
             return resolvedBuoys.filter({ (key, value) -> Bool in
