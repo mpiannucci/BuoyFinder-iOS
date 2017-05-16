@@ -10,6 +10,12 @@
 		173BAAA80B4C443A5B811909 /* Pods_BuoyFinderDataKit_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */; };
 		342EED7B1EC92EBE0076A8E2 /* BuoyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */; };
 		344C479E1E58A7CB006D4D17 /* LocalSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 344C479D1E58A7CB006D4D17 /* LocalSettings.plist */; };
+		345FEF591ECB3F9F002D970B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345FEF581ECB3F9F002D970B /* NotificationCenter.framework */; };
+		345FEF5C1ECB3F9F002D970B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345FEF5B1ECB3F9F002D970B /* TodayViewController.swift */; };
+		345FEF5F1ECB3F9F002D970B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 345FEF5D1ECB3F9F002D970B /* MainInterface.storyboard */; };
+		345FEF631ECB3F9F002D970B /* BuoyFinderTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 345FEF571ECB3F9F002D970B /* BuoyFinderTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		345FEF681ECB3FB4002D970B /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
+		345FEF6D1ECB4839002D970B /* CachedBuoyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345FEF6C1ECB4839002D970B /* CachedBuoyManager.swift */; };
 		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
 		346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346573B51E11EEBC007E6C12 /* BuoyViewController.swift */; };
 		347F21F81E5B4308008553C9 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347F21F71E5B4308008553C9 /* SyncManager.swift */; };
@@ -38,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		345FEF611ECB3F9F002D970B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 345FEF561ECB3F9F002D970B;
+			remoteInfo = BuoyFinderTodayExtension;
+		};
 		34E562BF1DECD683006F1C67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
@@ -62,6 +75,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		345FEF671ECB3F9F002D970B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				345FEF631ECB3F9F002D970B /* BuoyFinderTodayExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34E5628B1DECD29D006F1C67 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,6 +102,13 @@
 /* Begin PBXFileReference section */
 		342EED7A1EC92EBE0076A8E2 /* BuoyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyTabBarController.swift; sourceTree = "<group>"; };
 		344C479D1E58A7CB006D4D17 /* LocalSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LocalSettings.plist; sourceTree = "<group>"; };
+		345FEF571ECB3F9F002D970B /* BuoyFinderTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BuoyFinderTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		345FEF581ECB3F9F002D970B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		345FEF5B1ECB3F9F002D970B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		345FEF5E1ECB3F9F002D970B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		345FEF601ECB3F9F002D970B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		345FEF691ECB3FBF002D970B /* BuoyFinderTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinderTodayExtension.entitlements; sourceTree = "<group>"; };
+		345FEF6C1ECB4839002D970B /* CachedBuoyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachedBuoyManager.swift; path = WidgetShared/CachedBuoyManager.swift; sourceTree = SOURCE_ROOT; };
 		346573B21E11D21A007E6C12 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinder.entitlements; sourceTree = "<group>"; };
 		346573B51E11EEBC007E6C12 /* BuoyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +146,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		345FEF541ECB3F9F002D970B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				345FEF681ECB3FB4002D970B /* BuoyFinderDataKit.framework in Frameworks */,
+				345FEF591ECB3F9F002D970B /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34B4975A1DEBC7080076EB5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -144,6 +184,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		345FEF5A1ECB3F9F002D970B /* BuoyFinderTodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				345FEF691ECB3FBF002D970B /* BuoyFinderTodayExtension.entitlements */,
+				345FEF601ECB3F9F002D970B /* Info.plist */,
+				345FEF6C1ECB4839002D970B /* CachedBuoyManager.swift */,
+				345FEF5B1ECB3F9F002D970B /* TodayViewController.swift */,
+				345FEF5D1ECB3F9F002D970B /* MainInterface.storyboard */,
+			);
+			path = BuoyFinderTodayExtension;
+			sourceTree = "<group>";
+		};
 		34B497541DEBC7080076EB5B = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +203,7 @@
 				34E562AF1DECD634006F1C67 /* BuoyFinderDataKit */,
 				34E562B61DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
 				34E562C31DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
+				345FEF5A1ECB3F9F002D970B /* BuoyFinderTodayExtension */,
 				34B4975E1DEBC7090076EB5B /* Products */,
 				6D19952AF017934D0B45A567 /* Pods */,
 				D52C73CDDCF1F6142AB9EE21 /* Frameworks */,
@@ -163,6 +216,7 @@
 				34B4975D1DEBC7090076EB5B /* BuoyFinder.app */,
 				34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */,
 				34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */,
+				345FEF571ECB3F9F002D970B /* BuoyFinderTodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +292,7 @@
 				346573B21E11D21A007E6C12 /* CoreLocation.framework */,
 				9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */,
 				CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */,
+				345FEF581ECB3F9F002D970B /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -257,6 +312,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		345FEF561ECB3F9F002D970B /* BuoyFinderTodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 345FEF661ECB3F9F002D970B /* Build configuration list for PBXNativeTarget "BuoyFinderTodayExtension" */;
+			buildPhases = (
+				345FEF531ECB3F9F002D970B /* Sources */,
+				345FEF541ECB3F9F002D970B /* Frameworks */,
+				345FEF551ECB3F9F002D970B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuoyFinderTodayExtension;
+			productName = BuoyFinderTodayExtension;
+			productReference = 345FEF571ECB3F9F002D970B /* BuoyFinderTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		34B4975C1DEBC7080076EB5B /* BuoyFinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34B4976F1DEBC7090076EB5B /* Build configuration list for PBXNativeTarget "BuoyFinder" */;
@@ -268,11 +340,13 @@
 				C27C2470D4EE2B35AC2B21FE /* [CP] Embed Pods Frameworks */,
 				86CC263C446789361F9EA1AC /* [CP] Copy Pods Resources */,
 				34E5628B1DECD29D006F1C67 /* Embed Frameworks */,
+				345FEF671ECB3F9F002D970B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				34E562C91DECD683006F1C67 /* PBXTargetDependency */,
+				345FEF621ECB3F9F002D970B /* PBXTargetDependency */,
 			);
 			name = BuoyFinder;
 			productName = BuoyFinder;
@@ -324,10 +398,20 @@
 		34B497551DEBC7080076EB5B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Matthew Iannucci";
 				TargetAttributes = {
+					345FEF561ECB3F9F002D970B = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 39L46PD99U;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					34B4975C1DEBC7080076EB5B = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 39L46PD99U;
@@ -367,11 +451,20 @@
 				34B4975C1DEBC7080076EB5B /* BuoyFinder */,
 				34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
 				34E562BC1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
+				345FEF561ECB3F9F002D970B /* BuoyFinderTodayExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		345FEF551ECB3F9F002D970B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				345FEF5F1ECB3F9F002D970B /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34B4975B1DEBC7080076EB5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,6 +572,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		345FEF531ECB3F9F002D970B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				345FEF6D1ECB4839002D970B /* CachedBuoyManager.swift in Sources */,
+				345FEF5C1ECB3F9F002D970B /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34B497591DEBC7080076EB5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,6 +620,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		345FEF621ECB3F9F002D970B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 345FEF561ECB3F9F002D970B /* BuoyFinderTodayExtension */;
+			targetProxy = 345FEF611ECB3F9F002D970B /* PBXContainerItemProxy */;
+		};
 		34E562C01DECD683006F1C67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */;
@@ -536,6 +643,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		345FEF5D1ECB3F9F002D970B /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				345FEF5E1ECB3F9F002D970B /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		34B497641DEBC7090076EB5B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -555,6 +670,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		345FEF641ECB3F9F002D970B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = BuoyFinderTodayExtension/BuoyFinderTodayExtension.entitlements;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = BuoyFinderTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.BuoyFinderTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		345FEF651ECB3F9F002D970B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = BuoyFinderTodayExtension/BuoyFinderTodayExtension.entitlements;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = BuoyFinderTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.BuoyFinderTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		34B4976D1DEBC7090076EB5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -759,6 +906,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		345FEF661ECB3F9F002D970B /* Build configuration list for PBXNativeTarget "BuoyFinderTodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				345FEF641ECB3F9F002D970B /* Debug */,
+				345FEF651ECB3F9F002D970B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		34B497581DEBC7080076EB5B /* Build configuration list for PBXProject "BuoyFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

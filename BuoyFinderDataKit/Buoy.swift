@@ -14,6 +14,7 @@ public class Buoy: NSCoding {
     public static let buoyDataFetchStartedNotification = Notification.Name("buoyDataFetchStarted")
     public static let buoyDataUpdatedNotification = Notification.Name("buoyDataUpdated")
     public static let buoyDataUpdateFailedNotification = Notification.Name("buoyDataUpdateFailed")
+    public static let buoyNextUpdateTimeUpdatedNotification = Notification.Name("buoyNextUpdateTimeUpdated")
     
     // Required
     public var stationID: String
@@ -51,6 +52,7 @@ public class Buoy: NSCoding {
             }
         }
     }
+    public var nextUpdateTime: Date?
     
     private var fetching: Int = 0
     public var isFetching: Bool {
@@ -150,6 +152,7 @@ public class Buoy: NSCoding {
         self.latestData = aDecoder.decodeObject(forKey: "latestData") as? BuoyDataItem
         self.lastWaveUpdateTime = aDecoder.decodeObject(forKey: "lastWaveUpdateTime") as? Date
         self.lastWeatherUpdateTime = aDecoder.decodeObject(forKey: "lastWeatherUpdateTime") as? Date
+        self.nextUpdateTime = aDecoder.decodeObject(forKey: "nextUpdateTime") as? Date
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -165,6 +168,18 @@ public class Buoy: NSCoding {
         aCoder.encode(self.latestData, forKey: "latestData")
         aCoder.encode(self.lastWaveUpdateTime, forKey: "lastWaveUpdateTime")
         aCoder.encode(self.lastWeatherUpdateTime, forKey: "lastWeatherUpdateTime")
+        aCoder.encode(self.nextUpdateTime, forKey: "nextUpdateTime")
+    }
+    
+    public func fetchNextUpdateTime() {
+        BuoyNetworkClient.fetchNextUpdateTime(buoy: self) {
+            fetchError in
+            if fetchError != nil {
+                return
+            }
+            
+            NotificationCenter.default.post(name: Buoy.buoyNextUpdateTimeUpdatedNotification, object: self.stationID)
+        }
     }
     
     public func fetchLatestData() {

@@ -156,6 +156,31 @@ public class BuoyNetworkClient: NSObject {
         fetchTask.resume()
     }
     
+    public static func fetchNextUpdateTime(buoy: Buoy, callback: @escaping (FetchError?) -> Void) {
+        let stationUpdateTimeURL = URL(string: "https://mpitester-13.appspot.com/api/station/" + buoy.stationID + "/updatetime")!
+        let session = URLSession.shared
+        let fetchTask = session.dataTask(with: stationUpdateTimeURL) {
+            (rawData, response, error) -> Void in
+            
+            // Handle Errors
+            if let fetchError = checkErrors(data: rawData, response: response, error: error) {
+                callback(fetchError)
+                return
+            }
+            
+            // Read and parse the next update time
+            let json = JSON(data: rawData!)
+            let rawTime = json["next_update_time"].stringValue
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+            buoy.nextUpdateTime = dateFormatter.date(from: rawTime)
+            
+            callback(nil)
+        }
+        fetchTask.resume()
+    }
+    
     private static func checkErrors(data: Data?, response: URLResponse?, error: Error?) -> FetchError? {
         var fetchError: FetchError?
         

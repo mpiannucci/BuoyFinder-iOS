@@ -12,11 +12,21 @@
 		<key>BuoyFinderDataKit-iOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<key>BuoyFinderTodayExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>345FEF561ECB3F9F002D970B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>34B4975C1DEBC7080076EB5B</key>
 		<dict>
 			<key>primary</key>
