@@ -211,12 +211,23 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 if let _ = FIRAuth.auth()?.currentUser {
-                    do {
-                        try FIRAuth.auth()?.signOut()
-                        GIDSignIn.sharedInstance().signOut()
-                    } catch let signOutError as NSError {
-                        print ("Error signing out: %@", signOutError)
-                    }
+                    let confirmationController = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                        confirmationController.dismiss(animated: true, completion: nil)
+                    })
+                    confirmationController.addAction(cancelAction)
+                    let logOutAction = UIAlertAction(title: "Yes, Log out now", style: .default, handler: { (_) in
+                        do {
+                            try FIRAuth.auth()?.signOut()
+                            GIDSignIn.sharedInstance().signOut()
+                        } catch let signOutError as NSError {
+                            print ("Error signing out: %@", signOutError)
+                        }
+                        confirmationController.dismiss(animated: true, completion: nil)
+                    })
+                    confirmationController.addAction(logOutAction)
+                    
+                    self.present(confirmationController, animated: true, completion: nil)
                 } else {
                     GIDSignIn.sharedInstance().signIn()
                 }
