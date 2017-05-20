@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double BuoyFinderWatchDataKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char BuoyFinderWatchDataKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <BuoyFinderWatchDataKit/PublicHeader.h>
-
+#include "BuoyFinderDataKit.h"
 

@@ -21,3 +21,9 @@ target 'BuoyFinderDataKit-iOS' do
 
   pod 'SwiftyJSON'
 end
+
+target 'BuoyFinderWatchDataKit' do
+  use_frameworks!
+
+  pod 'SwiftyJSON'
+end

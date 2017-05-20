@@ -45,8 +45,8 @@ public class SyncManager {
     
     // Data cache states
     private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
-    private var userRef: FIRDatabaseReference? = nil
-    private var latestSnapshot: FIRDataSnapshot? = nil
+    private var userRef: DatabaseReference? = nil
+    private var latestSnapshot: DataSnapshot? = nil
     
     // Settings keys
     let favoriteBuoysKey = "favoriteBuoys"
@@ -57,10 +57,10 @@ public class SyncManager {
     private init() {
         self.loadFromLocal()
         
-        FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
+        Auth.auth().addStateDidChangeListener({ (auth, user) in
             if user != nil {
                 self.favoriteBuoys.removeAll()
-                self.userRef = FIRDatabase.database().reference(withPath: "user/" + user!.uid)
+                self.userRef = Database.database().reference(withPath: "user/" + user!.uid)
                 
                 self.userRef?.observe(.value, with: {
                     snapshot in

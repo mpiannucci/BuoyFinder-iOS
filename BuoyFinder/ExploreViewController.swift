@@ -57,15 +57,14 @@ class ExploreViewController: UIViewController {
         definesPresentationContext = true
     
         // Try and get the users location to give a better view of buoys around them
-        let locationRequest = Location.getLocation(withAccuracy: .city, onSuccess: { foundLocation in
-            // Change the view of the map to center around the location
+        let locationRequest = SwiftLocation.Location.getLocation(accuracy: .city, frequency: .oneShot, success: { (locRequest, foundLocation) -> (Void) in
             self.exploreMapView.camera = GMSCameraPosition.camera(withTarget: foundLocation.coordinate, zoom: 6)
             self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
-        }) { (lastValidLocation, error) in
+        }) { (locRequest, lastValidLocation, error) -> (Void) in
             self.exploreMapView.camera = GMSCameraPosition.camera(withLatitude: 39.8, longitude: -98.6, zoom: 3)
             self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
         }
-        locationRequest.start()
+        locationRequest.resume()
     }
 
     override func didReceiveMemoryWarning() {

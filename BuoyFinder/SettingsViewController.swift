@@ -13,8 +13,8 @@ import BuoyFinderDataKit
 
 class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
 
-    private var userRef: FIRDatabaseReference? = nil
-    private var latestSnapshot: FIRDataSnapshot? = nil
+    private var userRef: DatabaseReference? = nil
+    private var latestSnapshot: DataSnapshot? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +112,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         case 1:
             switch indexPath.row {
             case 0:
-                if let user = FIRAuth.auth()?.currentUser {
+                if let user = Auth.auth().currentUser {
                     cell.textLabel?.text = "Logged in as \(user.email ?? "")"
                     cell.detailTextLabel?.text = "Click to log out"
                 } else {
@@ -222,7 +222,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         case 1:
             switch indexPath.row {
             case 0:
-                if let _ = FIRAuth.auth()?.currentUser {
+                if let _ = Auth.auth().currentUser {
                     let confirmationController = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
                         confirmationController.dismiss(animated: true, completion: nil)
@@ -230,7 +230,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                     confirmationController.addAction(cancelAction)
                     let logOutAction = UIAlertAction(title: "Yes, Log out now", style: .default, handler: { (_) in
                         do {
-                            try FIRAuth.auth()?.signOut()
+                            try Auth.auth().signOut()
                             GIDSignIn.sharedInstance().signOut()
                         } catch let signOutError as NSError {
                             print ("Error signing out: %@", signOutError)

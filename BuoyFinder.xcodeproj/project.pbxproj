@@ -47,12 +47,21 @@
 		34E5E0371ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34E5E03C1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; };
 		34E5E03D1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
+		34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
+		34E5E0441ED0E02E00560E4D /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34E5E0451ED0E02E00560E4D /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
+		34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */; };
+		34E5E0471ED0E02E00560E4D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF211DED1E690084AE86 /* Location.swift */; };
+		34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
+		34E5E0491ED0E02E00560E4D /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34F154381DFCB9F10041B072 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
 		34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
 		34F5AF221DED1E690084AE86 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF211DED1E690084AE86 /* Location.swift */; };
 		34F5AF241DED236A0084AE86 /* BuoyNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */; };
+		50EB474232AE3FFD94AC1C98 /* Pods_BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39FBAD79973709391B0BE01 /* Pods_BuoyFinderWatchDataKit.framework */; };
 		6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -235,11 +244,14 @@
 		34F5AF1F1DED1E010084AE86 /* Buoy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buoy.swift; path = BuoyFinderDataKit/Buoy.swift; sourceTree = "<group>"; };
 		34F5AF211DED1E690084AE86 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = BuoyFinderDataKit/Location.swift; sourceTree = "<group>"; };
 		34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyNetworkClient.swift; path = BuoyFinderDataKit/BuoyNetworkClient.swift; sourceTree = "<group>"; };
+		4518F8027ED9E45AF6A16DC8 /* Pods-BuoyFinderWatchDataKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinderWatchDataKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinderWatchDataKit/Pods-BuoyFinderWatchDataKit.release.xcconfig"; sourceTree = "<group>"; };
 		6FE0039DB6F7D412501CC29D /* Pods-BuoyFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.release.xcconfig"; sourceTree = "<group>"; };
 		7057F7350387F786ABF01BF8 /* Pods-BuoyFinderDataKit-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinderDataKit-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinderDataKit-iOS/Pods-BuoyFinderDataKit-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		89B4E4AE4100DFEA3D21737F /* Pods-BuoyFinderWatchDataKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinderWatchDataKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinderWatchDataKit/Pods-BuoyFinderWatchDataKit.debug.xcconfig"; sourceTree = "<group>"; };
 		9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA27CF0E2B8F2B3FFD98FB7F /* Pods-BuoyFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.debug.xcconfig"; sourceTree = "<group>"; };
 		CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinderDataKit_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E39FBAD79973709391B0BE01 /* Pods_BuoyFinderWatchDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinderWatchDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB218A4BCE5080288FDA52FF /* Pods-BuoyFinderDataKit-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinderDataKit-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinderDataKit-iOS/Pods-BuoyFinderDataKit-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50EB474232AE3FFD94AC1C98 /* Pods_BuoyFinderWatchDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +453,8 @@
 				6FE0039DB6F7D412501CC29D /* Pods-BuoyFinder.release.xcconfig */,
 				7057F7350387F786ABF01BF8 /* Pods-BuoyFinderDataKit-iOS.debug.xcconfig */,
 				EB218A4BCE5080288FDA52FF /* Pods-BuoyFinderDataKit-iOS.release.xcconfig */,
+				89B4E4AE4100DFEA3D21737F /* Pods-BuoyFinderWatchDataKit.debug.xcconfig */,
+				4518F8027ED9E45AF6A16DC8 /* Pods-BuoyFinderWatchDataKit.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -451,6 +466,7 @@
 				9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */,
 				CBA3EC2FF46FEF3E9E85AA1C /* Pods_BuoyFinderDataKit_iOS.framework */,
 				345FEF581ECB3F9F002D970B /* NotificationCenter.framework */,
+				E39FBAD79973709391B0BE01 /* Pods_BuoyFinderWatchDataKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -471,6 +487,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E5E0441ED0E02E00560E4D /* BuoyFinderDataKit.h in Headers */,
 				34E5E0331ED0DF2700560E4D /* BuoyFinderWatchDataKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,10 +620,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34E5E0381ED0DF2700560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatchDataKit" */;
 			buildPhases = (
+				BFFB8536D922DB8085F752A2 /* [CP] Check Pods Manifest.lock */,
 				34E5E02A1ED0DF2600560E4D /* Sources */,
 				34E5E02B1ED0DF2600560E4D /* Frameworks */,
 				34E5E02C1ED0DF2600560E4D /* Headers */,
 				34E5E02D1ED0DF2600560E4D /* Resources */,
+				C4508E5B71BF9C0F74B55106 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -788,7 +807,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		86CC263C446789361F9EA1AC /* [CP] Copy Pods Resources */ = {
@@ -818,7 +837,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BFFB8536D922DB8085F752A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C27C2470D4EE2B35AC2B21FE /* [CP] Embed Pods Frameworks */ = {
@@ -834,6 +868,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4508E5B71BF9C0F74B55106 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BuoyFinderWatchDataKit/Pods-BuoyFinderWatchDataKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -898,6 +947,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */,
+				34E5E0451ED0E02E00560E4D /* BuoyModel.swift in Sources */,
+				34E5E0471ED0E02E00560E4D /* Location.swift in Sources */,
+				34E5E0491ED0E02E00560E4D /* Units.swift in Sources */,
+				34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */,
+				34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */,
+				34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1349,7 @@
 		};
 		34E5E0391ED0DF2700560E4D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89B4E4AE4100DFEA3D21737F /* Pods-BuoyFinderWatchDataKit.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1320,6 +1377,7 @@
 		};
 		34E5E03A1ED0DF2700560E4D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4518F8027ED9E45AF6A16DC8 /* Pods-BuoyFinderWatchDataKit.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1400,6 +1458,7 @@
 				34E5E0251ED0DEA800560E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34E5E0281ED0DEA800560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatch" */ = {
 			isa = XCConfigurationList;
@@ -1408,6 +1467,7 @@
 				34E5E0231ED0DEA800560E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34E5E0381ED0DF2700560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatchDataKit" */ = {
 			isa = XCConfigurationList;
@@ -1416,6 +1476,7 @@
 				34E5E03A1ED0DF2700560E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
