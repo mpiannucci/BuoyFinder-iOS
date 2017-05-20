@@ -34,6 +34,14 @@
 		34E562CA1DECD683006F1C67 /* BuoyFinderDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; };
 		34E562CB1DECD683006F1C67 /* BuoyFinderDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34E562D31DECD789006F1C67 /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34E5E0091ED0DEA800560E4D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E5E0071ED0DEA800560E4D /* Interface.storyboard */; };
+		34E5E00B1ED0DEA800560E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E5E00A1ED0DEA800560E4D /* Assets.xcassets */; };
+		34E5E0121ED0DEA800560E4D /* BuoyFinderWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34E5E0111ED0DEA800560E4D /* BuoyFinderWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		34E5E0171ED0DEA800560E4D /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5E0161ED0DEA800560E4D /* InterfaceController.swift */; };
+		34E5E0191ED0DEA800560E4D /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5E0181ED0DEA800560E4D /* ExtensionDelegate.swift */; };
+		34E5E01B1ED0DEA800560E4D /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5E01A1ED0DEA800560E4D /* ComplicationController.swift */; };
+		34E5E01D1ED0DEA800560E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E5E01C1ED0DEA800560E4D /* Assets.xcassets */; };
+		34E5E0211ED0DEA800560E4D /* BuoyFinderWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 34E5E0051ED0DEA800560E4D /* BuoyFinderWatch.app */; };
 		34F154381DFCB9F10041B072 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
@@ -72,6 +80,20 @@
 			remoteGlobalIDString = 34E562B41DECD683006F1C67;
 			remoteInfo = "BuoyFinderDataKit-iOS";
 		};
+		34E5E0131ED0DEA800560E4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34E5E0101ED0DEA800560E4D;
+			remoteInfo = "BuoyFinderWatch Extension";
+		};
+		34E5E01F1ED0DEA800560E4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34E5E0041ED0DEA800560E4D;
+			remoteInfo = BuoyFinderWatch;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +117,28 @@
 				34E562CB1DECD683006F1C67 /* BuoyFinderDataKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E5E0271ED0DEA800560E4D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				34E5E0121ED0DEA800560E4D /* BuoyFinderWatch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E5E0291ED0DEA800560E4D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				34E5E0211ED0DEA800560E4D /* BuoyFinderWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -131,6 +175,16 @@
 		34E562C41DECD683006F1C67 /* BuoyFinderDataKit_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyFinderDataKit_iOSTests.swift; sourceTree = "<group>"; };
 		34E562C61DECD683006F1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BuoyFinderDataKit.h; path = BuoyFinderDataKit/BuoyFinderDataKit.h; sourceTree = "<group>"; };
+		34E5E0051ED0DEA800560E4D /* BuoyFinderWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinderWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34E5E0081ED0DEA800560E4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		34E5E00A1ED0DEA800560E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		34E5E00C1ED0DEA800560E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E5E0111ED0DEA800560E4D /* BuoyFinderWatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "BuoyFinderWatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34E5E0161ED0DEA800560E4D /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		34E5E0181ED0DEA800560E4D /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		34E5E01A1ED0DEA800560E4D /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		34E5E01C1ED0DEA800560E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		34E5E01E1ED0DEA800560E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34F154361DFCB6B60041B072 /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Units.swift; path = BuoyFinderDataKit/Units.swift; sourceTree = "<group>"; };
 		34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyDataItem.swift; path = BuoyFinderDataKit/BuoyDataItem.swift; sourceTree = "<group>"; };
 		34F5AF1D1DED1B190084AE86 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Swell.swift; path = BuoyFinderDataKit/Swell.swift; sourceTree = "<group>"; };
@@ -181,6 +235,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		34E5E00E1ED0DEA800560E4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -204,6 +265,8 @@
 				34E562B61DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
 				34E562C31DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
 				345FEF5A1ECB3F9F002D970B /* BuoyFinderTodayExtension */,
+				34E5E0061ED0DEA800560E4D /* BuoyFinderWatch */,
+				34E5E0151ED0DEA800560E4D /* BuoyFinderWatch Extension */,
 				34B4975E1DEBC7090076EB5B /* Products */,
 				6D19952AF017934D0B45A567 /* Pods */,
 				D52C73CDDCF1F6142AB9EE21 /* Frameworks */,
@@ -217,6 +280,8 @@
 				34E562B51DECD683006F1C67 /* BuoyFinderDataKit.framework */,
 				34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */,
 				345FEF571ECB3F9F002D970B /* BuoyFinderTodayExtension.appex */,
+				34E5E0051ED0DEA800560E4D /* BuoyFinderWatch.app */,
+				34E5E0111ED0DEA800560E4D /* BuoyFinderWatch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,6 +338,28 @@
 				34E562C61DECD683006F1C67 /* Info.plist */,
 			);
 			path = "BuoyFinderDataKit-iOSTests";
+			sourceTree = "<group>";
+		};
+		34E5E0061ED0DEA800560E4D /* BuoyFinderWatch */ = {
+			isa = PBXGroup;
+			children = (
+				34E5E0071ED0DEA800560E4D /* Interface.storyboard */,
+				34E5E00A1ED0DEA800560E4D /* Assets.xcassets */,
+				34E5E00C1ED0DEA800560E4D /* Info.plist */,
+			);
+			path = BuoyFinderWatch;
+			sourceTree = "<group>";
+		};
+		34E5E0151ED0DEA800560E4D /* BuoyFinderWatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				34E5E0161ED0DEA800560E4D /* InterfaceController.swift */,
+				34E5E0181ED0DEA800560E4D /* ExtensionDelegate.swift */,
+				34E5E01A1ED0DEA800560E4D /* ComplicationController.swift */,
+				34E5E01C1ED0DEA800560E4D /* Assets.xcassets */,
+				34E5E01E1ED0DEA800560E4D /* Info.plist */,
+			);
+			path = "BuoyFinderWatch Extension";
 			sourceTree = "<group>";
 		};
 		6D19952AF017934D0B45A567 /* Pods */ = {
@@ -341,12 +428,14 @@
 				86CC263C446789361F9EA1AC /* [CP] Copy Pods Resources */,
 				34E5628B1DECD29D006F1C67 /* Embed Frameworks */,
 				345FEF671ECB3F9F002D970B /* Embed App Extensions */,
+				34E5E0291ED0DEA800560E4D /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				34E562C91DECD683006F1C67 /* PBXTargetDependency */,
 				345FEF621ECB3F9F002D970B /* PBXTargetDependency */,
+				34E5E0201ED0DEA800560E4D /* PBXTargetDependency */,
 			);
 			name = BuoyFinder;
 			productName = BuoyFinder;
@@ -392,6 +481,40 @@
 			productReference = 34E562BD1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		34E5E0041ED0DEA800560E4D /* BuoyFinderWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34E5E0281ED0DEA800560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatch" */;
+			buildPhases = (
+				34E5E0031ED0DEA800560E4D /* Resources */,
+				34E5E0271ED0DEA800560E4D /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34E5E0141ED0DEA800560E4D /* PBXTargetDependency */,
+			);
+			name = BuoyFinderWatch;
+			productName = BuoyFinderWatch;
+			productReference = 34E5E0051ED0DEA800560E4D /* BuoyFinderWatch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		34E5E0101ED0DEA800560E4D /* BuoyFinderWatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34E5E0261ED0DEA800560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatch Extension" */;
+			buildPhases = (
+				34E5E00D1ED0DEA800560E4D /* Sources */,
+				34E5E00E1ED0DEA800560E4D /* Frameworks */,
+				34E5E00F1ED0DEA800560E4D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BuoyFinderWatch Extension";
+			productName = "BuoyFinderWatch Extension";
+			productReference = 34E5E0111ED0DEA800560E4D /* BuoyFinderWatch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -433,6 +556,16 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 34B4975C1DEBC7080076EB5B;
 					};
+					34E5E0041ED0DEA800560E4D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 39L46PD99U;
+						ProvisioningStyle = Automatic;
+					};
+					34E5E0101ED0DEA800560E4D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 39L46PD99U;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 34B497581DEBC7080076EB5B /* Build configuration list for PBXProject "BuoyFinder" */;
@@ -452,6 +585,8 @@
 				34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */,
 				34E562BC1DECD683006F1C67 /* BuoyFinderDataKit-iOSTests */,
 				345FEF561ECB3F9F002D970B /* BuoyFinderTodayExtension */,
+				34E5E0041ED0DEA800560E4D /* BuoyFinderWatch */,
+				34E5E0101ED0DEA800560E4D /* BuoyFinderWatch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -488,6 +623,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E5E0031ED0DEA800560E4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E5E00B1ED0DEA800560E4D /* Assets.xcassets in Resources */,
+				34E5E0091ED0DEA800560E4D /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34E5E00F1ED0DEA800560E4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E5E01D1ED0DEA800560E4D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +769,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		34E5E00D1ED0DEA800560E4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34E5E0191ED0DEA800560E4D /* ExtensionDelegate.swift in Sources */,
+				34E5E0171ED0DEA800560E4D /* InterfaceController.swift in Sources */,
+				34E5E01B1ED0DEA800560E4D /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -639,6 +801,16 @@
 			isa = PBXTargetDependency;
 			target = 34E562B41DECD683006F1C67 /* BuoyFinderDataKit-iOS */;
 			targetProxy = 34E562C81DECD683006F1C67 /* PBXContainerItemProxy */;
+		};
+		34E5E0141ED0DEA800560E4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34E5E0101ED0DEA800560E4D /* BuoyFinderWatch Extension */;
+			targetProxy = 34E5E0131ED0DEA800560E4D /* PBXContainerItemProxy */;
+		};
+		34E5E0201ED0DEA800560E4D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34E5E0041ED0DEA800560E4D /* BuoyFinderWatch */;
+			targetProxy = 34E5E01F1ED0DEA800560E4D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -665,6 +837,14 @@
 				34B4976A1DEBC7090076EB5B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		34E5E0071ED0DEA800560E4D /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34E5E0081ED0DEA800560E4D /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -903,6 +1083,80 @@
 			};
 			name = Release;
 		};
+		34E5E0221ED0DEA800560E4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				IBSC_MODULE = BuoyFinderWatch_Extension;
+				INFOPLIST_FILE = BuoyFinderWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Debug;
+		};
+		34E5E0231ED0DEA800560E4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				IBSC_MODULE = BuoyFinderWatch_Extension;
+				INFOPLIST_FILE = BuoyFinderWatch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Release;
+		};
+		34E5E0241ED0DEA800560E4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = "BuoyFinderWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Debug;
+		};
+		34E5E0251ED0DEA800560E4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 39L46PD99U;
+				INFOPLIST_FILE = "BuoyFinderWatch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mpiannucci.BuoyFinder.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -950,6 +1204,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		34E5E0261ED0DEA800560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34E5E0241ED0DEA800560E4D /* Debug */,
+				34E5E0251ED0DEA800560E4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		34E5E0281ED0DEA800560E4D /* Build configuration list for PBXNativeTarget "BuoyFinderWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34E5E0221ED0DEA800560E4D /* Debug */,
+				34E5E0231ED0DEA800560E4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
