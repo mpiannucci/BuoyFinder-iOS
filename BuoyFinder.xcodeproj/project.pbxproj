@@ -55,6 +55,7 @@
 		34E5E0471ED0E02E00560E4D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF211DED1E690084AE86 /* Location.swift */; };
 		34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
 		34E5E0491ED0E02E00560E4D /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
+		34E5E04A1ED0E40C00560E4D /* CachedBuoyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345FEF6C1ECB4839002D970B /* CachedBuoyManager.swift */; };
 		34F154381DFCB9F10041B072 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
@@ -937,6 +938,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E5E04A1ED0E40C00560E4D /* CachedBuoyManager.swift in Sources */,
 				34E5E0191ED0DEA800560E4D /* ExtensionDelegate.swift in Sources */,
 				34E5E0171ED0DEA800560E4D /* InterfaceController.swift in Sources */,
 				34E5E01B1ED0DEA800560E4D /* ComplicationController.swift in Sources */,

@@ -7,8 +7,11 @@
 //
 
 import Foundation
+#if os(watchOS)
+import BuoyFinderWatchDataKit
+#else
 import BuoyFinderDataKit
-
+#endif
 
 public class CachedBuoyManager {
     
