@@ -13,7 +13,9 @@ import BuoyFinderDataKit
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
+    @IBOutlet weak var dataVariableLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     let cacheManager = CachedBuoyManager()
         
@@ -50,7 +52,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func updateUI() {
         DispatchQueue.main.async {
             if let buoy = self.cacheManager.defaultBuoy {
-                self.dataLabel.text = buoy.latestData?.waveSummary?.simpleDescription()
+                if let data = buoy.latestData {
+                    self.dataVariableLabel.text = "Waves"
+                    self.dataLabel.text = data.waveSummary?.simpleDescription()
+                    let formatter = DateFormatter()
+                    formatter.timeStyle = .short
+                    formatter.dateStyle = .short
+                    self.locationLabel.text = buoy.name + ": " + formatter.string(from: data.date)
+                }
             }
         }
     }

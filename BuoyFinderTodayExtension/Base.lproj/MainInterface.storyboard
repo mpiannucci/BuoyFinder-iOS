@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,21 +19,43 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
-                                <rect key="frame" x="20" y="8" width="280" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRt-Id-arl">
+                                <rect key="frame" x="16" y="81" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzr-Z4-LHU">
+                                <rect key="frame" x="16" y="37" width="288" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4k-vQ-WMy">
+                                <rect key="frame" x="16" y="8" width="288" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7E6-dd-8A7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" symbolic="YES" id="0Q0-KW-PJ6"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" symbolic="YES" id="6Vq-gs-PHe"/>
-                            <constraint firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="20" symbolic="YES" id="L8K-9R-egU"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="mYS-Cv-VNx"/>
+                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="trailing" secondItem="cRt-Id-arl" secondAttribute="trailing" id="9Va-My-EfW"/>
+                            <constraint firstItem="p4k-vQ-WMy" firstAttribute="trailing" secondItem="bzr-Z4-LHU" secondAttribute="trailing" id="BJA-VN-mu8"/>
+                            <constraint firstItem="p4k-vQ-WMy" firstAttribute="leading" secondItem="bzr-Z4-LHU" secondAttribute="leading" id="C9s-ul-Z39"/>
+                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="EaG-MA-n03"/>
+                            <constraint firstItem="cRt-Id-arl" firstAttribute="top" secondItem="bzr-Z4-LHU" secondAttribute="bottom" constant="8" symbolic="YES" id="Ux4-Aj-cmz"/>
+                            <constraint firstItem="p4k-vQ-WMy" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="VzT-bC-13z"/>
+                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="leading" secondItem="cRt-Id-arl" secondAttribute="leading" id="aFi-FP-q3N"/>
+                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="top" secondItem="p4k-vQ-WMy" secondAttribute="bottom" constant="8" symbolic="YES" id="bJj-2V-T95"/>
+                            <constraint firstItem="p4k-vQ-WMy" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="fih-C2-Pkf"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="cRt-Id-arl" secondAttribute="bottom" constant="8" symbolic="YES" id="fob-gh-NBA"/>
+                            <constraint firstItem="p4k-vQ-WMy" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="kGX-5k-lN6"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -40,13 +63,16 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="37"/>
+                    <size key="freeformSize" width="320" height="110"/>
                     <connections>
-                        <outlet property="dataLabel" destination="GcN-lo-r42" id="3iy-4x-vjJ"/>
+                        <outlet property="dataLabel" destination="bzr-Z4-LHU" id="1WM-sZ-ryN"/>
+                        <outlet property="dataVariableLabel" destination="p4k-vQ-WMy" id="uIY-AW-Yel"/>
+                        <outlet property="locationLabel" destination="cRt-Id-arl" id="pIZ-3e-yhT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="33.600000000000001" y="37.781109445277366"/>
         </scene>
     </scenes>
 </document>

@@ -913,6 +913,7 @@
 				345FEF651ECB3F9F002D970B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34B497581DEBC7080076EB5B /* Build configuration list for PBXProject "BuoyFinder" */ = {
 			isa = XCConfigurationList;
