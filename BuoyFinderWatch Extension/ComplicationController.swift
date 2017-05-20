@@ -11,10 +11,29 @@ import ClockKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
+    let cacheManager = CachedBuoyManager()
+    
+    // MARK - Updating
+    
+    func requestedUpdateDidBegin() {
+        self.cacheManager.fetchUpdate(forceUpdate: false, updateHandler: { (_) in
+            DispatchQueue.main.async {
+                let server=CLKComplicationServer.sharedInstance()
+                
+                for complication in server.activeComplications! {
+                    server.reloadTimeline(for: complication)
+                }
+            }
+        })
+    }
+    
     // MARK: - Timeline Configuration
     
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
         handler([.forward, .backward])
+    
+        // No time travel for now
+        handler(CLKComplicationTimeTravelDirections())
     }
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
