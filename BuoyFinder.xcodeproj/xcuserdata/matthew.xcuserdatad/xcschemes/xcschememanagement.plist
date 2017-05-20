@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
+		<key>BuoyFinderWatchDataKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -73,6 +78,11 @@
 			<true/>
 		</dict>
 		<key>34E5E0041ED0DEA800560E4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>34E5E02E1ED0DF2600560E4D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
