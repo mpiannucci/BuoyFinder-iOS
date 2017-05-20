@@ -27,6 +27,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         })
     }
     
+    func getNextRequestedUpdateDate(handler: @escaping (Date?) -> Void) {
+        handler(Date(timeIntervalSinceNow: 60*30))
+    }
+    
     // MARK: - Timeline Configuration
     
     func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
@@ -52,6 +56,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
+        
+        // TODO
+        
         handler(nil)
     }
     
@@ -69,6 +76,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
+        
+        // TODO
+        
         handler(nil)
     }
     
