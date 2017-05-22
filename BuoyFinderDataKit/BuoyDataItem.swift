@@ -96,6 +96,18 @@ public class BuoyDataItem: NSCoding {
         }
     }
     
+    // Variables
+    public enum Variable: String {
+        case wind = "wind"
+        case waves = "waves"
+        case pressure = "pressure"
+        case airTemperature = "air temperature"
+        case waterTemperature = "water temperature"
+        case dewpointTempurature = "dewpoint temperature"
+        case visibility = "visibility"
+        case waterLevel = "water level"
+    }
+    
     init(newDate: Date) {
         self.date = newDate
         self.units = Units.metric
@@ -166,6 +178,11 @@ public class BuoyDataItem: NSCoding {
         self.visibility = nil
         self.pressureTendency = nil
         self.waterLevel = nil
+    }
+    
+    public func getData(variable: Variable) -> String? {
+        // TODO
+        return nil
     }
     
     // MARK: NSCoder
