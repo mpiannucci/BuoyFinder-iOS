@@ -45,8 +45,6 @@
 		34E5E0331ED0DF2700560E4D /* BuoyFinderWatchDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E5E0311ED0DF2700560E4D /* BuoyFinderWatchDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34E5E0361ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; };
 		34E5E0371ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		34E5E03C1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; };
-		34E5E03D1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
 		34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34E5E0441ED0E02E00560E4D /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -116,13 +114,6 @@
 			remoteGlobalIDString = 34E5E02E1ED0DF2600560E4D;
 			remoteInfo = BuoyFinderWatchDataKit;
 		};
-		34E5E03E1ED0DF5300560E4D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 34B497551DEBC7080076EB5B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 34E5E02E1ED0DF2600560E4D;
-			remoteInfo = BuoyFinderWatchDataKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -177,17 +168,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				34E5E0371ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		34E5E0411ED0DF5400560E4D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				34E5E03D1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +292,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34E5E03C1ED0DF5300560E4D /* BuoyFinderWatchDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,13 +564,11 @@
 				34E5E0031ED0DEA800560E4D /* Resources */,
 				34E5E0271ED0DEA800560E4D /* Embed App Extensions */,
 				34E5E0401ED0DF5400560E4D /* Frameworks */,
-				34E5E0411ED0DF5400560E4D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				34E5E0141ED0DEA800560E4D /* PBXTargetDependency */,
-				34E5E03F1ED0DF5300560E4D /* PBXTargetDependency */,
 			);
 			name = BuoyFinderWatch;
 			productName = BuoyFinderWatch;
@@ -996,11 +973,6 @@
 			isa = PBXTargetDependency;
 			target = 34E5E02E1ED0DF2600560E4D /* BuoyFinderWatchDataKit */;
 			targetProxy = 34E5E0341ED0DF2700560E4D /* PBXContainerItemProxy */;
-		};
-		34E5E03F1ED0DF5300560E4D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 34E5E02E1ED0DF2600560E4D /* BuoyFinderWatchDataKit */;
-			targetProxy = 34E5E03E1ED0DF5300560E4D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
