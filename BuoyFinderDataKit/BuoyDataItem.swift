@@ -55,22 +55,22 @@ public class BuoyDataItem: NSCoding {
             var data: [String:String] = [:]
             
             if let windSpd = self.windSpeed, let windDir = self.windDirection {
-                data["Wind"] = String(format: "%.1f \(self.units.speedUnit()) %.0f\(self.units.degreesUnit())", windSpd, windDir)
+                data["Wind"] = String(format: "%.1f \(self.units.string(meas: .speed)) %.0f\(self.units.string(meas: .degrees))", windSpd, windDir)
             }
             if let windGst = self.windGust {
-                data["Wind Gust"] = String(format: "%.1f \(self.units.speedUnit())", windGst)
+                data["Wind Gust"] = String(format: "%.1f \(self.units.string(meas: .speed))", windGst)
             }
             if let waterTemp = self.waterTemperature {
-                data["Water Temperature"] = String(format: "%.2f \(self.units.temperatureUnit())", waterTemp)
+                data["Water Temperature"] = String(format: "%.2f \(self.units.string(meas: .temperature))", waterTemp)
             }
             if let airTemp = self.airTemperature {
-                data["Air Temperature"] = String(format: "%.2f \(self.units.temperatureUnit())", airTemp)
+                data["Air Temperature"] = String(format: "%.2f \(self.units.string(meas: .temperature))", airTemp)
             }
             if let press = self.pressure {
-                data["Pressure"] = String(format: "%.2f \(self.units.pressureUnit()) \(self.pressureTendencyString)", press)
+                data["Pressure"] = String(format: "%.2f \(self.units.string(meas: .pressure)) \(self.pressureTendencyString)", press)
             }
             if let vis = self.visibility {
-                data["Visibility"] = String(format: "%.1f \(self.units.visibilityUnit())", vis)
+                data["Visibility"] = String(format: "%.1f \(self.units.string(meas: .visibility))", vis)
             }
             if let level = self.waterLevel {
                 data["Water Level"] = String(format: "%.1f ft", level)
@@ -87,25 +87,8 @@ public class BuoyDataItem: NSCoding {
                 return
             }
             
-            switch self.units {
-            case .metric:
-                convertToMetric()
-            default:
-                convertToEnglish()
-            }
+            self.convert(sourceUnits: oldValue, destUnits: self.units)
         }
-    }
-    
-    // Variables
-    public enum Variable: String {
-        case wind = "wind"
-        case waves = "waves"
-        case pressure = "pressure"
-        case airTemperature = "air temperature"
-        case waterTemperature = "water temperature"
-        case dewpointTempurature = "dewpoint temperature"
-        case visibility = "visibility"
-        case waterLevel = "water level"
     }
     
     init(newDate: Date) {
@@ -158,6 +141,28 @@ public class BuoyDataItem: NSCoding {
         self.waterLevel = aDecoder.decodeObject(forKey: "waterLevel") as? Double
     }
     
+    // MARK: NSCoder
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.date, forKey: "date")
+        aCoder.encode(self.units, forKey: "units")
+        aCoder.encode(self.windDirection, forKey: "windDirection")
+        aCoder.encode(self.windSpeed, forKey: "windSpeed")
+        aCoder.encode(self.windGust, forKey: "windGust")
+        aCoder.encode(self.waveSummary, forKey: "waveSummary")
+        aCoder.encode(self.swellComponents, forKey: "swellComponents")
+        aCoder.encode(self.steepness, forKey: "steepness")
+        aCoder.encode(self.averagePeriod, forKey: "averagePeriod")
+        aCoder.encode(self.directionalSpectraPlotURL, forKey: "directionalSpectraPlotURL")
+        aCoder.encode(self.spectralDistributionPlotURL, forKey: "spectralDistributionPlotURL")
+        aCoder.encode(self.pressure, forKey: "pressure")
+        aCoder.encode(self.airTemperature, forKey: "airTemperature")
+        aCoder.encode(self.waterTemperature, forKey: "waterTemperature")
+        aCoder.encode(self.dewpointTemperature, forKey: "dewpointTemperature")
+        aCoder.encode(self.visibility, forKey: "visibility")
+        aCoder.encode(self.pressureTendency, forKey: "pressureTendency")
+        aCoder.encode(self.waterLevel, forKey: "waterLevel")
+    }
+    
     public func resetWaveData() {
         self.waveSummary = nil
         self.swellComponents = nil
@@ -180,96 +185,47 @@ public class BuoyDataItem: NSCoding {
         self.waterLevel = nil
     }
     
-    public func getData(variable: Variable) -> String? {
-        // TODO
-        return nil
+    // Variables
+    public enum Variable: String {
+        case wind = "wind"
+        case waves = "waves"
+        case pressure = "pressure"
+        case airTemperature = "air temperature"
+        case waterTemperature = "water temperature"
+        case dewpointTempurature = "dewpoint temperature"
+        case visibility = "visibility"
+        case waterLevel = "water level"
     }
     
-    // MARK: NSCoder
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.date, forKey: "date")
-        aCoder.encode(self.units, forKey: "units")
-        aCoder.encode(self.windDirection, forKey: "windDirection")
-        aCoder.encode(self.windSpeed, forKey: "windSpeed")
-        aCoder.encode(self.windGust, forKey: "windGust")
-        aCoder.encode(self.waveSummary, forKey: "waveSummary")
-        aCoder.encode(self.swellComponents, forKey: "swellComponents")
-        aCoder.encode(self.steepness, forKey: "steepness")
-        aCoder.encode(self.averagePeriod, forKey: "averagePeriod")
-        aCoder.encode(self.directionalSpectraPlotURL, forKey: "directionalSpectraPlotURL")
-        aCoder.encode(self.spectralDistributionPlotURL, forKey: "spectralDistributionPlotURL")
-        aCoder.encode(self.pressure, forKey: "pressure")
-        aCoder.encode(self.airTemperature, forKey: "airTemperature")
-        aCoder.encode(self.waterTemperature, forKey: "waterTemperature")
-        aCoder.encode(self.dewpointTemperature, forKey: "dewpointTemperature")
-        aCoder.encode(self.visibility, forKey: "visibility")
-        aCoder.encode(self.pressureTendency, forKey: "pressureTendency")
-        aCoder.encode(self.waterLevel, forKey: "waterLevel")
+    public func getDataSummary(variable: Variable) -> String? {
+        // TODO
+        return nil
     }
 }
 
 extension BuoyDataItem: UnitsProtocol {
     
-    // Assumes everything is in english -> going to metric
-    public func convertToMetric() {
+    public func convert(sourceUnits: Units, destUnits: Units) {
         if let uWindSpeed = self.windSpeed {
-            self.windSpeed = Units.mphToMetersPerSecond(mphValue: uWindSpeed)
+            self.windSpeed = Units.convert(meas: .speed, sourceUnit: sourceUnits, destUnit: destUnits, value: uWindSpeed)
         }
         if let uWindGust = self.windGust {
-            self.windGust = Units.mphToMetersPerSecond(mphValue: uWindGust)
+            self.windGust = Units.convert(meas: .speed, sourceUnit: sourceUnits, destUnit:destUnits, value: uWindGust)
         }
         if let uAirTemp = self.airTemperature {
-            self.airTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uAirTemp)
+            self.airTemperature = Units.convert(meas: .temperature, sourceUnit: sourceUnits, destUnit: destUnits, value: uAirTemp)
         }
         if let uWaterTemp = self.waterTemperature {
-            self.waterTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uWaterTemp)
+            self.waterTemperature = Units.convert(meas: .temperature, sourceUnit: sourceUnits, destUnit: destUnits, value: uWaterTemp)
         }
         if let uDewpointTemp = self.dewpointTemperature {
-            self.dewpointTemperature = Units.fahrenheitToCelsius(fahrenheitValue: uDewpointTemp)
+            self.dewpointTemperature = Units.convert(meas: .temperature, sourceUnit: sourceUnits, destUnit: destUnits, value: uDewpointTemp)
         }
         if let uPressure = self.pressure {
-            self.pressure = Units.inchMercuryToHpa(inhgValue: uPressure)
+            self.pressure = Units.convert(meas: .pressure, sourceUnit: sourceUnits, destUnit: destUnits, value: uPressure)
         }
         if let uPressureTendency = self.pressureTendency {
-            self.pressureTendency = Units.inchMercuryToHpa(inhgValue: uPressureTendency)
-        }
-        if let uWaterLevel = self.waterLevel {
-            self.waterLevel = Units.feetToMeters(feetValue: uWaterLevel)
-        }
-        
-        self.waveSummary?.units = self.units
-        if self.swellComponents != nil {
-            for i in self.swellComponents!.indices {
-                self.swellComponents![i].units = self.units
-            }
-        }
-    }
-    
-    // Assumes everything is in metric -> going to english
-    public func convertToEnglish() {
-        if let uWindSpeed = self.windSpeed {
-            self.windSpeed = Units.metersPerSecondToMPH(mpsValue: uWindSpeed)
-        }
-        if let uWindGust = self.windGust {
-            self.windGust = Units.metersPerSecondToMPH(mpsValue: uWindGust)
-        }
-        if let uAirTemp = self.airTemperature {
-            self.airTemperature = Units.celsiusToFahrenheit(celsiusValue: uAirTemp)
-        }
-        if let uWaterTemp = self.waterTemperature {
-            self.waterTemperature = Units.celsiusToFahrenheit(celsiusValue: uWaterTemp)
-        }
-        if let uDewpointTemp = self.dewpointTemperature {
-            self.dewpointTemperature = Units.celsiusToFahrenheit(celsiusValue: uDewpointTemp)
-        }
-        if let uPressure = self.pressure {
-            self.pressure = Units.hpaToInchMercury(hpaValue: uPressure)
-        }
-        if let uPressureTendency = self.pressureTendency {
-            self.pressureTendency = Units.hpaToInchMercury(hpaValue: uPressureTendency)
-        }
-        if let uWaterLevel = self.waterLevel {
-            self.waterLevel = Units.metersToFeet(metricValue: uWaterLevel)
+            self.pressureTendency = Units.convert(meas: .pressure, sourceUnit: sourceUnits, destUnit: destUnits, value: uPressureTendency)
         }
         
         self.waveSummary?.units = self.units

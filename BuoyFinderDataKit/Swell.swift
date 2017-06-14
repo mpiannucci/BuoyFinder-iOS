@@ -20,12 +20,7 @@ public class Swell: NSCoding {
                 return
             }
             
-            switch self.units {
-            case .metric:
-                convertToMetric()
-            default:
-                convertToEnglish()
-            }
+            self.convert(sourceUnits: oldValue, destUnits: self.units)
         }
     }
     
@@ -69,23 +64,16 @@ public class Swell: NSCoding {
     }
     
     public func simpleDescription() -> String {
-        return String(format: "%.01f", self.waveHeight) + " " + self.units.lengthUnit() + " @ " + String(format: "%.01f", self.period) + " s " + self.compassDirection!
+        return String(format: "%.01f", self.waveHeight) + " " + self.units.string(meas: .length) + " @ " + String(format: "%.01f", self.period) + " s " + self.compassDirection!
     }
     
     public func detailedDescription() -> String {
-        return String(format: "%.01f", self.waveHeight) + " " + self.units.lengthUnit() + " @ " + String(format: "%.01f", self.period) + " s " + String(format: "%3.0f", self.direction!) + self.units.degreesUnit() + " " + self.compassDirection!
+        return String(format: "%.01f", self.waveHeight) + " " + self.units.string(meas: .length) + " @ " + String(format: "%.01f", self.period) + " s " + String(format: "%3.0f", self.direction!) + self.units.string(meas: .degrees) + " " + self.compassDirection!
     }
 }
 
 extension Swell: UnitsProtocol {
-
-    // Assumes everything is in english -> going to metric
-    public func convertToMetric() {
-        self.waveHeight = Units.feetToMeters(feetValue: self.waveHeight)
-    }
-    
-    // Assumes everything is in metric -> going to english
-    public func convertToEnglish() {
-        self.waveHeight = Units.metersToFeet(metricValue: self.waveHeight)
+    public func convert(sourceUnits: Units, destUnits: Units) {
+        self.waveHeight = Units.convert(meas: .length, sourceUnit: sourceUnits, destUnit: destUnits, value: self.waveHeight)
     }
 }

@@ -8,52 +8,131 @@
 
 import Foundation
 
+public enum Measurement: String {
+    case length = "length"
+    case speed = "speed"
+    case temperature = "temperature"
+    case pressure = "pressure"
+    case visibility = "visibility"
+    case degrees = "degrees"
+}
+
 public enum Units: String {
     case metric = "metric"
     case english = "english"
     
-    public func lengthUnit() -> String {
+    public func string(meas: Measurement) -> String {
         switch self {
         case .metric:
-            return "m"
+            switch meas {
+            case .length:
+                return "m"
+            case .speed:
+                return "m/s"
+            case .temperature:
+                return "°c"
+            case .pressure:
+                return "hPa"
+            case .visibility:
+                return "nmi"
+            case .degrees:
+                return "°"
+            }
         case .english:
-            return "ft"
+            switch meas {
+            case .length:
+                return "ft"
+            case .speed:
+                return "mph"
+            case .temperature:
+                return "°F"
+            case .pressure:
+                return "inHG"
+            case .visibility:
+                return "nmi"
+            case .degrees:
+                return "°"
+            }
         }
     }
     
-    public func speedUnit() -> String {
-        switch self {
-        case .metric:
-            return "m/s"
-        case .english:
-            return "mph"
+    static public func convert(meas: Measurement, sourceUnit: Units, destUnit: Units, value: Double) -> Double {
+        if sourceUnit == destUnit {
+            return value
         }
-    }
-    
-    public func temperatureUnit() -> String {
-        switch self {
-        case .metric:
-            return "°C"
-        case .english:
-            return "°F"
+        
+        switch meas {
+        case .length:
+            switch sourceUnit {
+            case .metric:
+                switch destUnit {
+                case .english:
+                    return value * 3.28
+                default:
+                    return value
+                }
+            case .english:
+                switch destUnit {
+                case .metric:
+                    return value / 3.28
+                default:
+                    return value
+                }
+            }
+        case .speed:
+            switch sourceUnit {
+            case .metric:
+                switch destUnit {
+                case .english:
+                    return value * 2.237
+                default:
+                    return value
+                }
+            case .english:
+                switch destUnit {
+                case .metric:
+                    return value / 2.237
+                default:
+                    return value
+                }
+            }
+        case .temperature:
+            switch sourceUnit {
+            case .metric:
+                switch destUnit {
+                case .english:
+                    return (value * (9.0/5.0)) + 32.0
+                default:
+                    return value
+                }
+            case .english:
+                switch destUnit {
+                case .metric:
+                    return (value - 32.0) * (5.0/9.0)
+                default:
+                    return value
+                }
+            }
+        case .pressure:
+            switch sourceUnit {
+            case .metric:
+                switch destUnit {
+                case .english:
+                    return value / 33.8638
+                default:
+                    return value
+                }
+            case .english:
+                switch destUnit {
+                case .metric:
+                    return value * 33.8638
+                default:
+                    return value
+                }
+            }
+        default:
+            return value
         }
-    }
-    
-    public func pressureUnit() -> String {
-        switch self {
-        case .metric:
-            return "hPa"
-        case .english:
-            return "in HG"
-        }
-    }
-    
-    public func visibilityUnit() -> String {
-        return "nmi"
-    }
-    
-    public func degreesUnit() -> String {
-        return "°"
     }
     
     public func earthRadius() -> Double {
@@ -64,41 +143,8 @@ public enum Units: String {
             return 3961
         }
     }
-    
-    static func metersToFeet(metricValue: Double) -> Double {
-        return metricValue * 3.28
-    }
-    
-    static func feetToMeters(feetValue: Double) -> Double {
-        return feetValue / 3.28
-    }
-    
-    static func metersPerSecondToMPH(mpsValue: Double) -> Double {
-        return mpsValue * 2.237
-    }
-    
-    static func mphToMetersPerSecond(mphValue: Double) -> Double {
-        return mphValue / 2.237
-    }
-    
-    static func celsiusToFahrenheit(celsiusValue: Double) -> Double {
-        return (celsiusValue * (9.0/5.0)) + 32.0
-    }
-    
-    static func fahrenheitToCelsius(fahrenheitValue: Double) ->Double {
-        return (fahrenheitValue - 32.0) * (5.0/9.0)
-    }
-    
-    static func hpaToInchMercury(hpaValue: Double) -> Double {
-        return hpaValue / 33.8638
-    }
-    
-    static func inchMercuryToHpa(inhgValue: Double) -> Double {
-        return inhgValue * 33.8638
-    }
 }
 
 protocol UnitsProtocol {
-    mutating func convertToMetric()
-    mutating func convertToEnglish()
+    mutating func convert(sourceUnits: Units, destUnits: Units)
 }
