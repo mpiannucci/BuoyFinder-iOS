@@ -253,13 +253,22 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             if let waveSummary = self.buoy?.latestData?.waveSummary {
                 waveSummaryView.text = waveSummary.simpleDescription()
             }
-            if let primaryComponent = self.buoy?.latestData?.swellComponents?[0] {
-                primaryComponentView.text = primaryComponent.detailedDescription()
+            
+            
+            if let swellComponents = self.buoy?.latestData?.swellComponents {
+                if swellComponents.count > 0 {
+                    primaryComponentView.text = swellComponents[0].detailedDescription()
+                } else {
+                    primaryComponentView.text = "No primary swell"
+                }
+                
+                if swellComponents.count > 1 {
+                    secondaryComponentView.text = swellComponents[1].detailedDescription()
+                } else {
+                    secondaryComponentView.text = "No secondary swell"
+                }
             } else {
                 primaryComponentView.text = "No Component Information Available"
-            }
-            if let secondaryComponent = self.buoy?.latestData?.swellComponents?[1] {
-                secondaryComponentView.text = secondaryComponent.detailedDescription()
             }
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
