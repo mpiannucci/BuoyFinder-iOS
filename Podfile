@@ -1,29 +1,38 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+use_frameworks!
 
-target 'BuoyFinder' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for BuoyFinder
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
-  pod 'SwiftLocation'
-  pod 'AsyncImageView'
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-  pod 'GoogleSignIn'
+def shared_deps
+    pod 'SwiftyJSON'
 end
 
 target 'BuoyFinderDataKit-iOS' do
-  use_frameworks!
+    platform :ios, 10.1
 
-  pod 'SwiftyJSON'
+    shared_deps
+
+    target 'BuoyFinder' do
+        inherit! :search_paths
+
+        pod 'GoogleMaps'
+        pod 'GooglePlaces'
+        pod 'SwiftLocation'
+        pod 'AsyncImageView'
+        pod 'Firebase/Core'
+        pod 'Firebase/Auth'
+        pod 'Firebase/Database'
+        pod 'GoogleSignIn'
+    end
+
+    target 'BuoyFinderTodayExtension' do
+        inherit! :search_paths
+    end
 end
 
 target 'BuoyFinderWatchDataKit' do
-  use_frameworks!
+    platform :watchos, 3.2
 
-  pod 'SwiftyJSON'
+    shared_deps
+
+    target 'BuoyFinderWatch Extension' do
+        inherit! :search_paths
+    end
 end
