@@ -62,7 +62,8 @@ public class SyncManager {
         
         Auth.auth().addStateDidChangeListener({ (auth, user) in
             if user != nil {
-                self.favoriteBuoys.removeAll()
+                self.resetLocalDefaults()
+                
                 self.userRef = Database.database().reference(withPath: "user/" + user!.uid)
                 
                 self.userRef?.observe(.value, with: {
@@ -249,6 +250,8 @@ public class SyncManager {
             }
         }
         
+        self.saveData()
+        
         if changed {
             NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
         }
@@ -355,6 +358,7 @@ public class SyncManager {
     
     private func saveData() {
         self.saveFavoriteBuoys()
+        self.saveDefaultBuoy()
         self.saveUnits()
         self.saveInitialView()
         self.saveTodayVariable()
@@ -366,6 +370,7 @@ public class SyncManager {
         self.favoriteBuoys = []
         self.defaultBuoyID = ""
         self.todayVariable = .waves
+        saveData()
     }
     
     @objc private func userDefaultsChanged(notification: NSNotification) {
