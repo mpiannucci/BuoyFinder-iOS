@@ -1387,6 +1387,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 73A02FD6E669ADAD3EB19B9B /* Pods-BuoyFinderWatch Extension.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 39L46PD99U;
@@ -1406,6 +1407,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 069E0FA19B5753186186FFE5 /* Pods-BuoyFinderWatch Extension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				DEVELOPMENT_TEAM = 39L46PD99U;
