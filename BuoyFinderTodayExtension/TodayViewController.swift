@@ -18,17 +18,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var locationLabel: UILabel!
     
     let cacheManager = CachedBuoyManager()
+    var variable = BuoyDataItem.Variable.waves
+    var units = Units.english
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let defaultBuoyID = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")?.string(forKey: "defaultBuoy") {
+        let userDefaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
+        
+        if let defaultBuoyID = userDefaults?.string(forKey: "defaultBuoy") {
             if !self.cacheManager.checkDefaultBuoyID(buoyID: defaultBuoyID) {
                 self.cacheManager.getDefaultBuoy(buoyID: defaultBuoyID) {
                     (_) in
                     self.updateUI()
                 }
             }
+        }
+        
+        if let todayVariable = userDefaults?.string(forKey: "todayVariable") {
+            self.variable = BuoyDataItem.Variable(rawValue: todayVariable)!
+        }
+        
+        if let unit = userDefaults?.string(forKey: "units") {
+            self.units = Units(rawValue: unit)!
         }
         
         updateUI()
@@ -53,8 +65,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DispatchQueue.main.async {
             if let buoy = self.cacheManager.defaultBuoy {
                 if let data = buoy.latestData {
-                    self.dataVariableLabel.text = "Waves"
-                    self.dataLabel.text = data.waveSummary?.simpleDescription()
+                    data.convert(sourceUnits: data.units, destUnits: self.units)
+                    self.dataVariableLabel.text = self.variable.rawValue.capitalized
+                    self.dataLabel.text = self.variableDataText(dataVariable: self.variable, data: data)
                     let formatter = DateFormatter()
                     formatter.timeStyle = .short
                     formatter.dateStyle = .short
@@ -62,5 +75,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 }
             }
         }
+    }
+    
+    func variableDataText(dataVariable: BuoyDataItem.Variable, data: BuoyDataItem) -> String {
+        switch dataVariable {
+        case .wind:
+            return data.windSummary
+        case .waves:
+            return data.waveSummary?.simpleDescription() ?? ""
+        default:
+            break
+        }
+        
+        return ""
     }
 }

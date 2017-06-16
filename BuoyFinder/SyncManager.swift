@@ -318,10 +318,9 @@ public class SyncManager {
     }
     
     private func saveUnits() {
+        self.userDefaults?.setValue(self.units.rawValue, forKey: self.unitsKey)
         if self.userRef != nil {
             self.userRef!.child(self.unitsKey).setValue(self.units.rawValue as NSString)
-        } else {
-            self.userDefaults?.setValue(self.units.rawValue, forKey: self.unitsKey)
         }
     }
     

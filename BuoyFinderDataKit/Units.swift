@@ -56,6 +56,15 @@ public enum Units: String {
         }
     }
     
+    public func earthRadius() -> Double {
+        switch self {
+        case .metric:
+            return 6373
+        case .english:
+            return 3961
+        }
+    }
+    
     static public func convert(meas: Measurement, sourceUnit: Units, destUnit: Units, value: Double) -> Double {
         if sourceUnit == destUnit {
             return value
@@ -135,13 +144,17 @@ public enum Units: String {
         }
     }
     
-    public func earthRadius() -> Double {
-        switch self {
-        case .metric:
-            return 6373
-        case .english:
-            return 3961
+    static public func degreesToDirection(deg: Double) -> String {
+        let wind_directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "S", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+        if deg > 360 || deg < 0 {
+            return "NULL"
         }
+        
+        var wind_index: Int = Int((deg+11.25)/22.5 - 0.02)
+        if wind_index >= wind_directions.count {
+            wind_index = 0
+        }
+        return wind_directions[wind_index%wind_directions.count]
     }
 }
 

@@ -50,12 +50,22 @@ public class BuoyDataItem: NSCoding {
         }
     }
     
+    public var windSummary: String {
+        get {
+            if let speed = self.windSpeed, let gust = self.windGust, let dir = self.windDirection {
+                return String(format: "%.1f (Gust %.1f) \(self.units.string(meas: .speed)) \(Units.degreesToDirection(deg: dir))", speed, gust)
+            } else {
+                return ""
+            }
+        }
+    }
+    
     public var weatherData: [String:String] {
         get {
             var data: [String:String] = [:]
             
             if let windSpd = self.windSpeed, let windDir = self.windDirection {
-                data["Wind"] = String(format: "%.1f \(self.units.string(meas: .speed)) %.0f\(self.units.string(meas: .degrees))", windSpd, windDir)
+                data["Wind"] = String(format: "%.1f \(self.units.string(meas: .speed)) %.0f\(self.units.string(meas: .degrees)) \(Units.degreesToDirection(deg: windDir))", windSpd, windDir)
             }
             if let windGst = self.windGust {
                 data["Wind Gust"] = String(format: "%.1f \(self.units.string(meas: .speed))", windGst)
