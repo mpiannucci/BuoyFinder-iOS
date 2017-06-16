@@ -78,7 +78,7 @@ public class SyncManager {
                     self.latestSnapshot = nil
                 }
                 
-                self.favoriteBuoys.removeAll()
+                self.resetLocalDefaults()
                 self.loadFromLocal()
             }
             
@@ -86,6 +86,14 @@ public class SyncManager {
         })
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.newBuoysLoaded), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
+    }
+    
+    public func deleteUser() {
+        if let user = self.userRef {
+            user.removeAllObservers()
+            user.removeValue()
+            self.latestSnapshot = nil
+        }
     }
     
     public func changeUnits(newUnits: Units) {
@@ -350,6 +358,14 @@ public class SyncManager {
         self.saveUnits()
         self.saveInitialView()
         self.saveTodayVariable()
+    }
+    
+    private func resetLocalDefaults() {
+        self.units = .metric
+        self.initialView = .explore
+        self.favoriteBuoys = []
+        self.defaultBuoyID = ""
+        self.todayVariable = .waves
     }
     
     @objc private func userDefaultsChanged(notification: NSNotification) {

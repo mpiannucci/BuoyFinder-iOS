@@ -67,7 +67,11 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
         case 0:
             return 4
         case 1:
-            return 1
+            if let _ = Auth.auth().currentUser {
+                return 2
+            } else {
+                return 1
+            }
         case 2:
             return 3
         default:
@@ -126,6 +130,8 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                     cell.textLabel?.text = "Not Logged In"
                     cell.detailTextLabel?.text = "Click to log in and sync your favorites"
                 }
+            case 1:
+                cell.textLabel?.text = "Delete Account"
             default:
                 break
             }
@@ -266,6 +272,29 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 } else {
                     GIDSignIn.sharedInstance().signIn()
                 }
+            case 1:
+                if Auth.auth().currentUser == nil {
+                    break
+                }
+                
+                let confirmationController = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account? You will be logged out and all saved settings will be permanently deleted!", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                    confirmationController.dismiss(animated: true, completion: nil)
+                })
+                confirmationController.addAction(cancelAction)
+                let deleteAction = UIAlertAction(title: "Yes, delete now", style: .default, handler: { (_) in
+                    SyncManager.instance.deleteUser()
+                    do {
+                        try Auth.auth().signOut()
+                        GIDSignIn.sharedInstance().signOut()
+                    } catch let signOutError as NSError {
+                        print ("Error signing out: %@", signOutError)
+                    }
+                    confirmationController.dismiss(animated: true, completion: nil)
+                })
+                confirmationController.addAction(deleteAction)
+                
+                self.present(confirmationController, animated: true, completion: nil)
             default:
                 break
             }
