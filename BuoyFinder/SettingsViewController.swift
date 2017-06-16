@@ -65,7 +65,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 4
         case 1:
             return 1
         case 2:
@@ -96,14 +96,21 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 cell.textLabel?.text = "Default Buoy"
                 if let defaultBuoy = SyncManager.instance.defaultbuoy {
                     cell.detailTextLabel?.text =  defaultBuoy.name
-                } else {
+                } else if SyncManager.instance.favoriteBuoys.count > 0 {
                     cell.detailTextLabel?.text = "Click to choose a default buoy"
-                }
-                
-                if SyncManager.instance.favoriteBuoys.count < 1 {
-                    cell.isUserInteractionEnabled = false
-                } else {
                     cell.isUserInteractionEnabled = true
+                } else {
+                    cell.detailTextLabel?.text = "Save a favorite buoy to enable"
+                    cell.isUserInteractionEnabled = false
+                }
+            case 3:
+                cell.textLabel?.text = "Today Widget Variable"
+                cell.detailTextLabel?.text = SyncManager.instance.todayVariable.rawValue.capitalized
+                if SyncManager.instance.favoriteBuoys.count > 0  {
+                    cell.isUserInteractionEnabled = true
+                } else {
+                    cell.detailTextLabel?.text = "Save a favorite buoy to enable"
+                    cell.isUserInteractionEnabled = false
                 }
             default:
                 break
@@ -216,6 +223,22 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 
                 self.present(defaultBuoyPicker, animated: true, completion: nil)
+            case 3:
+                let todayVariablePicker = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                    todayVariablePicker.dismiss(animated: true, completion: nil)
+                })
+                todayVariablePicker.addAction(cancelAction)
+                
+                BuoyDataItem.dataVariables.forEach({ (variable) in
+                    let todayVariableAction = UIAlertAction(title: variable.rawValue.capitalized, style: .default, handler: { (_) in
+                        SyncManager.instance.changeTodayVariable(newVariable: variable)
+                        todayVariablePicker.dismiss(animated: true, completion: nil)
+                    })
+                    todayVariablePicker.addAction(todayVariableAction)
+                })
+                
+                self.present(todayVariablePicker, animated: true, completion: nil)
             default:
                 break
             }

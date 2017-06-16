@@ -197,9 +197,11 @@ public class BuoyDataItem: NSCoding {
         case waterLevel = "water level"
     }
     
-    public func getDataSummary(variable: Variable) -> String? {
-        // TODO
-        return nil
+    static public var dataVariables: [Variable] {
+        get {
+            return [Variable.wind, Variable.waves, Variable.pressure, Variable.airTemperature, Variable.waterTemperature,
+                Variable.dewpointTempurature, Variable.visibility, Variable.waterLevel]
+        }
     }
 }
 

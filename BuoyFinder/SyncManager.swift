@@ -27,14 +27,14 @@ public class SyncManager {
             })
         }
     }
-    public private(set) var units: Units = Units.metric
+    public private(set) var units: Units = .metric
     
     public enum InitialView: String {
         case explore = "explore"
         case favorites = "favorites"
         case defaultBuoy = "default buoy"
     }
-    public private(set) var initialView: InitialView = InitialView.explore
+    public private(set) var initialView: InitialView = .explore
 
     public private(set) var defaultBuoyID: String = ""
     public var defaultbuoy: Buoy? {
@@ -42,6 +42,8 @@ public class SyncManager {
             return BuoyModel.sharedModel.buoys?[self.defaultBuoyID]
         }
     }
+    
+    public private(set) var todayVariable: BuoyDataItem.Variable = .waves
     
     // Data cache states
     private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
@@ -53,6 +55,7 @@ public class SyncManager {
     let unitsKey = "units"
     let initialViewKey = "initialView"
     let defaultBuoyKey = "defaultBuoy"
+    let todayVariableKey = "todayVariable"
     
     private init() {
         self.loadFromLocal()
@@ -112,6 +115,16 @@ public class SyncManager {
         
         self.defaultBuoyID = buoyID
         self.saveDefaultBuoy()
+        NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
+    }
+    
+    public func changeTodayVariable(newVariable: BuoyDataItem.Variable) {
+        if self.todayVariable == newVariable {
+            return
+        }
+        
+        self.todayVariable = newVariable
+        self.saveTodayVariable()
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
@@ -196,6 +209,13 @@ public class SyncManager {
             }
         }
         
+        if let newTodayVariable = self.latestSnapshot?.childSnapshot(forPath: self.todayVariableKey).value as? String {
+            if newTodayVariable != self.todayVariable.rawValue {
+                self.todayVariable = BuoyDataItem.Variable(rawValue: newTodayVariable)!
+                changed = true
+            }
+        }
+        
         if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
             let newFavoriteBuoys = rawFavoriteBuoys as! [String]
             for newFavoriteBuoyID in newFavoriteBuoys {
@@ -247,6 +267,13 @@ public class SyncManager {
         if let newDefaultBuoyID = userDefaults?.value(forKey: self.defaultBuoyKey) as? String {
             if newDefaultBuoyID != self.defaultBuoyID {
                 self.defaultBuoyID = newDefaultBuoyID
+                changed = true
+            }
+        }
+        
+        if let newTodayVariable = userDefaults?.value(forKey: self.todayVariableKey) as? String {
+            if newTodayVariable != self.todayVariable.rawValue {
+                self.todayVariable = BuoyDataItem.Variable(rawValue: newTodayVariable)!
                 changed = true
             }
         }
@@ -312,10 +339,18 @@ public class SyncManager {
         }
     }
     
+    private func saveTodayVariable() {
+        self.userDefaults?.setValue(self.todayVariable.rawValue, forKey: self.todayVariableKey)
+        if self.userRef != nil {
+            self.userRef!.child(self.todayVariableKey).setValue(self.todayVariable.rawValue as NSString)
+        }
+    }
+    
     private func saveData() {
         self.saveFavoriteBuoys()
         self.saveUnits()
         self.saveInitialView()
+        self.saveTodayVariable()
     }
     
     @objc private func userDefaultsChanged(notification: NSNotification) {
