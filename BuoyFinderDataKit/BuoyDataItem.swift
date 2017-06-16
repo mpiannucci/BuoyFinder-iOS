@@ -60,6 +60,16 @@ public class BuoyDataItem: NSCoding {
         }
     }
     
+    public var pressureSummary: String {
+        get {
+            if let press = self.pressure {
+                return String(format: "%.2f \(self.units.string(meas: .pressure)) \(self.pressureTendencyString)", press)
+            } else {
+                return ""
+            }
+        }
+    }
+    
     public var weatherData: [String:String] {
         get {
             var data: [String:String] = [:]
@@ -200,17 +210,11 @@ public class BuoyDataItem: NSCoding {
         case wind = "wind"
         case waves = "waves"
         case pressure = "pressure"
-        case airTemperature = "air temperature"
-        case waterTemperature = "water temperature"
-        case dewpointTempurature = "dewpoint temperature"
-        case visibility = "visibility"
-        case waterLevel = "water level"
     }
     
     static public var dataVariables: [Variable] {
         get {
-            return [Variable.wind, Variable.waves, Variable.pressure, Variable.airTemperature, Variable.waterTemperature,
-                Variable.dewpointTempurature, Variable.visibility, Variable.waterLevel]
+            return [Variable.wind, Variable.waves, Variable.pressure]
         }
     }
 }

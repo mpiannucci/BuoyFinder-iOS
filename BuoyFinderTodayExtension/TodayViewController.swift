@@ -83,10 +83,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return data.windSummary
         case .waves:
             return data.waveSummary?.simpleDescription() ?? ""
-        default:
-            break
+        case .pressure:
+            return data.pressureSummary
         }
-        
-        return ""
     }
 }
