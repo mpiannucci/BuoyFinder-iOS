@@ -26,10 +26,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         let userDefaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
         
+        if let unit = userDefaults?.string(forKey: "units") {
+            self.units = Units(rawValue: unit)!
+        }
+        
         if let defaultBuoyID = userDefaults?.string(forKey: "defaultBuoy") {
             if !self.cacheManager.checkDefaultBuoyID(buoyID: defaultBuoyID) {
                 self.cacheManager.getDefaultBuoy(buoyID: defaultBuoyID) {
                     (_) in
+                    self.cacheManager.defaultBuoy?.units = self.units
                     self.updateUI()
                 }
             }
@@ -37,10 +42,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         if let todayVariable = userDefaults?.string(forKey: "todayVariable") {
             self.variable = BuoyDataItem.Variable(rawValue: todayVariable)!
-        }
-        
-        if let unit = userDefaults?.string(forKey: "units") {
-            self.units = Units(rawValue: unit)!
         }
         
         updateUI()
@@ -65,7 +66,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DispatchQueue.main.async {
             if let buoy = self.cacheManager.defaultBuoy {
                 if let data = buoy.latestData {
-                    data.convert(sourceUnits: data.units, destUnits: self.units)
                     self.dataVariableLabel.text = self.variable.rawValue.capitalized
                     self.dataLabel.text = self.variableDataText(dataVariable: self.variable, data: data)
                     let formatter = DateFormatter()

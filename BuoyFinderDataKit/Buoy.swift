@@ -259,6 +259,8 @@ public class Buoy: NSCoding {
         
         prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
         
+        self.latestData?.units = Units(rawValue: jsonData["unit"].stringValue)!
+        
         self.latestData?.waveSummary = Swell(jsonData: jsonData["wave_summary"])
         self.latestData?.swellComponents = jsonData["swell_components"].arrayValue.map({ (swellJSON) -> Swell in
             return Swell(jsonData: swellJSON)
@@ -278,6 +280,8 @@ public class Buoy: NSCoding {
         defer { objc_sync_exit(self) }
         
         prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
+        
+        self.latestData?.units = Units(rawValue: jsonData["unit"].stringValue)!
         
         if self.latestData?.waveSummary == nil {
             self.latestData?.waveSummary = Swell(jsonData: jsonData["wave_summary"])
@@ -301,6 +305,8 @@ public class Buoy: NSCoding {
         defer { objc_sync_exit(self) }
         
         prepareForDataUpdate(rawTime: jsonData["date"].stringValue)
+        
+        self.latestData?.units = Units(rawValue: jsonData["unit"].stringValue)!
         
         self.latestData?.windDirection = jsonData["wind_direction"].double
         self.latestData?.windSpeed = jsonData["wind_speed"].double
@@ -353,6 +359,6 @@ public class Buoy: NSCoding {
 //        }
         
         // Set the units to metric for standardized loading
-        self.latestData?.units = .metric
+//        self.latestData?.units = .metric
     }
 }
