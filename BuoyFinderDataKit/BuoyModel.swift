@@ -18,7 +18,10 @@ public class BuoyModel: NSObject {
     public static let buoyStationsUpdateFailedNotification = Notification.Name("buoyStationUpdateFailed")
     
     // Buoys
-    public private(set) var buoys: [String:Buoy]? = nil
+    public private(set) var buoys: [String:GTLRStation_ApiApiMessagesStationMessage]? = nil
+    
+    // Keys
+    private let buoyFinderAPIKey = "AIzaSyDDlpruyR4OVCDCdkkbHHlysaKf51zkh68"
     
     private override init() {
         
@@ -26,7 +29,7 @@ public class BuoyModel: NSObject {
     
     // MARK: NSCoding
     public required init?(coder aDecoder: NSCoder) {
-        if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [String:Buoy] {
+        if let savedBuoys = aDecoder.decodeObject(forKey: "buoys") as? [String:GTLRStation_ApiApiMessagesStationMessage] {
             self.buoys = savedBuoys
         }
     }
@@ -41,14 +44,23 @@ public class BuoyModel: NSObject {
     
     // Fetching
     public func fetchBuoyStations() {
-        BuoyNetworkClient.fetchAllBuoys {
-            (newBuoys) in
-            if newBuoys == nil {
+        let stationsQuery = GTLRStationQuery_Stations.query()
+        let service = GTLRStationService()
+        service.apiKey = buoyFinderAPIKey
+        service.executeQuery(stationsQuery) { (ticket, obj, err) in
+            if err != nil {
                 NotificationCenter.default.post(name: BuoyModel.buoyStationsUpdateFailedNotification, object: nil)
                 return
             }
             
-            self.buoys = newBuoys
+            let rawBuoys = (obj as? GTLRStation_ApiApiMessagesStationsMessage)?.stations
+            self.buoys = rawBuoys?.reduce([String:GTLRStation_ApiApiMessagesStationMessage]()) {
+                dict, station in
+                
+                var newDict = dict
+                newDict[station.stationId!] = station
+                return newDict
+            }
             NotificationCenter.default.post(name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
         }
     }
@@ -56,16 +68,18 @@ public class BuoyModel: NSObject {
     public func fetchLatestDataForBuoys(ids: [String]) {
         ids.forEach { (stationId) in
             if let buoy = self.buoys?[stationId] {
-                buoy.fetchAllDataIfNeeded()
+                
             }
         }
     }
     
     public func nearbyBuoys(location: Location, radius: Double, units: Units) -> [Buoy] {
         if let resolvedBuoys = self.buoys {
-            return resolvedBuoys.filter({ (key, value) -> Bool in
+            return resolvedBuoys.filter({ (arg) -> Bool in
+                let (key, value) = arg
                 return value.location.distance(location: location, units: units) < radius
-            }).map({ (key, value) -> Buoy in
+            }).map({ (arg) -> Buoy in
+                let (key, value) = arg
                 return value
             }).sorted(by: { (buoy1, buoy2) -> Bool in
                 return buoy1.location.distance(location: location, units: units) < buoy2.location.distance(location: location, units: units)
