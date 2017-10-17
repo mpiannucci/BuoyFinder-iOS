@@ -19,6 +19,20 @@
 		346573B31E11D21A007E6C12 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 346573B21E11D21A007E6C12 /* CoreLocation.framework */; };
 		346573B61E11EEBC007E6C12 /* BuoyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346573B51E11EEBC007E6C12 /* BuoyViewController.swift */; };
 		347F21F81E5B4308008553C9 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347F21F71E5B4308008553C9 /* SyncManager.swift */; };
+		34B01ACA1F95A2FF008E9528 /* GTLRStationQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC31F95A2FF008E9528 /* GTLRStationQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01ACB1F95A2FF008E9528 /* GTLRStationQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC31F95A2FF008E9528 /* GTLRStationQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01ACC1F95A2FF008E9528 /* GTLRStationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC41F95A2FF008E9528 /* GTLRStationService.m */; };
+		34B01ACD1F95A2FF008E9528 /* GTLRStationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC41F95A2FF008E9528 /* GTLRStationService.m */; };
+		34B01ACE1F95A2FF008E9528 /* GTLRStationObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC51F95A2FF008E9528 /* GTLRStationObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01ACF1F95A2FF008E9528 /* GTLRStationObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC51F95A2FF008E9528 /* GTLRStationObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01AD01F95A2FF008E9528 /* GTLRStationObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC61F95A2FF008E9528 /* GTLRStationObjects.m */; };
+		34B01AD11F95A2FF008E9528 /* GTLRStationObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC61F95A2FF008E9528 /* GTLRStationObjects.m */; };
+		34B01AD21F95A2FF008E9528 /* GTLRStationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC71F95A2FF008E9528 /* GTLRStationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01AD31F95A2FF008E9528 /* GTLRStationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC71F95A2FF008E9528 /* GTLRStationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01AD41F95A2FF008E9528 /* GTLRStationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */; };
+		34B01AD51F95A2FF008E9528 /* GTLRStationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */; };
+		34B01AD61F95A2FF008E9528 /* GTLRStation.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC91F95A2FF008E9528 /* GTLRStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01AD71F95A2FF008E9528 /* GTLRStation.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC91F95A2FF008E9528 /* GTLRStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
 		34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B497601DEBC7090076EB5B /* AppDelegate.swift */; };
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
@@ -192,6 +206,13 @@
 		346573B41E11E3D1007E6C12 /* BuoyFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BuoyFinder.entitlements; sourceTree = "<group>"; };
 		346573B51E11EEBC007E6C12 /* BuoyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuoyViewController.swift; sourceTree = "<group>"; };
 		347F21F71E5B4308008553C9 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		34B01AC31F95A2FF008E9528 /* GTLRStationQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStationQuery.h; path = BuoyFinderDataKit/GTLRStationQuery.h; sourceTree = "<group>"; };
+		34B01AC41F95A2FF008E9528 /* GTLRStationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLRStationService.m; path = BuoyFinderDataKit/GTLRStationService.m; sourceTree = "<group>"; };
+		34B01AC51F95A2FF008E9528 /* GTLRStationObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStationObjects.h; path = BuoyFinderDataKit/GTLRStationObjects.h; sourceTree = "<group>"; };
+		34B01AC61F95A2FF008E9528 /* GTLRStationObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLRStationObjects.m; path = BuoyFinderDataKit/GTLRStationObjects.m; sourceTree = "<group>"; };
+		34B01AC71F95A2FF008E9528 /* GTLRStationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStationService.h; path = BuoyFinderDataKit/GTLRStationService.h; sourceTree = "<group>"; };
+		34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLRStationQuery.m; path = BuoyFinderDataKit/GTLRStationQuery.m; sourceTree = "<group>"; };
+		34B01AC91F95A2FF008E9528 /* GTLRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStation.h; path = BuoyFinderDataKit/GTLRStation.h; sourceTree = "<group>"; };
 		34B176FC1E02303F007E211E /* BuoyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyModel.swift; path = BuoyFinderDataKit/BuoyModel.swift; sourceTree = "<group>"; };
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B497601DEBC7090076EB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -375,6 +396,13 @@
 		34E562AF1DECD634006F1C67 /* BuoyFinderDataKit */ = {
 			isa = PBXGroup;
 			children = (
+				34B01AC91F95A2FF008E9528 /* GTLRStation.h */,
+				34B01AC51F95A2FF008E9528 /* GTLRStationObjects.h */,
+				34B01AC61F95A2FF008E9528 /* GTLRStationObjects.m */,
+				34B01AC31F95A2FF008E9528 /* GTLRStationQuery.h */,
+				34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */,
+				34B01AC71F95A2FF008E9528 /* GTLRStationService.h */,
+				34B01AC41F95A2FF008E9528 /* GTLRStationService.m */,
 				34F5AF1F1DED1E010084AE86 /* Buoy.swift */,
 				34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */,
 				34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */,
@@ -474,8 +502,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34B01AD61F95A2FF008E9528 /* GTLRStation.h in Headers */,
 				34E562D31DECD789006F1C67 /* BuoyFinderDataKit.h in Headers */,
+				34B01AD21F95A2FF008E9528 /* GTLRStationService.h in Headers */,
 				34E562C71DECD683006F1C67 /* BuoyFinderDataKit-iOS.h in Headers */,
+				34B01ACA1F95A2FF008E9528 /* GTLRStationQuery.h in Headers */,
+				34B01ACE1F95A2FF008E9528 /* GTLRStationObjects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,8 +515,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34B01AD71F95A2FF008E9528 /* GTLRStation.h in Headers */,
 				34E5E0441ED0E02E00560E4D /* BuoyFinderDataKit.h in Headers */,
+				34B01AD31F95A2FF008E9528 /* GTLRStationService.h in Headers */,
 				34E5E0331ED0DF2700560E4D /* BuoyFinderWatchDataKit.h in Headers */,
+				34B01ACB1F95A2FF008E9528 /* GTLRStationQuery.h in Headers */,
+				34B01ACF1F95A2FF008E9528 /* GTLRStationObjects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +704,7 @@
 					34E562B41DECD683006F1C67 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 39L46PD99U;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					34E562BC1DECD683006F1C67 = {
@@ -689,6 +726,7 @@
 					34E5E02E1ED0DF2600560E4D = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 39L46PD99U;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -800,13 +838,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuoyFinder-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		42335A80F9470D5AC74481D3 /* [CP] Copy Pods Resources */ = {
@@ -845,13 +886,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuoyFinderWatch Extension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		86CC263C446789361F9EA1AC /* [CP] Copy Pods Resources */ = {
@@ -860,9 +904,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -875,9 +924,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BuoyFinderWatch Extension/Pods-BuoyFinderWatch Extension-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-watchOS/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST-watchOS/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-watchOS/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -890,13 +946,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuoyFinderTodayExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BACAA524C4CBF46FFD56D522 /* [CP] Check Pods Manifest.lock */ = {
@@ -905,13 +964,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuoyFinderDataKit-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BFFB8536D922DB8085F752A2 /* [CP] Check Pods Manifest.lock */ = {
@@ -920,13 +982,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BuoyFinderWatchDataKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C27C2470D4EE2B35AC2B21FE /* [CP] Embed Pods Frameworks */ = {
@@ -935,9 +1000,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher-iOS/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/AsyncImageView/AsyncImageView.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftLocation/SwiftLocation.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST-iOS/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON-iOS/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncImageView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftLocation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -991,7 +1075,10 @@
 			files = (
 				34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */,
 				34F154381DFCB9F10041B072 /* Units.swift in Sources */,
+				34B01AD41F95A2FF008E9528 /* GTLRStationQuery.m in Sources */,
 				34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */,
+				34B01ACC1F95A2FF008E9528 /* GTLRStationService.m in Sources */,
+				34B01AD01F95A2FF008E9528 /* GTLRStationObjects.m in Sources */,
 				34F5AF221DED1E690084AE86 /* Location.swift in Sources */,
 				34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */,
 				34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */,
@@ -1024,7 +1111,10 @@
 			files = (
 				34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */,
 				34E5E0451ED0E02E00560E4D /* BuoyModel.swift in Sources */,
+				34B01AD51F95A2FF008E9528 /* GTLRStationQuery.m in Sources */,
 				34E5E0471ED0E02E00560E4D /* Location.swift in Sources */,
+				34B01ACD1F95A2FF008E9528 /* GTLRStationService.m in Sources */,
+				34B01AD11F95A2FF008E9528 /* GTLRStationObjects.m in Sources */,
 				34E5E0491ED0E02E00560E4D /* Units.swift in Sources */,
 				34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */,
 				34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */,
@@ -1273,6 +1363,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7057F7350387F786ABF01BF8 /* Pods-BuoyFinderDataKit-iOS.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1286,6 +1377,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mpiannucci.BuoyFinderDataKit-iOS";
 				PRODUCT_NAME = BuoyFinderDataKit;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1296,6 +1388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB218A4BCE5080288FDA52FF /* Pods-BuoyFinderDataKit-iOS.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1429,6 +1522,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1443,6 +1537,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1457,6 +1552,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

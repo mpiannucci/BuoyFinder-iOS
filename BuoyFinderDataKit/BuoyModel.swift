@@ -18,7 +18,7 @@ public class BuoyModel: NSObject {
     public static let buoyStationsUpdateFailedNotification = Notification.Name("buoyStationUpdateFailed")
     
     // Buoys
-    public private(set) var buoys: [String:Buoy]? = nil
+    public private(set) var buoys: [String:GTLRStation]? = nil
     
     private override init() {
         
