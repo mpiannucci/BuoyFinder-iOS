@@ -91,7 +91,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Units"
-                cell.detailTextLabel?.text = SyncManager.instance.units.rawValue.capitalized
+                cell.detailTextLabel?.text = SyncManager.instance.units.capitalized
             case 1:
                 cell.textLabel?.text = "Initial View"
                 cell.detailTextLabel?.text = SyncManager.instance.initialView.rawValue.capitalized
@@ -99,7 +99,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 2:
                 cell.textLabel?.text = "Default Buoy"
                 if let defaultBuoy = SyncManager.instance.defaultbuoy {
-                    cell.detailTextLabel?.text =  defaultBuoy.name
+                    cell.detailTextLabel?.text =  defaultBuoy.location!.name
                 } else if SyncManager.instance.favoriteBuoys.count > 0 {
                     cell.detailTextLabel?.text = "Click to choose a default buoy"
                     cell.isUserInteractionEnabled = true
@@ -165,16 +165,16 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 unitPicker.addAction(cancelAction)
             
-                let metricAction = UIAlertAction(title: Units.metric.rawValue.capitalized, style: .default, handler: {
+                let metricAction = UIAlertAction(title: kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: Units.metric)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(metricAction)
             
-                let englishAction = UIAlertAction(title: Units.english.rawValue.capitalized, style: .default, handler: {
+                let englishAction = UIAlertAction(title: kGTLRStation_ApiApiMessagesSwellMessage_Unit_English.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: Units.english)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStation_ApiApiMessagesSwellMessage_Unit_English)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(englishAction)
@@ -221,8 +221,8 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 defaultBuoyPicker.addAction(cancelAction)
                 
                 favoriteBuoys.forEach({ (buoy) in
-                    let buoyAction = UIAlertAction(title: buoy.name, style: .default, handler: { (_) in
-                        SyncManager.instance.changeDefaultBuoy(buoyID: buoy.stationID)
+                    let buoyAction = UIAlertAction(title: buoy.location!.name, style: .default, handler: { (_) in
+                        SyncManager.instance.changeDefaultBuoy(buoyID: buoy.stationId!)
                         defaultBuoyPicker.dismiss(animated: true, completion: nil)
                     })
                     defaultBuoyPicker.addAction(buoyAction)

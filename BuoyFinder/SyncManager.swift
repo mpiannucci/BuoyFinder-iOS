@@ -19,15 +19,15 @@ public class SyncManager {
     public static let syncDataUpdatedNotification = Notification.Name("syncDataUpdated")
     
     // Data variables
-    public private(set) var favoriteBuoys: [Buoy] = []
+    public private(set) var favoriteBuoys: [GTLRStation_ApiApiMessagesStationMessage] = []
     public var favoriteBuoyIDs: [String] {
         get {
             return self.favoriteBuoys.map({ (buoy) -> String in
-                return buoy.stationID
+                return buoy.stationId!
             })
         }
     }
-    public private(set) var units: Units = .metric
+    public private(set) var units: String = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
     
     public enum InitialView: String {
         case explore = "explore"
@@ -37,7 +37,7 @@ public class SyncManager {
     public private(set) var initialView: InitialView = .explore
 
     public private(set) var defaultBuoyID: String = ""
-    public var defaultbuoy: Buoy? {
+    public var defaultbuoy: GTLRStation_ApiApiMessagesStationMessage? {
         get {
             return BuoyModel.sharedModel.buoys?[self.defaultBuoyID]
         }
@@ -97,7 +97,7 @@ public class SyncManager {
         }
     }
     
-    public func changeUnits(newUnits: Units) {
+    public func changeUnits(newUnits: String) {
         if self.units == newUnits {
             return
         }
@@ -137,9 +137,9 @@ public class SyncManager {
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
-    public func addFavoriteBuoy(newBuoy: Buoy) {
+    public func addFavoriteBuoy(newBuoy: GTLRStation_ApiApiMessagesStationMessage) {
         if self.favoriteBuoys.contains(where: { (buoy) -> Bool in
-            buoy.stationID == newBuoy.stationID
+            buoy.stationId! == newBuoy.stationId!
         }) {
             return
         }
@@ -155,9 +155,9 @@ public class SyncManager {
         }
     }
     
-    public func removeFavoriteBuoy(buoy: Buoy) {
+    public func removeFavoriteBuoy(buoy: GTLRStation_ApiApiMessagesStationMessage) {
         if let index = self.favoriteBuoys.index(where: { (oldBuoy) -> Bool in
-            oldBuoy.stationID == buoy.stationID
+            oldBuoy.stationId! == buoy.stationId!
         }) {
             self.favoriteBuoys.remove(at: index)
             self.saveFavoriteBuoys()
@@ -176,9 +176,9 @@ public class SyncManager {
         self.saveFavoriteBuoys()
     }
     
-    public func isBuoyAFavorite(buoy: Buoy) -> Bool {
+    public func isBuoyAFavorite(buoy: GTLRStation_ApiApiMessagesStationMessage) -> Bool {
         return self.favoriteBuoys.contains(where: { (oldBuoy) -> Bool in
-            return oldBuoy.stationID == buoy.stationID
+            return oldBuoy.stationId! == buoy.stationId!
         })
     }
     
@@ -198,8 +198,8 @@ public class SyncManager {
         var changed = false
         
         if let newUnits = self.latestSnapshot?.childSnapshot(forPath: self.unitsKey).value as? String {
-            if newUnits != self.units.rawValue {
-                self.units = Units(rawValue: newUnits)!
+            if newUnits != self.units {
+                self.units = newUnits
                 changed = true
             }
         }
@@ -262,8 +262,8 @@ public class SyncManager {
         
         
         if let newUnits = userDefaults?.value(forKey: self.unitsKey) as? String {
-            if newUnits != self.units.rawValue {
-                self.units = Units(rawValue: newUnits)!
+            if newUnits != self.units {
+                self.units = newUnits
                 changed = true
             }
         }
@@ -329,9 +329,9 @@ public class SyncManager {
     }
     
     private func saveUnits() {
-        self.userDefaults?.setValue(self.units.rawValue, forKey: self.unitsKey)
+        self.userDefaults?.setValue(self.units, forKey: self.unitsKey)
         if self.userRef != nil {
-            self.userRef!.child(self.unitsKey).setValue(self.units.rawValue as NSString)
+            self.userRef!.child(self.unitsKey).setValue(self.units as NSString)
         }
     }
     
@@ -365,7 +365,7 @@ public class SyncManager {
     }
     
     private func resetLocalDefaults() {
-        self.units = .metric
+        self.units = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
         self.initialView = .explore
         self.favoriteBuoys = []
         self.defaultBuoyID = ""

@@ -19,7 +19,7 @@ class ExploreViewController: UIViewController {
     
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
-    var nearbyBuoys: [Buoy] = []
+    var nearbyBuoys: [GTLRStation_ApiApiMessagesStationMessage] = []
     
     var selectedBuoyStation: String = ""
 
@@ -89,9 +89,9 @@ class ExploreViewController: UIViewController {
             if let stations = BuoyModel.sharedModel.buoys {
                 for (_, station) in stations {
                     let marker = GMSMarker()
-                    marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
-                    marker.title = station.name
-                    marker.snippet = "Station: " + station.stationID + ", " + (station.program ?? "")
+                    marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
+                    marker.title = station.location!.name!
+                    marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
                     marker.map = self.exploreMapView
                 }
             }
@@ -108,7 +108,7 @@ class ExploreViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let buoyView = segue.destination as? BuoyViewController {
             buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedBuoyStation]
-            buoyView.buoy?.fetchAllDataIfNeeded()
+//            buoyView.buoy?.fetchAllDataIfNeeded()
         }
     }
     
@@ -130,7 +130,9 @@ extension ExploreViewController: GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         DispatchQueue.global().async {
-            let location = Location(latitude: position.target.latitude, longitude: position.target.longitude)
+            let location = GTLRStation_ApiApiMessagesLocationMessage()
+            location.latitude = NSNumber.init(value: position.target.latitude)
+            location.longitude = NSNumber.init(value: position.target.longitude)
             self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 120, units: SyncManager.instance.units)
             
             DispatchQueue.main.sync {
@@ -187,8 +189,8 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let buoy = self.nearbyBuoys[indexPath.row]
-        cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
+        cell.textLabel?.text = buoy.location?.name
+        cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
         
         return cell
     }
@@ -199,7 +201,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        self.selectedBuoyStation = self.nearbyBuoys[indexPath.row].stationID
+        self.selectedBuoyStation = self.nearbyBuoys[indexPath.row].stationId!
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }

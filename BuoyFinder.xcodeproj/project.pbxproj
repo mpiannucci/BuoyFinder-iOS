@@ -33,6 +33,8 @@
 		34B01AD51F95A2FF008E9528 /* GTLRStationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */; };
 		34B01AD61F95A2FF008E9528 /* GTLRStation.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC91F95A2FF008E9528 /* GTLRStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34B01AD71F95A2FF008E9528 /* GTLRStation.h in Headers */ = {isa = PBXBuildFile; fileRef = 34B01AC91F95A2FF008E9528 /* GTLRStation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B01AD91F96E458008E9528 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AD81F96E458008E9528 /* Extensions.swift */; };
+		34B01ADA1F96E458008E9528 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B01AD81F96E458008E9528 /* Extensions.swift */; };
 		34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
 		34B497611DEBC7090076EB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B497601DEBC7090076EB5B /* AppDelegate.swift */; };
 		34B497661DEBC7090076EB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34B497641DEBC7090076EB5B /* Main.storyboard */; };
@@ -213,6 +215,7 @@
 		34B01AC71F95A2FF008E9528 /* GTLRStationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStationService.h; path = BuoyFinderDataKit/GTLRStationService.h; sourceTree = "<group>"; };
 		34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTLRStationQuery.m; path = BuoyFinderDataKit/GTLRStationQuery.m; sourceTree = "<group>"; };
 		34B01AC91F95A2FF008E9528 /* GTLRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLRStation.h; path = BuoyFinderDataKit/GTLRStation.h; sourceTree = "<group>"; };
+		34B01AD81F96E458008E9528 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = BuoyFinderDataKit/Extensions.swift; sourceTree = "<group>"; };
 		34B176FC1E02303F007E211E /* BuoyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyModel.swift; path = BuoyFinderDataKit/BuoyModel.swift; sourceTree = "<group>"; };
 		34B4975D1DEBC7090076EB5B /* BuoyFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuoyFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B497601DEBC7090076EB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -411,6 +414,7 @@
 				34F5AF211DED1E690084AE86 /* Location.swift */,
 				34F5AF1D1DED1B190084AE86 /* Swell.swift */,
 				34F154361DFCB6B60041B072 /* Units.swift */,
+				34B01AD81F96E458008E9528 /* Extensions.swift */,
 			);
 			name = BuoyFinderDataKit;
 			sourceTree = "<group>";
@@ -1082,6 +1086,7 @@
 				34F5AF221DED1E690084AE86 /* Location.swift in Sources */,
 				34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */,
 				34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */,
+				34B01AD91F96E458008E9528 /* Extensions.swift in Sources */,
 				34F5AF241DED236A0084AE86 /* BuoyNetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,6 +1123,7 @@
 				34E5E0491ED0E02E00560E4D /* Units.swift in Sources */,
 				34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */,
 				34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */,
+				34B01ADA1F96E458008E9528 /* Extensions.swift in Sources */,
 				34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

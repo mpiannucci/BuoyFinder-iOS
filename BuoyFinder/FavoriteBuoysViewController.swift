@@ -82,8 +82,8 @@ class FavoriteBuoysViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteBuoyCell", for: indexPath)
 
         let buoy = SyncManager.instance.favoriteBuoys[indexPath.row]
-        cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
+        cell.textLabel?.text = buoy.location!.name!
+        cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
 
         return cell
     }
@@ -125,7 +125,7 @@ class FavoriteBuoysViewController: UITableViewController {
         // Get the buoy view
         if let buoyView = segue.destination as? BuoyViewController, let index = self.tableView.indexPathForSelectedRow {
             buoyView.buoy = SyncManager.instance.favoriteBuoys[index.row]
-            buoyView.buoy?.fetchAllDataIfNeeded()
+//            buoyView.buoy?.fetchAllDataIfNeeded()
         }
     }
 

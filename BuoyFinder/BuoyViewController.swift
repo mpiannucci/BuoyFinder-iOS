@@ -14,7 +14,7 @@ import BuoyFinderDataKit
 class BuoyViewController: UIViewController {
     
     // Variables
-    public var buoy: Buoy? {
+    public var buoy: GTLRStation_ApiApiMessagesStationMessage? {
         didSet {
             // Set the default camera to be directly over america
             if self.buoy != nil {
@@ -58,10 +58,10 @@ class BuoyViewController: UIViewController {
         self.setupViews()
         
         if let buoy_ = self.buoy {
-            if buoy_.isFetching && !self.buoyDataTable.refreshControl!.isRefreshing {
-                self.buoyDataTable.refreshControl?.beginRefreshing()
-                self.buoyDataTable.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
-            }
+//            if buoy_.isFetching && !self.buoyDataTable.refreshControl!.isRefreshing {
+//                self.buoyDataTable.refreshControl?.beginRefreshing()
+//                self.buoyDataTable.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
+//            }
         }
     
         // Register notification listeners
@@ -79,7 +79,7 @@ class BuoyViewController: UIViewController {
         guard let buoy = self.buoy, let mapView = self.mapView else { return }
         
         // Set the title
-        self.title = buoy.name
+        self.title = buoy.location?.name
         
         // Set the favorites button
         self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!))
@@ -88,47 +88,47 @@ class BuoyViewController: UIViewController {
         self.mapView.clear()
         
         // Set up the map of the buoy
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: buoy.location.latitude + 0.5, longitude: buoy.location.longitude, zoom: 6)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: buoy.location!.latitude!.doubleValue + 0.5, longitude: buoy.location!.longitude!.doubleValue, zoom: 6)
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
-        marker.position = CLLocation(latitude: self.buoy!.location.latitude, longitude: buoy.location.longitude).coordinate
-        marker.title = "Station: " + buoy.stationID
+        marker.position = CLLocation(latitude: self.buoy!.location!.latitude!.doubleValue, longitude: buoy.location!.longitude!.doubleValue).coordinate
+        marker.title = "Station: " + buoy.stationId!
         marker.snippet = buoy.program ?? ""
         marker.map = mapView
         
         self.mapView.selectedMarker = marker
         
         // Set the units to match the settings
-        self.buoy?.units = SyncManager.instance.units
+        //self.buoy?.unit = SyncManager.instance.units
         
         // Try to update the table...
-        if let newWeatherData = self.buoy?.latestData?.weatherData {
-            self.weatherData = newWeatherData
-            self.weatherKeys = Array(self.weatherData.keys)
-        }
+//        if let newWeatherData = self.buoy?.data?.weatherData {
+//            self.weatherData = newWeatherData
+//            self.weatherKeys = Array(self.weatherData.keys)
+//        }
         self.buoyDataTable.reloadData()
     }
     
     @objc func reloadTableData() {
-        DispatchQueue.main.async{
-            if let newWeatherData = self.buoy?.latestData?.weatherData {
-                self.weatherData = newWeatherData
-                self.weatherKeys = Array(self.weatherData.keys)
-            }
-            self.buoyDataTable.reloadData()
-            
-            if let buoy_ = self.buoy {
-                if !buoy_.isFetching && self.buoyDataTable.refreshControl!.isRefreshing {
-                    self.buoyDataTable.refreshControl?.endRefreshing()
-                }
-                
-                if let updateDate = buoy_.latestUpdateTime {
-                    let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
-                    self.mapView.selectedMarker?.snippet = "\(buoy_.program ?? "")\nUpdated \(dateString)"
-                }
-            }
-        }
+//        DispatchQueue.main.async{
+//            if let newWeatherData = self.buoy?.latestData?.weatherData {
+//                self.weatherData = newWeatherData
+//                self.weatherKeys = Array(self.weatherData.keys)
+//            }
+//            self.buoyDataTable.reloadData()
+//
+//            if let buoy_ = self.buoy {
+//                if !buoy_.isFetching && self.buoyDataTable.refreshControl!.isRefreshing {
+//                    self.buoyDataTable.refreshControl?.endRefreshing()
+//                }
+//
+//                if let updateDate = buoy_.latestUpdateTime {
+//                    let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
+//                    self.mapView.selectedMarker?.snippet = "\(buoy_.program ?? "")\nUpdated \(dateString)"
+//                }
+//            }
+//        }
     }
     
     @objc func toggleBuoyFavorite() {
@@ -154,7 +154,7 @@ class BuoyViewController: UIViewController {
     }
     
     @objc func fetchNewBuoyData() {
-        self.buoy?.fetchAllLatestData()
+//        self.buoy?.fetchAllLatestData()
     }
 
     /*
@@ -176,25 +176,28 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if self.buoy?.latestData?.waveSummary != nil {
-                return 1
-            } else {
-                return 0
-            }
+//            if self.buoy?.latestData?.waveSummary != nil {
+//                return 1
+//            } else {
+//                return 0
+//            }
+            return 0
         case 1:
             return self.weatherData.count
         case 2:
-            if self.buoy?.latestData?.directionalSpectraPlotURL != nil {
-                return 1
-            } else {
-                return 0
-            }
+//            if self.buoy?.latestData?.directionalSpectraPlotURL != nil {
+//                return 1
+//            } else {
+//                return 0
+//            }
+            return 0
         case 3:
-            if self.buoy?.latestData?.spectralDistributionPlotURL != nil {
-                return 1
-            } else {
-                return 0
-            }
+//            if self.buoy?.latestData?.spectralDistributionPlotURL != nil {
+//                return 1
+//            } else {
+//                return 0
+//            }
+            return 0
         default:
             return 0
         }
@@ -250,26 +253,26 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 let primaryComponentView = cell.viewWithTag(42) as? UILabel,
                 let secondaryComponentView = cell.viewWithTag(43) as? UILabel else { return cell }
 
-            if let waveSummary = self.buoy?.latestData?.waveSummary {
-                waveSummaryView.text = waveSummary.simpleDescription()
-            }
-            
-            
-            if let swellComponents = self.buoy?.latestData?.swellComponents {
-                if swellComponents.count > 0 {
-                    primaryComponentView.text = swellComponents[0].detailedDescription()
-                } else {
-                    primaryComponentView.text = "No primary swell"
-                }
-                
-                if swellComponents.count > 1 {
-                    secondaryComponentView.text = swellComponents[1].detailedDescription()
-                } else {
-                    secondaryComponentView.text = "No secondary swell"
-                }
-            } else {
-                primaryComponentView.text = "No Component Information Available"
-            }
+//            if let waveSummary = self.buoy?.latestData?.waveSummary {
+//                waveSummaryView.text = waveSummary.simpleDescription()
+//            }
+//
+//
+//            if let swellComponents = self.buoy?.latestData?.swellComponents {
+//                if swellComponents.count > 0 {
+//                    primaryComponentView.text = swellComponents[0].detailedDescription()
+//                } else {
+//                    primaryComponentView.text = "No primary swell"
+//                }
+//
+//                if swellComponents.count > 1 {
+//                    secondaryComponentView.text = swellComponents[1].detailedDescription()
+//                } else {
+//                    secondaryComponentView.text = "No secondary swell"
+//                }
+//            } else {
+//                primaryComponentView.text = "No Component Information Available"
+//            }
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
             let key = self.weatherKeys[indexPath.row]
@@ -278,15 +281,15 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
             guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
-            if let plotURL = self.buoy?.latestData?.directionalSpectraPlotURL {
-                plotView.imageURL = URL.init(string: plotURL)
-            }
+//            if let plotURL = self.buoy?.latestData?.directionalSpectraPlotURL {
+//                plotView.imageURL = URL.init(string: plotURL)
+//            }
         case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
             guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
-            if let plotURL = self.buoy?.latestData?.spectralDistributionPlotURL {
-                plotView.imageURL = URL.init(string: plotURL)
-            }
+//            if let plotURL = self.buoy?.latestData?.spectralDistributionPlotURL {
+//                plotView.imageURL = URL.init(string: plotURL)
+//            }
         default:
             // Do Nothing and give back an empty cell
             cell = UITableViewCell()

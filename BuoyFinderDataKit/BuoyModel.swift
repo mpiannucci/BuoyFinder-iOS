@@ -68,21 +68,21 @@ public class BuoyModel: NSObject {
     public func fetchLatestDataForBuoys(ids: [String]) {
         ids.forEach { (stationId) in
             if let buoy = self.buoys?[stationId] {
-                
+                // TODO
             }
         }
     }
     
-    public func nearbyBuoys(location: Location, radius: Double, units: Units) -> [Buoy] {
+    public func nearbyBuoys(location: GTLRStation_ApiApiMessagesLocationMessage, radius: Double, units: String) -> [GTLRStation_ApiApiMessagesStationMessage] {
         if let resolvedBuoys = self.buoys {
             return resolvedBuoys.filter({ (arg) -> Bool in
                 let (key, value) = arg
-                return value.location.distance(location: location, units: units) < radius
-            }).map({ (arg) -> Buoy in
+                return value.location!.distance(location: location, units: units) < radius
+            }).map({ (arg) -> GTLRStation_ApiApiMessagesStationMessage in
                 let (key, value) = arg
                 return value
             }).sorted(by: { (buoy1, buoy2) -> Bool in
-                return buoy1.location.distance(location: location, units: units) < buoy2.location.distance(location: location, units: units)
+                return buoy1.location!.distance(location: location, units: units) < buoy2.location!.distance(location: location, units: units)
             })
         } else {
             return []
