@@ -38,19 +38,17 @@ class ExploreViewController: UIViewController {
         self.nearbyBuoysTable.delegate = self
         
         // Set up the search controllers
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
+        self.resultsViewController = GMSAutocompleteResultsViewController()
+        self.resultsViewController?.delegate = self
+        self.searchController = UISearchController(searchResultsController: resultsViewController)
+        self.searchController?.searchResultsUpdater = resultsViewController
+        self.searchController?.hidesNavigationBarDuringPresentation = false
         
-        // Set up the search bar
-        let subView = UIView(frame: CGRect(x: 0, y: 64.0, width: UIScreen.main.bounds.width, height: 45.0))
-        if let searchBar = searchController?.searchBar {
-            subView.addSubview(searchBar)
+        if #available(iOS 11.0, *) {
+            self.navigationItem.searchController = self.searchController
+        } else {
+            // Fallback on earlier versions
         }
-        view.addSubview(subView)
-        searchController?.searchBar.sizeToFit()
-        searchController?.hidesNavigationBarDuringPresentation = false
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
