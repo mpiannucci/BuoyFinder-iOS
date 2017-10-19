@@ -281,6 +281,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MVj-cX-UeC" firstAttribute="leading" secondItem="etW-Il-eJo" secondAttribute="leading" id="6A0-te-zsT"/>
                             <constraint firstAttribute="trailing" secondItem="MVj-cX-UeC" secondAttribute="trailing" id="8hF-na-PAl"/>
@@ -312,7 +313,7 @@
         <!--Buoy View-->
         <scene sceneID="eQe-mY-SCp">
             <objects>
-                <viewController title="Buoy View" automaticallyAdjustsScrollViewInsets="NO" id="OgC-rd-YbK" customClass="BuoyViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Buoy View" id="OgC-rd-YbK" customClass="BuoyViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GVr-iA-viN"/>
                         <viewControllerLayoutGuide type="bottom" id="qU1-6s-95b"/>
