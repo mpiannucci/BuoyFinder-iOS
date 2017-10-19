@@ -16,6 +16,8 @@ class FavoriteBuoysViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.backBarButtonItem?.title = ""
     }
 
     override func didReceiveMemoryWarning() {
