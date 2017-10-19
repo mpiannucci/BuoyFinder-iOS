@@ -14,7 +14,7 @@
         <!--TabBar-->
         <scene sceneID="NZQ-IM-r2W">
             <objects>
-                <tabBarController title="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="PNA-6z-bRV" customClass="BuoyTabBarController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="TabBar" id="PNA-6z-bRV" customClass="BuoyTabBarController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="eKK-x1-vRC">
                         <barButtonItem key="backBarButtonItem" title="Back" id="oRb-st-ygD"/>
                         <barButtonItem key="leftBarButtonItem" image="ic_settings_white" style="plain" id="pCH-vL-4nL">
@@ -65,7 +65,7 @@
         <!--Favorites-->
         <scene sceneID="taV-i8-Hb7">
             <objects>
-                <tableViewController title="Favorites" automaticallyAdjustsScrollViewInsets="NO" id="3la-7L-9cB" customClass="FavoriteBuoysViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="3la-7L-9cB" customClass="FavoriteBuoysViewController" customModule="BuoyFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="sqA-DS-x8p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
