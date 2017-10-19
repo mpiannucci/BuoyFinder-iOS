@@ -111,8 +111,8 @@ NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Metric = @"MET
 //
 
 @implementation GTLRStation_ApiApiMessagesStationMessage
-@dynamic active, currents, dart, data, location, owner, program, stationId,
-         stationType, waterQuality;
+@dynamic active, currents, dart, data, location, name, owner, program,
+         stationId, stationType, waterQuality;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   NSDictionary<NSString *, NSString *> *map = @{

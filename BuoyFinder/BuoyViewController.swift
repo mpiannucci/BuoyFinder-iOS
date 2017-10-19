@@ -79,7 +79,7 @@ class BuoyViewController: UIViewController {
         guard let buoy = self.buoy, let mapView = self.mapView else { return }
         
         // Set the title
-        self.title = buoy.location?.name
+        self.title = buoy.name
         
         // Set the favorites button
         self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoyId: self.buoy?.stationId ?? ""))

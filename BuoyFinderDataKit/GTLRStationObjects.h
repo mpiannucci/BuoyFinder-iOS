@@ -259,6 +259,7 @@ GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Me
 
 @property(nonatomic, strong, nullable) NSArray<GTLRStation_ApiApiMessagesDataMessage *> *data;
 @property(nonatomic, strong, nullable) GTLRStation_ApiApiMessagesLocationMessage *location;
+@property(nonatomic, copy, nullable) NSString *name;
 @property(nonatomic, copy, nullable) NSString *owner;
 @property(nonatomic, copy, nullable) NSString *program;
 @property(nonatomic, copy, nullable) NSString *stationId;

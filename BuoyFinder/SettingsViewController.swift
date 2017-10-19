@@ -99,7 +99,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 2:
                 cell.textLabel?.text = "Default Buoy"
                 if let defaultBuoy = SyncManager.instance.defaultbuoy {
-                    cell.detailTextLabel?.text =  defaultBuoy.location!.name
+                    cell.detailTextLabel?.text =  defaultBuoy.name
                 } else if SyncManager.instance.favoriteBuoyIds.count > 0 {
                     cell.detailTextLabel?.text = "Click to choose a default buoy"
                     cell.isUserInteractionEnabled = true

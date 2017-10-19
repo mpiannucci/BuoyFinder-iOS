@@ -88,7 +88,7 @@ class FavoriteBuoysViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteBuoyCell", for: indexPath)
 
         if let buoy = BuoyModel.sharedModel.buoys?[SyncManager.instance.favoriteBuoyIds[indexPath.row]] {
-            cell.textLabel?.text = buoy.location!.name!
+            cell.textLabel?.text = buoy.name!
             cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
         }
 

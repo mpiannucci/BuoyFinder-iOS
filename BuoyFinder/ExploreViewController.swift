@@ -92,7 +92,7 @@ class ExploreViewController: UIViewController {
                 for (_, station) in stations {
                     let marker = GMSMarker()
                     marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
-                    marker.title = station.location!.name!
+                    marker.title = station.name
                     marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
                     marker.map = self.exploreMapView
                 }
@@ -191,7 +191,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let buoy = self.nearbyBuoys[indexPath.row]
-        cell.textLabel?.text = buoy.location?.name
+        cell.textLabel?.text = buoy.name
         cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
         
         return cell
