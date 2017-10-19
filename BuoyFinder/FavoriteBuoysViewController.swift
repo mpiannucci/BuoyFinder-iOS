@@ -25,8 +25,6 @@ class FavoriteBuoysViewController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
