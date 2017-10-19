@@ -19,14 +19,7 @@ public class SyncManager {
     public static let syncDataUpdatedNotification = Notification.Name("syncDataUpdated")
     
     // Data variables
-    public private(set) var favoriteBuoys: [GTLRStation_ApiApiMessagesStationMessage] = []
-    public var favoriteBuoyIDs: [String] {
-        get {
-            return self.favoriteBuoys.map({ (buoy) -> String in
-                return buoy.stationId!
-            })
-        }
-    }
+    public var favoriteBuoyIds: [String] = []
     public private(set) var units: String = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
     
     public enum InitialView: String {
@@ -36,10 +29,10 @@ public class SyncManager {
     }
     public private(set) var initialView: InitialView = .explore
 
-    public private(set) var defaultBuoyID: String = ""
+    public private(set) var defaultBuoyId: String = ""
     public var defaultbuoy: GTLRStation_ApiApiMessagesStationMessage? {
         get {
-            return BuoyModel.sharedModel.buoys?[self.defaultBuoyID]
+            return BuoyModel.sharedModel.buoys?[self.defaultBuoyId]
         }
     }
     
@@ -79,7 +72,6 @@ public class SyncManager {
                     self.latestSnapshot = nil
                 }
                 
-                self.resetLocalDefaults()
                 self.loadFromLocal()
             }
             
@@ -117,12 +109,12 @@ public class SyncManager {
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
-    public func changeDefaultBuoy(buoyID: String) {
-        if self.defaultBuoyID == buoyID {
+    public func changeDefaultBuoy(buoyId: String) {
+        if self.defaultBuoyId == buoyId {
             return
         }
         
-        self.defaultBuoyID = buoyID
+        self.defaultBuoyId = buoyId
         self.saveDefaultBuoy()
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
@@ -137,49 +129,31 @@ public class SyncManager {
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
-    public func addFavoriteBuoy(newBuoy: GTLRStation_ApiApiMessagesStationMessage) {
-        if self.favoriteBuoys.contains(where: { (buoy) -> Bool in
-            buoy.stationId! == newBuoy.stationId!
-        }) {
+    public func addFavoriteBuoy(newBuoyId: String) {
+        if self.favoriteBuoyIds.contains(newBuoyId) {
             return
         }
         
-        self.favoriteBuoys.append(newBuoy)
+        self.favoriteBuoyIds.append(newBuoyId)
         self.saveFavoriteBuoys()
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
-    public func addFavoriteBuoy(newBuoyID: String) {
-        if let buoy = BuoyModel.sharedModel.buoys?[newBuoyID] {
-            addFavoriteBuoy(newBuoy: buoy)
-        }
-    }
-    
-    public func removeFavoriteBuoy(buoy: GTLRStation_ApiApiMessagesStationMessage) {
-        if let index = self.favoriteBuoys.index(where: { (oldBuoy) -> Bool in
-            oldBuoy.stationId! == buoy.stationId!
-        }) {
-            self.favoriteBuoys.remove(at: index)
+    public func removeFavoriteBuoy(buoyId: String) {
+        if let index = self.favoriteBuoyIds.index(of: buoyId) {
+            self.favoriteBuoyIds.remove(at: index)
             self.saveFavoriteBuoys()
             NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
         }
     }
     
-    public func removeFavoriteBuoy(buoyID: String) {
-        if let buoy = BuoyModel.sharedModel.buoys?[buoyID] {
-            self.removeFavoriteBuoy(buoy: buoy)
-        }
-    }
-    
     public func moveFavoriteBuoy(currentIndex: Int, newIndex: Int) {
-        self.favoriteBuoys.insert(self.favoriteBuoys.remove(at: currentIndex), at: newIndex)
+        self.favoriteBuoyIds.insert(self.favoriteBuoyIds.remove(at: currentIndex), at: newIndex)
         self.saveFavoriteBuoys()
     }
     
-    public func isBuoyAFavorite(buoy: GTLRStation_ApiApiMessagesStationMessage) -> Bool {
-        return self.favoriteBuoys.contains(where: { (oldBuoy) -> Bool in
-            return oldBuoy.stationId! == buoy.stationId!
-        })
+    public func isBuoyAFavorite(buoyId: String) -> Bool {
+        return self.favoriteBuoyIds.contains(buoyId)
     }
     
     @objc private func newBuoysLoaded() {
@@ -212,8 +186,8 @@ public class SyncManager {
         }
         
         if let newDefaultBuoyID = self.latestSnapshot?.childSnapshot(forPath: self.defaultBuoyKey).value as? String {
-            if newDefaultBuoyID != self.defaultBuoyID {
-                self.defaultBuoyID = newDefaultBuoyID
+            if newDefaultBuoyID != self.defaultBuoyId {
+                self.defaultBuoyId = newDefaultBuoyID
                 changed = true
             }
         }
@@ -228,23 +202,22 @@ public class SyncManager {
         if let rawFavoriteBuoys = self.latestSnapshot?.childSnapshot(forPath: self.favoriteBuoysKey).value as? NSArray {
             let newFavoriteBuoys = rawFavoriteBuoys as! [String]
             for newFavoriteBuoyID in newFavoriteBuoys {
-                if self.favoriteBuoyIDs.contains(newFavoriteBuoyID) {
+                if self.favoriteBuoyIds.contains(newFavoriteBuoyID) {
                     continue
                 }
-                if let newBuoy = BuoyModel.sharedModel.buoys?[newFavoriteBuoyID] {
-                    self.favoriteBuoys.append(newBuoy)
-                    changed = true
-                }
+                
+                self.favoriteBuoyIds.append(newFavoriteBuoyID)
+                changed = true
             }
             
-            let currentFavorites = self.favoriteBuoyIDs
+            let currentFavorites = self.favoriteBuoyIds
             for currentFavorite in currentFavorites.reversed() {
                 if newFavoriteBuoys.contains(currentFavorite) {
                     continue
                 }
                 
                 if let index = currentFavorites.index(of: currentFavorite) {
-                    self.favoriteBuoys.remove(at: index)
+                    self.favoriteBuoyIds.remove(at: index)
                     changed = true
                 }
             }
@@ -276,8 +249,8 @@ public class SyncManager {
         }
         
         if let newDefaultBuoyID = userDefaults?.value(forKey: self.defaultBuoyKey) as? String {
-            if newDefaultBuoyID != self.defaultBuoyID {
-                self.defaultBuoyID = newDefaultBuoyID
+            if newDefaultBuoyID != self.defaultBuoyId {
+                self.defaultBuoyId = newDefaultBuoyID
                 changed = true
             }
         }
@@ -291,24 +264,22 @@ public class SyncManager {
         
         if let newFavoriteBuoyIDs = userDefaults?.value(forKey: self.favoriteBuoysKey) as? [String] {
             for newFavoriteBuoyID in newFavoriteBuoyIDs {
-                if self.favoriteBuoyIDs.contains(newFavoriteBuoyID) {
+                if self.favoriteBuoyIds.contains(newFavoriteBuoyID) {
                     continue
                 }
                 
-                if let newBuoy = BuoyModel.sharedModel.buoys?[newFavoriteBuoyID] {
-                    self.favoriteBuoys.append(newBuoy)
-                    changed = true
-                }
+                self.favoriteBuoyIds.append(newFavoriteBuoyID)
+                changed = true
             }
             
-            let currentFavorites = self.favoriteBuoyIDs
+            let currentFavorites = self.favoriteBuoyIds
             for currentFavorite in currentFavorites.reversed() {
                 if newFavoriteBuoyIDs.contains(currentFavorite) {
                     continue
                 }
                 
                 if let index = currentFavorites.index(of: currentFavorite) {
-                    self.favoriteBuoys.remove(at: index)
+                    self.favoriteBuoyIds.remove(at: index)
                     changed = true
                 }
             }
@@ -322,9 +293,9 @@ public class SyncManager {
     
     private func saveFavoriteBuoys() {
         if self.userRef != nil {
-            self.userRef!.child(self.favoriteBuoysKey).setValue(self.favoriteBuoyIDs as NSArray)
+            self.userRef!.child(self.favoriteBuoysKey).setValue(self.favoriteBuoyIds as NSArray)
         } else {
-            self.userDefaults?.setValue(self.favoriteBuoyIDs, forKey: self.favoriteBuoysKey)
+            self.userDefaults?.setValue(self.favoriteBuoyIds, forKey: self.favoriteBuoysKey)
         }
     }
     
@@ -343,9 +314,9 @@ public class SyncManager {
     }
     
     private func saveDefaultBuoy() {
-        self.userDefaults?.setValue(self.defaultBuoyID, forKey: self.defaultBuoyKey)
+        self.userDefaults?.setValue(self.defaultBuoyId, forKey: self.defaultBuoyKey)
         if self.userRef != nil {
-            self.userRef!.child(self.defaultBuoyKey).setValue(self.defaultBuoyID as NSString)
+            self.userRef!.child(self.defaultBuoyKey).setValue(self.defaultBuoyId as NSString)
         }
     }
     
@@ -367,8 +338,8 @@ public class SyncManager {
     private func resetLocalDefaults() {
         self.units = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
         self.initialView = .explore
-        self.favoriteBuoys = []
-        self.defaultBuoyID = ""
+        self.favoriteBuoyIds = []
+        self.defaultBuoyId = ""
         self.todayVariable = .waves
         saveData()
     }

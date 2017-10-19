@@ -82,7 +82,7 @@ class BuoyViewController: UIViewController {
         self.title = buoy.location?.name
         
         // Set the favorites button
-        self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoy: self.buoy!))
+        self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoyId: self.buoy?.stationId ?? ""))
         
         // Clear the map
         self.mapView.clear()
@@ -134,11 +134,11 @@ class BuoyViewController: UIViewController {
     @objc func toggleBuoyFavorite() {
         guard let buoy = self.buoy else { return }
         
-        if SyncManager.instance.isBuoyAFavorite(buoy: buoy) {
-            SyncManager.instance.removeFavoriteBuoy(buoy: buoy)
+        if SyncManager.instance.isBuoyAFavorite(buoyId: buoy.stationId!) {
+            SyncManager.instance.removeFavoriteBuoy(buoyId: buoy.stationId!)
             setFavoriteBuoyIcon(isFavorite: false)
         } else {
-            SyncManager.instance.addFavoriteBuoy(newBuoy: buoy)
+            SyncManager.instance.addFavoriteBuoy(newBuoyId: buoy.stationId!)
             setFavoriteBuoyIcon(isFavorite: true)
         }
     }

@@ -100,7 +100,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 cell.textLabel?.text = "Default Buoy"
                 if let defaultBuoy = SyncManager.instance.defaultbuoy {
                     cell.detailTextLabel?.text =  defaultBuoy.location!.name
-                } else if SyncManager.instance.favoriteBuoys.count > 0 {
+                } else if SyncManager.instance.favoriteBuoyIds.count > 0 {
                     cell.detailTextLabel?.text = "Click to choose a default buoy"
                     cell.isUserInteractionEnabled = true
                 } else {
@@ -110,7 +110,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 3:
                 cell.textLabel?.text = "Today Widget Variable"
                 cell.detailTextLabel?.text = SyncManager.instance.todayVariable.rawValue.capitalized
-                if SyncManager.instance.favoriteBuoys.count > 0  {
+                if SyncManager.instance.favoriteBuoyIds.count > 0  {
                     cell.isUserInteractionEnabled = true
                 } else {
                     cell.detailTextLabel?.text = "Save a favorite buoy to enable"
@@ -199,7 +199,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 initialViewPicker.addAction(favoritesAction)
                 
-                if SyncManager.instance.favoriteBuoys.count > 0 {
+                if SyncManager.instance.favoriteBuoyIds.count > 0 {
                     let defaultBuoyAction = UIAlertAction(title: SyncManager.InitialView.defaultBuoy.rawValue.capitalized, style: .default, handler: { (_) in
                         SyncManager.instance.changeInitialView(newInitialView: SyncManager.InitialView.defaultBuoy)
                         initialViewPicker.dismiss(animated: true, completion: nil)
@@ -209,7 +209,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 
                 self.present(initialViewPicker, animated: true, completion: nil)
             case 2:
-                let favoriteBuoys = SyncManager.instance.favoriteBuoys
+                let favoriteBuoys = SyncManager.instance.favoriteBuoyIds
                 if favoriteBuoys.count < 1 {
                     break
                 }
@@ -221,8 +221,8 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 defaultBuoyPicker.addAction(cancelAction)
                 
                 favoriteBuoys.forEach({ (buoy) in
-                    let buoyAction = UIAlertAction(title: buoy.location!.name, style: .default, handler: { (_) in
-                        SyncManager.instance.changeDefaultBuoy(buoyID: buoy.stationId!)
+                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys?[buoy]?.location?.name, style: .default, handler: { (_) in
+                        SyncManager.instance.changeDefaultBuoy(buoyId: buoy)
                         defaultBuoyPicker.dismiss(animated: true, completion: nil)
                     })
                     defaultBuoyPicker.addAction(buoyAction)
