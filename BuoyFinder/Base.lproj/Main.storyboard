@@ -47,6 +47,9 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.74089014530181885" blue="0.59427708387374878" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -102,7 +105,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="K13-F5-Kvz"/>
-                    <navigationItem key="navigationItem" id="qd3-qM-M9L">
+                    <navigationItem key="navigationItem" title="BuoyFinder" id="qd3-qM-M9L">
                         <barButtonItem key="leftBarButtonItem" image="ic_settings_white" id="Wj3-bF-O1H">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -286,7 +289,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="02Q-pd-Uw5"/>
-                    <navigationItem key="navigationItem" id="KEx-5x-EOy">
+                    <navigationItem key="navigationItem" title="BuoyFinder" id="KEx-5x-EOy">
                         <barButtonItem key="leftBarButtonItem" image="ic_settings_white" id="B2Q-ES-X9H">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -477,7 +480,7 @@
         <image name="ic_settings_white" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YGD-3v-Xq6"/>
-        <segue reference="fmZ-DN-gKB"/>
+        <segue reference="XaI-Bd-00s"/>
+        <segue reference="OOg-d8-Xg2"/>
     </inferredMetricsTieBreakers>
 </document>

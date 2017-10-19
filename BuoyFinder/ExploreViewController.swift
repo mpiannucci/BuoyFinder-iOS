@@ -44,6 +44,15 @@ class ExploreViewController: UIViewController {
         self.searchController?.searchResultsUpdater = resultsViewController
         self.searchController?.hidesNavigationBarDuringPresentation = false
         
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+            self.navigationItem.hidesSearchBarWhenScrolling = false
+            self.navigationItem.searchController = self.searchController
+        } else {
+            // Fallback on earlier versions
+            self.navigationItem.titleView = self.searchController?.searchBar
+        }
+        
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
