@@ -29,3 +29,32 @@ extension GTLRStation_ApiApiMessagesLocationMessage {
         return abs(c * self.earthsRadius(units: units))
     }
 }
+
+extension GTLRStation_ApiApiMessagesStationMessage {
+    // TODO: Buoy station extensions
+    
+    public var needsUpdate: Bool {
+        get {
+            guard let data = self.data, data.count > 0, let latestUpdateTime = data[0].date else {
+                return true
+            }
+            
+            return latestUpdateTime.date.timeIntervalSinceNow > 30*60
+        }
+    }
+    
+    public func importData(newData: GTLRStation_ApiApiMessagesDataMessage, dataType: String? = nil) {
+        switch dataType {
+        case .some(kGTLRStationDataTypeSpectra):
+            break
+        case .some(kGTLRStationDataTypeWaves):
+            break
+        case .some(kGTLRStationDataTypeWeather):
+            break
+        case .none:
+            break
+        default:
+            return
+        }
+    }
+}
