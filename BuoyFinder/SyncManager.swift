@@ -32,7 +32,7 @@ public class SyncManager {
     public private(set) var defaultBuoyId: String = ""
     public var defaultbuoy: GTLRStation_ApiApiMessagesStationMessage? {
         get {
-            return BuoyModel.sharedModel.buoys?[self.defaultBuoyId]
+            return BuoyModel.sharedModel.buoys[self.defaultBuoyId]
         }
     }
     

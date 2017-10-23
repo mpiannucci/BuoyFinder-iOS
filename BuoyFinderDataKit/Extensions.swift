@@ -30,31 +30,42 @@ extension GTLRStation_ApiApiMessagesLocationMessage {
     }
 }
 
-extension GTLRStation_ApiApiMessagesStationMessage {
-    // TODO: Buoy station extensions
-    
-    public var needsUpdate: Bool {
-        get {
-            guard let data = self.data, data.count > 0, let latestUpdateTime = data[0].date else {
-                return true
-            }
-            
-            return latestUpdateTime.date.timeIntervalSinceNow > 30*60
+extension GTLRStation_ApiApiMessagesDataMessage {
+    public func mergeData(newData: GTLRStation_ApiApiMessagesDataMessage, dataType: String) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
+        switch (dataType) {
+        case kGTLRStationDataTypeSpectra:
+            self.waveSummary = newData.waveSummary
+            self.swellComponents = newData.swellComponents
+            self.steepness = newData.steepness
+            self.averagePeriod = newData.averagePeriod
+            self.waveSpectra = newData.waveSpectra
+            self.energySpectraPlot = newData.energySpectraPlot
+            self.directionSpectraPlot = newData.directionSpectraPlot
+        case kGTLRStationDataTypeWeather:
+            self.windSpeed = newData.windSpeed
+            self.windGust = newData.windGust
+            self.windDirection = newData.windDirection
+            self.windCompassDirection = newData.windCompassDirection
+            self.waterTemperature = newData.waterTemperature
+            self.airTemperature = newData.airTemperature
+            self.dewpointTemperature = newData.dewpointTemperature
+            self.pressure = newData.pressure
+            self.pressureTendency = newData.pressureTendency
+            self.waterLevel = newData.waterLevel
+        default:
+            break
         }
     }
-    
-    public func importData(newData: GTLRStation_ApiApiMessagesDataMessage, dataType: String? = nil) {
-        switch dataType {
-        case .some(kGTLRStationDataTypeSpectra):
-            break
-        case .some(kGTLRStationDataTypeWaves):
-            break
-        case .some(kGTLRStationDataTypeWeather):
-            break
-        case .none:
-            break
-        default:
-            return
-        }
+}
+
+extension GTLRStation_ApiApiMessagesStationMessage {
+    public func addData(newData: GTLRStation_ApiApiMessagesDataMessage) {
+        self.data?.append(newData)
+        self.data?.sort(by: { (first, second) -> Bool in
+            return first.date!.date.compare(second.date!.date) == .orderedDescending
+        })
     }
 }

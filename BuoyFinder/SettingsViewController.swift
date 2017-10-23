@@ -221,7 +221,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 defaultBuoyPicker.addAction(cancelAction)
                 
                 favoriteBuoys.forEach({ (buoy) in
-                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys?[buoy]?.location?.name, style: .default, handler: { (_) in
+                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys[buoy]?.location?.name, style: .default, handler: { (_) in
                         SyncManager.instance.changeDefaultBuoy(buoyId: buoy)
                         defaultBuoyPicker.dismiss(animated: true, completion: nil)
                     })

@@ -75,19 +75,17 @@ class FavoriteBuoysViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if let buoys = BuoyModel.sharedModel.buoys {
-            if buoys.count < 1 {
-                return 0
-            }
+        if BuoyModel.sharedModel.buoys.count < 1 {
+            return 0
         }
+        
         return SyncManager.instance.favoriteBuoyIds.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteBuoyCell", for: indexPath)
 
-        if let buoy = BuoyModel.sharedModel.buoys?[SyncManager.instance.favoriteBuoyIds[indexPath.row]] {
+        if let buoy = BuoyModel.sharedModel.buoys[SyncManager.instance.favoriteBuoyIds[indexPath.row]] {
             cell.textLabel?.text = buoy.name!
             cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
         }
@@ -131,7 +129,7 @@ class FavoriteBuoysViewController: UITableViewController {
         
         // Get the buoy view
         if let buoyView = segue.destination as? BuoyViewController, let index = self.tableView.indexPathForSelectedRow {
-            buoyView.buoy = BuoyModel.sharedModel.buoys?[SyncManager.instance.favoriteBuoyIds[index.row]]
+            buoyView.buoy = BuoyModel.sharedModel.buoys[SyncManager.instance.favoriteBuoyIds[index.row]]
 //            buoyView.buoy?.fetchAllDataIfNeeded()
         }
     }

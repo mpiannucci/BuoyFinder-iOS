@@ -88,14 +88,12 @@ class ExploreViewController: UIViewController {
     
     func updateBuoyStations() {
         DispatchQueue.main.async {
-            if let stations = BuoyModel.sharedModel.buoys {
-                for (_, station) in stations {
-                    let marker = GMSMarker()
-                    marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
-                    marker.title = station.name
-                    marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
-                    marker.map = self.exploreMapView
-                }
+            for (_, station) in BuoyModel.sharedModel.buoys {
+                let marker = GMSMarker()
+                marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
+                marker.title = station.name
+                marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
+                marker.map = self.exploreMapView
             }
             
             self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
@@ -109,7 +107,7 @@ class ExploreViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let buoyView = segue.destination as? BuoyViewController {
-            buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedBuoyStation]
+            buoyView.buoy = BuoyModel.sharedModel.buoys[selectedBuoyStation]
 //            buoyView.buoy?.fetchAllDataIfNeeded()
         }
     }
