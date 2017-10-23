@@ -45,7 +45,7 @@ class BuoyViewController: UIViewController {
         // Add a refresh control to the data table
         self.buoyDataTable.refreshControl = UIRefreshControl()
         self.buoyDataTable.refreshControl?.backgroundColor = UIColor.white
-        self.buoyDataTable.refreshControl?.tintColor = UIColor(colorLiteralRed: 0, green: 179.0/255.0, blue: 134.0/255.0, alpha: 255.0/255.0)
+        self.buoyDataTable.refreshControl?.tintColor = UIColor(red: 0, green: 179.0/255.0, blue: 134.0/255.0, alpha: 255.0/255.0)
         self.buoyDataTable.refreshControl?.addTarget(self, action: #selector(self.fetchNewBuoyData), for: .valueChanged)
     }
 
@@ -108,10 +108,10 @@ class BuoyViewController: UIViewController {
         //self.buoy?.unit = SyncManager.instance.units
         
         // Try to update the table...
-//        if let newWeatherData = self.buoy?.data?.weatherData {
-//            self.weatherData = newWeatherData
-//            self.weatherKeys = Array(self.weatherData.keys)
-//        }
+        if let newWeatherData = buoy.data?.first?.weatherData {
+            self.weatherData = newWeatherData
+            self.weatherKeys = Array(self.weatherData.keys)
+        }
         self.buoyDataTable.reloadData()
     }
     
@@ -129,12 +129,7 @@ class BuoyViewController: UIViewController {
     
     @objc func reloadTableData() {
         DispatchQueue.main.async{
-//            if let newWeatherData = self.buoy?.d?.weatherData {
-//                self.weatherData = newWeatherData
-//                self.weatherKeys = Array(self.weatherData.keys)
-//            }
-            self.buoyDataTable.reloadData()
-
+            
             if let buoyId_ = self.buoyId, let buoy = BuoyModel.sharedModel.buoys[buoyId_] {
                 if !BuoyModel.sharedModel.isBuoyDataFetching(stationId: buoyId_) && self.buoyDataTable.refreshControl!.isRefreshing {
                     self.buoyDataTable.refreshControl?.endRefreshing()
@@ -144,7 +139,14 @@ class BuoyViewController: UIViewController {
                     let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
                     self.mapView.selectedMarker?.snippet = "\(buoy.program ?? "")\nUpdated \(dateString)"
                 }
+                
+                if let newWeatherData = buoy.data?.first?.weatherData {
+                    self.weatherData = newWeatherData
+                    self.weatherKeys = Array(self.weatherData.keys)
+                }
             }
+            
+            self.buoyDataTable.reloadData()
         }
     }
     

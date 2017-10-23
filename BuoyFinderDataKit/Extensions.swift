@@ -61,6 +61,74 @@ extension GTLRStation_ApiApiMessagesSwellMessage {
 }
 
 extension GTLRStation_ApiApiMessagesDataMessage {
+    
+    public var pressureTendencyString: String {
+        get {
+            guard let tendency = self.pressureTendency else {
+                return ""
+            }
+            
+            if tendency.doubleValue > 0 {
+                return "RISING"
+            } else if tendency.doubleValue < 0 {
+                return "FALLING"
+            } else {
+                return "STEADY"
+            }
+        }
+    }
+    
+    public var windSummary: String {
+        get {
+            guard let speed = self.windSpeed, let gust = self.windGust, let dir = self.windCompassDirection, let units = self.units else {
+                return ""
+            }
+            
+            return String(format: "%d (Gust %d) ", speed.intValue, gust.intValue) + units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Speed) + " " + dir
+        }
+    }
+    
+    public var pressureSummary: String {
+        get {
+            guard let pressure = self.pressure, let units = self.units else {
+                return ""
+            }
+            
+            return String(format: "%.2f ", pressure.doubleValue) + units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Pressure) + " " + self.pressureTendencyString
+        }
+    }
+    
+    public var weatherData: [String:String] {
+        get {
+            var data: [String:String] = [:]
+            
+            guard let units = self.units else {
+                return data
+            }
+            
+            if let windSpd = self.windSpeed, let windDir = self.windCompassDirection {
+                data["Wind"] = String(format: "%.1f \(units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Speed)) %.0f\(units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Direction)) \(windDir)", windSpd.doubleValue)
+            }
+            if let windGst = self.windGust {
+                data["Wind Gust"] = String(format: "%.1f \(units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Speed))", windGst.doubleValue)
+            }
+            if let waterTemp = self.waterTemperature {
+                data["Water Temperature"] = String(format: "%.2f \(units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Temperature))", waterTemp.doubleValue)
+            }
+            if let airTemp = self.airTemperature {
+                data["Air Temperature"] = String(format: "%.2f \(units.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Temperature))", airTemp.doubleValue)
+            }
+            if let _ = self.pressure {
+                data["Pressure"] = self.pressureSummary
+            }
+            if let level = self.waterLevel {
+                data["Water Level"] = String(format: "%.1f ft", level.doubleValue)
+            }
+            
+            return data
+        }
+    }
+    
     public func mergeData(newData: GTLRStation_ApiApiMessagesDataMessage, dataType: String) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
