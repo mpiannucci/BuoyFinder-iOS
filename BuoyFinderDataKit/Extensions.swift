@@ -12,14 +12,14 @@ import Foundation
 
 extension GTLRStation_ApiApiMessagesLocationMessage {
     private func earthsRadius(units: String) -> Double {
-        if units == kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric {
+        if units == kGTLRStationUnitsMetric {
             return 6373
         } else {
             return 3961
         }
     }
     
-    public func distance(location: GTLRStation_ApiApiMessagesLocationMessage, units: String = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric) -> Double {
+    public func distance(location: GTLRStation_ApiApiMessagesLocationMessage, units: String = kGTLRStationUnitsMetric) -> Double {
         let latDist = self.latitude!.doubleValue - location.latitude!.doubleValue
         let lonDist = self.longitude!.doubleValue - location.longitude!.doubleValue
         
@@ -30,16 +30,32 @@ extension GTLRStation_ApiApiMessagesLocationMessage {
     }
 }
 
+extension GTLRStation_ApiApiMessagesUnitLabelMessage {
+    public func label(measurement: String) -> String {
+        guard let measurements = self.measurements else {
+            return ""
+        }
+        
+        for measure in measurements {
+            if measure.measurement == measurement {
+                return measure.label ?? ""
+            }
+        }
+        
+        return ""
+    }
+}
+
 extension GTLRStation_ApiApiMessagesSwellMessage {
     public var simpleDescription: String {
         get {
-            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit! + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + self.compassDirection!
+            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length)  + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + self.compassDirection!
         }
     }
     
     public var detailedDescription: String {
         get {
-            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit! + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + String(format: "%3.0f", self.direction!.doubleValue) + "self.units.string(meas: .degrees)" + " " + self.compassDirection!
+            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length) + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + String(format: "%3.0f", self.direction!.doubleValue) + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Direction) + " " + self.compassDirection!
         }
     }
 }
@@ -84,8 +100,13 @@ extension GTLRStation_ApiApiMessagesStationMessage {
     }
     
     public func addData(newData: GTLRStation_ApiApiMessagesDataMessage) {
-        self.data?.append(newData)
-        self.data?.sort(by: { (first, second) -> Bool in
+        guard let _ = self.data else {
+            self.data = [newData]
+            return
+        }
+        
+        self.data!.append(newData)
+        self.data!.sort(by: { (first, second) -> Bool in
             return first.date!.date.compare(second.date!.date) == .orderedDescending
         })
     }

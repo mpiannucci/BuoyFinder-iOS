@@ -19,10 +19,6 @@ NSString * const kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_
 NSString * const kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Temperature = @"TEMPERATURE";
 NSString * const kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Visibility = @"VISIBILITY";
 
-// GTLRStation_ApiApiMessagesSwellMessage.unit
-NSString * const kGTLRStation_ApiApiMessagesSwellMessage_Unit_English = @"ENGLISH";
-NSString * const kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric = @"METRIC";
-
 // GTLRStation_ApiApiMessagesUnitLabelMessage.unit
 NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_English = @"ENGLISH";
 NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Metric = @"METRIC";

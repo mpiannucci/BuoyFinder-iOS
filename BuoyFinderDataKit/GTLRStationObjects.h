@@ -47,14 +47,6 @@ GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesMeasurementLabelMessage_
 GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Visibility;
 
 // ----------------------------------------------------------------------------
-// GTLRStation_ApiApiMessagesSwellMessage.unit
-
-/** Value: "ENGLISH" */
-GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesSwellMessage_Unit_English;
-/** Value: "METRIC" */
-GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric;
-
-// ----------------------------------------------------------------------------
 // GTLRStation_ApiApiMessagesUnitLabelMessage.unit
 
 /** Value: "ENGLISH" */
@@ -307,15 +299,7 @@ GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Me
  */
 @property(nonatomic, strong, nullable) NSNumber *period;
 
-/**
- *  unit
- *
- *  Likely values:
- *    @arg @c kGTLRStation_ApiApiMessagesSwellMessage_Unit_English Value
- *        "ENGLISH"
- *    @arg @c kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric Value "METRIC"
- */
-@property(nonatomic, copy, nullable) NSString *unit;
+@property(nonatomic, strong, nullable) GTLRStation_ApiApiMessagesUnitLabelMessage *unit;
 
 /**
  *  waveHeight

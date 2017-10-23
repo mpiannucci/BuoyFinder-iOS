@@ -20,7 +20,7 @@ public class SyncManager {
     
     // Data variables
     public var favoriteBuoyIds: [String] = []
-    public private(set) var units: String = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
+    public private(set) var units: String = kGTLRStationUnitsMetric
     
     public enum InitialView: String {
         case explore = "explore"
@@ -336,7 +336,7 @@ public class SyncManager {
     }
     
     private func resetLocalDefaults() {
-        self.units = kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric
+        self.units = kGTLRStationUnitsMetric
         self.initialView = .explore
         self.favoriteBuoyIds = []
         self.defaultBuoyId = ""

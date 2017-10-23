@@ -165,16 +165,16 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 unitPicker.addAction(cancelAction)
             
-                let metricAction = UIAlertAction(title: kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric.capitalized, style: .default, handler: {
+                let metricAction = UIAlertAction(title: kGTLRStationUnitsMetric.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: kGTLRStation_ApiApiMessagesSwellMessage_Unit_Metric)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStationUnitsMetric)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(metricAction)
             
-                let englishAction = UIAlertAction(title: kGTLRStation_ApiApiMessagesSwellMessage_Unit_English.capitalized, style: .default, handler: {
+                let englishAction = UIAlertAction(title: kGTLRStationUnitsEnglish.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: kGTLRStation_ApiApiMessagesSwellMessage_Unit_English)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStationUnitsEnglish)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(englishAction)
