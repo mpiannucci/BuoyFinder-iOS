@@ -108,7 +108,7 @@ class ExploreViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let buoyView = segue.destination as? BuoyViewController {
             buoyView.buoy = BuoyModel.sharedModel.buoys[selectedBuoyStation]
-//            buoyView.buoy?.fetchAllDataIfNeeded()
+            BuoyModel.sharedModel.fetchAllLatestBuoyData(stationId: selectedBuoyStation, units: SyncManager.instance.units)
         }
     }
     

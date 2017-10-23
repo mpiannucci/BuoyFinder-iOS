@@ -30,6 +30,20 @@ extension GTLRStation_ApiApiMessagesLocationMessage {
     }
 }
 
+extension GTLRStation_ApiApiMessagesSwellMessage {
+    public var simpleDescription: String {
+        get {
+            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit! + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + self.compassDirection!
+        }
+    }
+    
+    public var detailedDescription: String {
+        get {
+            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit! + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + String(format: "%3.0f", self.direction!.doubleValue) + "self.units.string(meas: .degrees)" + " " + self.compassDirection!
+        }
+    }
+}
+
 extension GTLRStation_ApiApiMessagesDataMessage {
     public func mergeData(newData: GTLRStation_ApiApiMessagesDataMessage, dataType: String) {
         objc_sync_enter(self)
@@ -62,6 +76,13 @@ extension GTLRStation_ApiApiMessagesDataMessage {
 }
 
 extension GTLRStation_ApiApiMessagesStationMessage {
+    
+    public var latestUpdateTime: Date? {
+        get {
+            return self.data?.first?.date?.date
+        }
+    }
+    
     public func addData(newData: GTLRStation_ApiApiMessagesDataMessage) {
         self.data?.append(newData)
         self.data?.sort(by: { (first, second) -> Bool in

@@ -100,7 +100,9 @@ public class BuoyModel: NSObject {
             objc_sync_enter(self)
             defer { objc_sync_exit(self) }
             
-            guard let _ = error, let newData = response as? GTLRStation_ApiApiMessagesDataMessage else {
+            guard error == nil, let newData = response as? GTLRStation_ApiApiMessagesDataMessage else {
+                print(error!)
+                
                 if let fetchGroup = self.buoyFetchCounter[stationId] {
                     fetchGroup.leave()
                 }
@@ -126,6 +128,8 @@ public class BuoyModel: NSObject {
             return
         }
         
+        NotificationCenter.default.post(name: BuoyModel.buoyDataFetchStartedNotification, object: stationId)
+        
         self.buoyFetchCounter[stationId] = DispatchGroup()
         
         self.fetchLatestBuoyData(stationId: stationId, units: units, dataType: kGTLRStationDataTypeSpectra)
@@ -133,12 +137,22 @@ public class BuoyModel: NSObject {
         
         self.buoyFetchCounter[stationId]?.notify(queue: DispatchQueue.main, execute: {
             // Finished multiple data fetch... cleanup
+            var success = false
             if let newData = self.buoyFetchCache[stationId] {
                 self.buoys[stationId]?.addData(newData: newData)
                 self.buoyFetchHistory[stationId] = Date()
+                success = true
+            } else {
+                success = false
             }
             self.buoyFetchCache.removeValue(forKey: stationId)
             self.buoyFetchCounter.removeValue(forKey: stationId)
+            
+            if success {
+                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdatedNotification, object: stationId)
+            } else {
+                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdateFailedNotification, object: stationId)
+            }
         })
     }
     
@@ -148,6 +162,10 @@ public class BuoyModel: NSObject {
         }
         
         return lastUpdateTime.timeIntervalSinceNow > 30*60
+    }
+    
+    public func isBuoyDataFetching(stationId: String) -> Bool {
+        return self.buoyFetchCounter[stationId] != nil
     }
     
     public func nearbyBuoys(location: GTLRStation_ApiApiMessagesLocationMessage, radius: Double, units: String) -> [GTLRStation_ApiApiMessagesStationMessage] {

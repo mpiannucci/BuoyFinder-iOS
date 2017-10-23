@@ -130,7 +130,7 @@ class FavoriteBuoysViewController: UITableViewController {
         // Get the buoy view
         if let buoyView = segue.destination as? BuoyViewController, let index = self.tableView.indexPathForSelectedRow {
             buoyView.buoy = BuoyModel.sharedModel.buoys[SyncManager.instance.favoriteBuoyIds[index.row]]
-//            buoyView.buoy?.fetchAllDataIfNeeded()
+            BuoyModel.sharedModel.fetchAllLatestBuoyData(stationId: buoyView.buoy?.stationId ?? "", units: SyncManager.instance.units)
         }
     }
 
