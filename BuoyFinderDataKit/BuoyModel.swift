@@ -124,7 +124,7 @@ public class BuoyModel: NSObject {
     }
     
     public func fetchAllLatestBuoyData(stationId: String, units: String) {
-        guard self.buoyFetchCounter[stationId] == nil, doesBuoyNeedUpdate(stationId: stationId) else {
+        guard self.buoyFetchCounter[stationId] == nil, doesBuoyNeedUpdate(stationId: stationId, units: units) else {
             return
         }
         
@@ -156,8 +156,12 @@ public class BuoyModel: NSObject {
         })
     }
     
-    public func doesBuoyNeedUpdate(stationId: String) -> Bool {
-        guard let lastUpdateTime = self.buoyFetchHistory[stationId] else {
+    public func doesBuoyNeedUpdate(stationId: String, units: String) -> Bool {
+        guard let lastUpdateTime = self.buoyFetchHistory[stationId], let oldUnits = self.buoys[stationId]?.data?.first?.units?.unit else {
+            return true
+        }
+        
+        if oldUnits != units {
             return true
         }
         

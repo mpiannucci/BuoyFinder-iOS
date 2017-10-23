@@ -106,6 +106,9 @@ extension GTLRStation_ApiApiMessagesStationMessage {
         }
         
         self.data!.append(newData)
+        self.data = self.data?.filter({ (data) -> Bool in
+            return data.units?.unit == newData.units?.unit
+        })
         self.data!.sort(by: { (first, second) -> Bool in
             return first.date!.date.compare(second.date!.date) == .orderedDescending
         })
