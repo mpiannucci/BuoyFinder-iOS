@@ -14,10 +14,10 @@ import BuoyFinderDataKit
 class BuoyViewController: UIViewController {
     
     // Variables
-    public var buoy: GTLRStation_ApiApiMessagesStationMessage? {
+    public var buoyId: String? {
         didSet {
             // Set the default camera to be directly over america
-            guard let buoy_ = self.buoy else {
+            guard let _ = self.buoyId else {
                 return
             }
             
@@ -59,18 +59,18 @@ class BuoyViewController: UIViewController {
         
         self.setupViews()
         
-        guard let buoy_ = self.buoy else {
+        guard let buoyId_ = self.buoyId else {
             return
         }
         
-        if BuoyModel.sharedModel.isBuoyDataFetching(stationId: buoy_.stationId!) && !self.buoyDataTable.refreshControl!.isRefreshing {
+        if BuoyModel.sharedModel.isBuoyDataFetching(stationId: buoyId_) && !self.buoyDataTable.refreshControl!.isRefreshing {
             self.buoyDataTable.refreshControl?.beginRefreshing()
             self.buoyDataTable.setContentOffset(CGPoint(x: 0, y: -60.0), animated: true)
         }
         
         // Register notification listeners
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: Buoy.buoyDataUpdatedNotification, object: buoy_.stationId!)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: Buoy.buoyDataUpdateFailedNotification, object: buoy_.stationId!)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: Buoy.buoyDataUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: Buoy.buoyDataUpdateFailedNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,13 +81,13 @@ class BuoyViewController: UIViewController {
     }
     
     func setupViews() {
-        guard let buoy = self.buoy, let mapView = self.mapView else { return }
+        guard let buoyId_ = self.buoyId, let buoy = BuoyModel.sharedModel.buoys[buoyId_], let mapView = self.mapView else { return }
         
         // Set the title
         self.title = buoy.name
         
         // Set the favorites button
-        self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoyId: self.buoy?.stationId ?? ""))
+        self.setFavoriteBuoyIcon(isFavorite: SyncManager.instance.isBuoyAFavorite(buoyId: buoyId_))
         
         // Clear the map
         self.mapView.clear()
@@ -97,7 +97,7 @@ class BuoyViewController: UIViewController {
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
-        marker.position = CLLocation(latitude: self.buoy!.location!.latitude!.doubleValue, longitude: buoy.location!.longitude!.doubleValue).coordinate
+        marker.position = CLLocation(latitude: buoy.location!.latitude!.doubleValue, longitude: buoy.location!.longitude!.doubleValue).coordinate
         marker.title = "Station: " + buoy.stationId!
         marker.snippet = buoy.program ?? ""
         marker.map = mapView
@@ -116,7 +116,15 @@ class BuoyViewController: UIViewController {
     }
     
     @objc func handleBuoyDataUpdate(_ notification: NSNotification) {
+        guard let stationIdInfo = notification.userInfo?["stationId"] as? String, let stationId = self.buoyId else {
+            return
+        }
         
+        if stationIdInfo != stationId {
+            return
+        }
+        
+        reloadTableData()
     }
     
     @objc func reloadTableData() {
@@ -127,27 +135,27 @@ class BuoyViewController: UIViewController {
 //            }
             self.buoyDataTable.reloadData()
 
-            if let buoy_ = self.buoy {
-                if BuoyModel.sharedModel.isBuoyDataFetching(stationId: buoy_.stationId!) && self.buoyDataTable.refreshControl!.isRefreshing {
+            if let buoyId_ = self.buoyId, let buoy = BuoyModel.sharedModel.buoys[buoyId_] {
+                if !BuoyModel.sharedModel.isBuoyDataFetching(stationId: buoyId_) && self.buoyDataTable.refreshControl!.isRefreshing {
                     self.buoyDataTable.refreshControl?.endRefreshing()
                 }
 
-                if let updateDate = buoy_.latestUpdateTime {
+                if let updateDate = buoy.latestUpdateTime {
                     let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
-                    self.mapView.selectedMarker?.snippet = "\(buoy_.program ?? "")\nUpdated \(dateString)"
+                    self.mapView.selectedMarker?.snippet = "\(buoy.program ?? "")\nUpdated \(dateString)"
                 }
             }
         }
     }
     
     @objc func toggleBuoyFavorite() {
-        guard let buoy = self.buoy else { return }
+        guard let buoyId_ = self.buoyId else { return }
         
-        if SyncManager.instance.isBuoyAFavorite(buoyId: buoy.stationId!) {
-            SyncManager.instance.removeFavoriteBuoy(buoyId: buoy.stationId!)
+        if SyncManager.instance.isBuoyAFavorite(buoyId: buoyId_) {
+            SyncManager.instance.removeFavoriteBuoy(buoyId: buoyId_)
             setFavoriteBuoyIcon(isFavorite: false)
         } else {
-            SyncManager.instance.addFavoriteBuoy(newBuoyId: buoy.stationId!)
+            SyncManager.instance.addFavoriteBuoy(newBuoyId: buoyId_)
             setFavoriteBuoyIcon(isFavorite: true)
         }
     }
@@ -163,7 +171,7 @@ class BuoyViewController: UIViewController {
     }
     
     @objc func fetchNewBuoyData() {
-        guard let stationId = self.buoy?.stationId else {
+        guard let stationId = self.buoyId else {
             return
         }
         
@@ -187,21 +195,25 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let buoyId_ = self.buoyId, let buoy = BuoyModel.sharedModel.buoys[buoyId_] else {
+            return 0
+        }
+        
         switch section {
         case 0:
-            if self.buoy?.data?.first?.waveSummary != nil {
+            if buoy.data?.first?.waveSummary != nil {
                 return 1
             }
             return 0
         case 1:
             return self.weatherData.count
         case 2:
-            if self.buoy?.data?.first?.directionSpectraPlot != nil {
+            if buoy.data?.first?.directionSpectraPlot != nil {
                 return 1
             }
             return 0
         case 3:
-            if self.buoy?.data?.first?.energySpectraPlot != nil {
+            if buoy.data?.first?.energySpectraPlot != nil {
                 return 1
             }
             return 0
@@ -253,6 +265,11 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell
         
+        guard let buoyId_ = self.buoyId, let buoy = BuoyModel.sharedModel.buoys[buoyId_] else {
+            cell = UITableViewCell()
+            return cell
+        }
+        
         switch indexPath.section {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveStatusCell", for: indexPath)
@@ -260,11 +277,11 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 let primaryComponentView = cell.viewWithTag(42) as? UILabel,
                 let secondaryComponentView = cell.viewWithTag(43) as? UILabel else { return cell }
 
-            if let waveSummary = self.buoy?.data?.first?.waveSummary {
+            if let waveSummary = buoy.data?.first?.waveSummary {
                 waveSummaryView.text = waveSummary.simpleDescription
             }
 
-            if let swellComponents = self.buoy?.data?.first?.swellComponents {
+            if let swellComponents = buoy.data?.first?.swellComponents {
                 if swellComponents.count > 0 {
                     primaryComponentView.text = swellComponents[0].detailedDescription
                 } else {
@@ -287,13 +304,13 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveDirectionalSpectraCell", for: indexPath)
             guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
-            if let plotURL = self.buoy?.data?.first?.directionSpectraPlot {
+            if let plotURL = buoy.data?.first?.directionSpectraPlot {
                 plotView.imageURL = URL.init(string: plotURL)
             }
         case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: "waveEnergyDistributionCell", for: indexPath)
             guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
-            if let plotURL = self.buoy?.data?.first?.energySpectraPlot {
+            if let plotURL = buoy.data?.first?.energySpectraPlot {
                 plotView.imageURL = URL.init(string: plotURL)
             }
         default:

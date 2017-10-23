@@ -128,7 +128,7 @@ public class BuoyModel: NSObject {
             return
         }
         
-        NotificationCenter.default.post(name: BuoyModel.buoyDataFetchStartedNotification, object: stationId)
+        NotificationCenter.default.post(name: BuoyModel.buoyDataFetchStartedNotification, object: nil, userInfo: ["stationId": stationId])
         
         self.buoyFetchCounter[stationId] = DispatchGroup()
         
@@ -149,9 +149,9 @@ public class BuoyModel: NSObject {
             self.buoyFetchCounter.removeValue(forKey: stationId)
             
             if success {
-                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdatedNotification, object: stationId)
+                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdatedNotification, object: nil, userInfo: ["stationId": stationId])
             } else {
-                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdateFailedNotification, object: stationId)
+                NotificationCenter.default.post(name: BuoyModel.buoyDataUpdateFailedNotification, object: nil, userInfo: ["stationId": stationId])
             }
         })
     }
