@@ -19,7 +19,7 @@ class ExploreViewController: UIViewController {
     
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
-    var nearbyBuoys: [Buoy] = []
+    var nearbyBuoys: [GTLRStation_ApiApiMessagesStationMessage] = []
     
     var selectedBuoyStation: String = ""
 
@@ -38,20 +38,21 @@ class ExploreViewController: UIViewController {
         self.nearbyBuoysTable.delegate = self
         
         // Set up the search controllers
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
+        self.resultsViewController = GMSAutocompleteResultsViewController()
+        self.resultsViewController?.delegate = self
+        self.searchController = UISearchController(searchResultsController: resultsViewController)
+        self.searchController?.searchResultsUpdater = resultsViewController
+        self.searchController?.hidesNavigationBarDuringPresentation = false
         
-        // Set up the search bar
-        let subView = UIView(frame: CGRect(x: 0, y: 64.0, width: UIScreen.main.bounds.width, height: 45.0))
-        if let searchBar = searchController?.searchBar {
-            subView.addSubview(searchBar)
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+            self.navigationItem.hidesSearchBarWhenScrolling = false
+            self.navigationItem.searchController = self.searchController
+        } else {
+            // Fallback on earlier versions
+            self.navigationItem.titleView = self.searchController?.searchBar
         }
-        view.addSubview(subView)
-        searchController?.searchBar.sizeToFit()
-        searchController?.hidesNavigationBarDuringPresentation = false
-        
+
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
@@ -86,14 +87,12 @@ class ExploreViewController: UIViewController {
     
     func updateBuoyStations() {
         DispatchQueue.main.async {
-            if let stations = BuoyModel.sharedModel.buoys {
-                for (_, station) in stations {
-                    let marker = GMSMarker()
-                    marker.position = CLLocation(latitude: station.location.latitude, longitude: station.location.longitude).coordinate
-                    marker.title = station.name
-                    marker.snippet = "Station: " + station.stationID + ", " + (station.program ?? "")
-                    marker.map = self.exploreMapView
-                }
+            for (_, station) in BuoyModel.sharedModel.buoys {
+                let marker = GMSMarker()
+                marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
+                marker.title = station.name
+                marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
+                marker.map = self.exploreMapView
             }
             
             self.mapView(self.exploreMapView, didChange: self.exploreMapView.camera)
@@ -107,8 +106,8 @@ class ExploreViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let buoyView = segue.destination as? BuoyViewController {
-            buoyView.buoy = BuoyModel.sharedModel.buoys?[selectedBuoyStation]
-            buoyView.buoy?.fetchAllDataIfNeeded()
+            buoyView.buoyId = selectedBuoyStation
+            BuoyModel.sharedModel.fetchAllLatestBuoyData(stationId: selectedBuoyStation, units: SyncManager.instance.units)
         }
     }
     
@@ -130,7 +129,9 @@ extension ExploreViewController: GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         DispatchQueue.global().async {
-            let location = Location(latitude: position.target.latitude, longitude: position.target.longitude)
+            let location = GTLRStation_ApiApiMessagesLocationMessage()
+            location.latitude = NSNumber.init(value: position.target.latitude)
+            location.longitude = NSNumber.init(value: position.target.longitude)
             self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 120, units: SyncManager.instance.units)
             
             DispatchQueue.main.sync {
@@ -188,7 +189,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         
         let buoy = self.nearbyBuoys[indexPath.row]
         cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
+        cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
         
         return cell
     }
@@ -199,7 +200,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        self.selectedBuoyStation = self.nearbyBuoys[indexPath.row].stationID
+        self.selectedBuoyStation = self.nearbyBuoys[indexPath.row].stationId!
         self.performSegue(withIdentifier: "exploreShowBuoySegue", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }

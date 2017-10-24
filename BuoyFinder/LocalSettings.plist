@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>units</key>
-	<string>metric</string>
+	<string>METRIC</string>
 	<key>favorites</key>
 	<array/>
 </dict>

@@ -9,4 +9,6 @@
 #ifndef BuoyFinderDataKit_h
 #define BuoyFinderDataKit_h
 
+#import "GTLRStation.h"
+
 #endif /* BuoyFinderDataKit_h */

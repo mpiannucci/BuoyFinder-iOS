@@ -16,6 +16,8 @@ class FavoriteBuoysViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.backBarButtonItem?.title = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,8 +27,6 @@ class FavoriteBuoysViewController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +36,7 @@ class FavoriteBuoysViewController: UITableViewController {
 
         self.tableView.reloadData()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableData), name: BuoyModel.buoyStationsUpdatedNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateTableData), name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
@@ -52,9 +53,9 @@ class FavoriteBuoysViewController: UITableViewController {
             self.tableView.reloadData()
             
             // Check to see if we should navigate to the users default buoy
-            if self.initialLoad && SyncManager.instance.favoriteBuoys.count > 0 {
+            if self.initialLoad && SyncManager.instance.favoriteBuoyIds.count > 0 {
                 if SyncManager.instance.initialView == SyncManager.InitialView.defaultBuoy {
-                    if let buoyIndex = SyncManager.instance.favoriteBuoyIDs.index(of: SyncManager.instance.defaultBuoyID) {
+                    if let buoyIndex = SyncManager.instance.favoriteBuoyIds.index(of: SyncManager.instance.defaultBuoyId) {
                         let indexPath = IndexPath(row: buoyIndex, section: 0)
                         self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.none)
                         self.performSegue(withIdentifier: "favoriteBuoySegue", sender: self)
@@ -74,16 +75,20 @@ class FavoriteBuoysViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return SyncManager.instance.favoriteBuoys.count
+        if BuoyModel.sharedModel.buoys.count < 1 {
+            return 0
+        }
+        
+        return SyncManager.instance.favoriteBuoyIds.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteBuoyCell", for: indexPath)
 
-        let buoy = SyncManager.instance.favoriteBuoys[indexPath.row]
-        cell.textLabel?.text = buoy.name
-        cell.detailTextLabel?.text = "Station: " + buoy.stationID + " " + (buoy.program ?? "")
+        if let buoy = BuoyModel.sharedModel.buoys[SyncManager.instance.favoriteBuoyIds[indexPath.row]] {
+            cell.textLabel?.text = buoy.name!
+            cell.detailTextLabel?.text = "Station: " + buoy.stationId! + " " + (buoy.program ?? "")
+        }
 
         return cell
     }
@@ -104,7 +109,7 @@ class FavoriteBuoysViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             //tableView.deleteRows(at: [indexPath], with: .fade)
-            SyncManager.instance.removeFavoriteBuoy(buoy: SyncManager.instance.favoriteBuoys[indexPath.row])
+            SyncManager.instance.removeFavoriteBuoy(buoyId: SyncManager.instance.favoriteBuoyIds[indexPath.row])
         }
     }
     
@@ -124,8 +129,8 @@ class FavoriteBuoysViewController: UITableViewController {
         
         // Get the buoy view
         if let buoyView = segue.destination as? BuoyViewController, let index = self.tableView.indexPathForSelectedRow {
-            buoyView.buoy = SyncManager.instance.favoriteBuoys[index.row]
-            buoyView.buoy?.fetchAllDataIfNeeded()
+            buoyView.buoyId = SyncManager.instance.favoriteBuoyIds[index.row]
+            BuoyModel.sharedModel.fetchAllLatestBuoyData(stationId: SyncManager.instance.favoriteBuoyIds[index.row], units: SyncManager.instance.units)
         }
     }
 

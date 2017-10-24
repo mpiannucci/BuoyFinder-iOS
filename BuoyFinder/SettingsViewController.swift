@@ -91,7 +91,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Units"
-                cell.detailTextLabel?.text = SyncManager.instance.units.rawValue.capitalized
+                cell.detailTextLabel?.text = SyncManager.instance.units.capitalized
             case 1:
                 cell.textLabel?.text = "Initial View"
                 cell.detailTextLabel?.text = SyncManager.instance.initialView.rawValue.capitalized
@@ -100,7 +100,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 cell.textLabel?.text = "Default Buoy"
                 if let defaultBuoy = SyncManager.instance.defaultbuoy {
                     cell.detailTextLabel?.text =  defaultBuoy.name
-                } else if SyncManager.instance.favoriteBuoys.count > 0 {
+                } else if SyncManager.instance.favoriteBuoyIds.count > 0 {
                     cell.detailTextLabel?.text = "Click to choose a default buoy"
                     cell.isUserInteractionEnabled = true
                 } else {
@@ -110,7 +110,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
             case 3:
                 cell.textLabel?.text = "Today Widget Variable"
                 cell.detailTextLabel?.text = SyncManager.instance.todayVariable.rawValue.capitalized
-                if SyncManager.instance.favoriteBuoys.count > 0  {
+                if SyncManager.instance.favoriteBuoyIds.count > 0  {
                     cell.isUserInteractionEnabled = true
                 } else {
                     cell.detailTextLabel?.text = "Save a favorite buoy to enable"
@@ -165,16 +165,16 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 unitPicker.addAction(cancelAction)
             
-                let metricAction = UIAlertAction(title: Units.metric.rawValue.capitalized, style: .default, handler: {
+                let metricAction = UIAlertAction(title: kGTLRStationUnitsMetric.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: Units.metric)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStationUnitsMetric)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(metricAction)
             
-                let englishAction = UIAlertAction(title: Units.english.rawValue.capitalized, style: .default, handler: {
+                let englishAction = UIAlertAction(title: kGTLRStationUnitsEnglish.capitalized, style: .default, handler: {
                     (_) in
-                    SyncManager.instance.changeUnits(newUnits: Units.english)
+                    SyncManager.instance.changeUnits(newUnits: kGTLRStationUnitsEnglish)
                     unitPicker.dismiss(animated: true, completion: nil)
                 })
                 unitPicker.addAction(englishAction)
@@ -199,7 +199,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 initialViewPicker.addAction(favoritesAction)
                 
-                if SyncManager.instance.favoriteBuoys.count > 0 {
+                if SyncManager.instance.favoriteBuoyIds.count > 0 {
                     let defaultBuoyAction = UIAlertAction(title: SyncManager.InitialView.defaultBuoy.rawValue.capitalized, style: .default, handler: { (_) in
                         SyncManager.instance.changeInitialView(newInitialView: SyncManager.InitialView.defaultBuoy)
                         initialViewPicker.dismiss(animated: true, completion: nil)
@@ -209,7 +209,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 
                 self.present(initialViewPicker, animated: true, completion: nil)
             case 2:
-                let favoriteBuoys = SyncManager.instance.favoriteBuoys
+                let favoriteBuoys = SyncManager.instance.favoriteBuoyIds
                 if favoriteBuoys.count < 1 {
                     break
                 }
@@ -221,8 +221,8 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 defaultBuoyPicker.addAction(cancelAction)
                 
                 favoriteBuoys.forEach({ (buoy) in
-                    let buoyAction = UIAlertAction(title: buoy.name, style: .default, handler: { (_) in
-                        SyncManager.instance.changeDefaultBuoy(buoyID: buoy.stationID)
+                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys[buoy]?.location?.name, style: .default, handler: { (_) in
+                        SyncManager.instance.changeDefaultBuoy(buoyId: buoy)
                         defaultBuoyPicker.dismiss(animated: true, completion: nil)
                     })
                     defaultBuoyPicker.addAction(buoyAction)

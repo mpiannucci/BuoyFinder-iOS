@@ -2,6 +2,7 @@ use_frameworks!
 
 def shared_deps
     pod 'SwiftyJSON'
+    pod 'GoogleAPIClientForREST'
 end
 
 target 'BuoyFinderDataKit-iOS' do
