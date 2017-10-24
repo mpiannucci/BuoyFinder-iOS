@@ -182,3 +182,28 @@ extension GTLRStation_ApiApiMessagesStationMessage {
         })
     }
 }
+
+extension UIColor {
+    // From https://stackoverflow.com/questions/11598043/get-slightly-lighter-and-darker-color-from-uicolor
+    public func darker() -> UIColor {
+        
+        var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: max(r - 0.4, 0.0), green: max(g - 0.4, 0.0), blue: max(b - 0.4, 0.0), alpha: a)
+        }
+        
+        return UIColor()
+    }
+    
+    public func lighter() -> UIColor {
+        
+        var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0
+        
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a){
+            return UIColor(red: min(r + 0.4, 1.0), green: min(g + 0.4, 1.0), blue: min(b + 0.4, 1.0), alpha: a)
+        }
+        
+        return UIColor()
+    }
+}

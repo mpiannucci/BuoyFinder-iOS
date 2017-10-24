@@ -137,7 +137,7 @@ class BuoyViewController: UIViewController {
 
                 if let updateDate = buoy.latestUpdateTime {
                     let dateString = DateFormatter.localizedString(from: updateDate, dateStyle: .short, timeStyle: .short)
-                    self.mapView.selectedMarker?.snippet = "\(buoy.program ?? "")\nUpdated \(dateString)"
+                    self.mapView.selectedMarker?.snippet = "\(self.mapView.selectedMarker?.snippet ?? "")\nUpdated \(dateString)"
                 }
                 
                 if let newWeatherData = buoy.data?.first?.weatherData {
@@ -193,7 +193,7 @@ class BuoyViewController: UIViewController {
 
 extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -219,6 +219,8 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
                 return 1
             }
             return 0
+        case 4:
+            return 4
         default:
             return 0
         }
@@ -234,6 +236,8 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             return "Directional Wave Spectra"
         case 3:
             return "Wave Energy Distribution"
+        case 4:
+            return "Station Info"
         default:
             return nil
         }
@@ -314,6 +318,31 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
             guard let plotView = cell.viewWithTag(51) as? AsyncImageView else { return cell }
             if let plotURL = buoy.data?.first?.energySpectraPlot {
                 plotView.imageURL = URL.init(string: plotURL)
+            }
+        case 4:
+            cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Active"
+                cell.detailTextLabel?.text = "\(buoy.active!.boolValue)".capitalized
+                if buoy.active?.boolValue ?? false {
+                    cell.textLabel?.textColor = UIColor.green.darker()
+                    cell.detailTextLabel?.textColor = UIColor.green.darker()
+                } else {
+                    cell.textLabel?.textColor = UIColor.red.darker()
+                    cell.detailTextLabel?.textColor = UIColor.red.darker()
+                }
+            case 1:
+                cell.textLabel?.text = "Type"
+                cell.detailTextLabel?.text = "\(buoy.stationType!.capitalized)"
+            case 2:
+                cell.textLabel?.text = "Owner"
+                cell.detailTextLabel?.text = "\(buoy.owner!)"
+            case 3:
+                cell.textLabel?.text = "Program"
+                cell.detailTextLabel?.text = "\(buoy.program!)"
+            default:
+                break
             }
         default:
             // Do Nothing and give back an empty cell
