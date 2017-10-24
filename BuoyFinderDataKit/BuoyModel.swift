@@ -59,9 +59,7 @@ public class BuoyModel: NSObject {
         defer { objc_sync_exit(self) }
         
         let stationsQuery = GTLRStationQuery_Stations.query()
-        let service = GTLRStationService()
-        service.apiKey = buoyFinderAPIKey
-        service.executeQuery(stationsQuery) { (ticket, obj, err) in
+        self.fetchAPIData (query: stationsQuery){ (ticket, obj, err) in
             objc_sync_enter(self)
             defer { objc_sync_exit(self) }
             
@@ -82,6 +80,21 @@ public class BuoyModel: NSObject {
         }
     }
     
+    public func fetchLatestBuoyData(stationId: String, units: String, callback: @escaping (GTLRStation_ApiApiMessagesDataMessage)->Void) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
+        let latestDataQuery = GTLRStationQuery_Data.query(withUnits: units, stationId: stationId)
+        self.fetchAPIData(query: latestDataQuery) { (ticket, response, error) in
+            guard error == nil, let newData = response as? GTLRStation_ApiApiMessagesDataMessage else {
+                print(error!)
+                return
+            }
+            
+            callback(newData)
+        }
+    }
+    
     public func fetchLatestBuoyData(stationId: String, units: String, dataType: String? = nil) {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
@@ -94,9 +107,7 @@ public class BuoyModel: NSObject {
         if let dType = dataType {
             latestDataQuery.dataType = dType
         }
-        let service = GTLRStationService()
-        service.apiKey = buoyFinderAPIKey
-        service.executeQuery(latestDataQuery) { (ticket, response, error) in
+        self.fetchAPIData(query: latestDataQuery){ (ticket, response, error) in
             objc_sync_enter(self)
             defer { objc_sync_exit(self) }
             
@@ -182,5 +193,11 @@ public class BuoyModel: NSObject {
         }).sorted(by: { (buoy1, buoy2) -> Bool in
             return buoy1.location!.distance(location: location, units: units) < buoy2.location!.distance(location: location, units: units)
         })
+    }
+    
+    private func fetchAPIData(query: GTLRQueryProtocol, callback: @escaping GTLRServiceCompletionHandler) {
+        let service = GTLRStationService()
+        service.apiKey = buoyFinderAPIKey
+        service.executeQuery(query, completionHandler: callback)
     }
 }
