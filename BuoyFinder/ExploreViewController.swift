@@ -89,9 +89,18 @@ class ExploreViewController: UIViewController {
         DispatchQueue.main.async {
             for (_, station) in BuoyModel.sharedModel.buoys {
                 let marker = GMSMarker()
+                if station.active?.boolValue ?? false {
+                    if station.stationType == kGTLRStationBuoyTypeBuoy || station.program?.contains("NDBC") ?? false {
+                        marker.icon = GMSMarker.markerImage(with: UIColor.green.darker())
+                    } else {
+                        marker.icon = GMSMarker.markerImage(with: UIColor.blue.darker())
+                    }
+                } else {
+                    marker.icon = GMSMarker.markerImage(with: UIColor.red.darker())
+                }
                 marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
                 marker.title = station.name
-                marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "")
+                marker.snippet = "Station: " + station.stationId! + ", " + (station.program ?? "") + "\n" + (station.active?.boolValue ?? false ? "Active" : "Inactive")
                 marker.map = self.exploreMapView
             }
             
