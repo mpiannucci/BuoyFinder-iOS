@@ -52,8 +52,7 @@ class ExploreViewController: UIViewController {
             // Fallback on earlier versions
             self.navigationItem.titleView = self.searchController?.searchBar
         }
-        self.navigationItem.backBarButtonItem?.title = ""
-        
+
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true

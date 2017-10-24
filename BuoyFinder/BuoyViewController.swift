@@ -305,6 +305,8 @@ extension BuoyViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             cell = tableView.dequeueReusableCell(withIdentifier: "weatherInfoCell", for: indexPath)
             let key = self.weatherKeys[indexPath.row]
+            cell.textLabel?.textColor = UIColor.black
+            cell.detailTextLabel?.textColor = UIColor.black
             cell.textLabel?.text = key
             cell.detailTextLabel?.text = self.weatherData[key]
         case 2:
