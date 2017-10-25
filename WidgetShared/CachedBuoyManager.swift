@@ -61,6 +61,7 @@ public class CachedBuoyManager {
         }
         
         if !needsUpdate {
+            updateHandler(buoy.data!.first!)
             return
         }
         
