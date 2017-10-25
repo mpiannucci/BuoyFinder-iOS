@@ -178,12 +178,9 @@ extension GTLRStation_ApiApiMessagesStationMessage {
     
     public func addData(newData: GTLRStation_ApiApiMessagesDataMessage) {
         guard let _ = self.data else {
-            print("\(newData.waveSummary!.waveHeight!.doubleValue)")
             self.data = [newData]
             return
         }
-        
-        print("\(newData.waveSummary!.waveHeight!.doubleValue)")
         
         self.data!.append(newData)
         self.data = self.data?.filter({ (data) -> Bool in
