@@ -69,8 +69,8 @@ class BuoyViewController: UIViewController {
         }
         
         // Register notification listeners
-        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: Buoy.buoyDataUpdatedNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: Buoy.buoyDataUpdateFailedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: BuoyModel.buoyDataUpdatedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleBuoyDataUpdate(_:)), name: BuoyModel.buoyDataUpdateFailedNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

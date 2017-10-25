@@ -109,7 +109,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 }
             case 3:
                 cell.textLabel?.text = "Today Widget Variable"
-                cell.detailTextLabel?.text = SyncManager.instance.todayVariable.rawValue.capitalized
+                cell.detailTextLabel?.text = SyncManager.instance.todayVariable.capitalized
                 if SyncManager.instance.favoriteBuoyIds.count > 0  {
                     cell.isUserInteractionEnabled = true
                 } else {
@@ -221,7 +221,7 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 defaultBuoyPicker.addAction(cancelAction)
                 
                 favoriteBuoys.forEach({ (buoy) in
-                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys[buoy]?.location?.name, style: .default, handler: { (_) in
+                    let buoyAction = UIAlertAction(title: BuoyModel.sharedModel.buoys[buoy]?.name, style: .default, handler: { (_) in
                         SyncManager.instance.changeDefaultBuoy(buoyId: buoy)
                         defaultBuoyPicker.dismiss(animated: true, completion: nil)
                     })
@@ -236,8 +236,8 @@ class SettingsViewController: UITableViewController, GIDSignInUIDelegate {
                 })
                 todayVariablePicker.addAction(cancelAction)
                 
-                BuoyDataItem.dataVariables.forEach({ (variable) in
-                    let todayVariableAction = UIAlertAction(title: variable.rawValue.capitalized, style: .default, handler: { (_) in
+                ["WAVES", "WIND", "PRESSURE"].forEach({ (variable) in
+                    let todayVariableAction = UIAlertAction(title: variable.capitalized, style: .default, handler: { (_) in
                         SyncManager.instance.changeTodayVariable(newVariable: variable)
                         todayVariablePicker.dismiss(animated: true, completion: nil)
                     })

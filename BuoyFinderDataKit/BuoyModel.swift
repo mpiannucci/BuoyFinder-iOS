@@ -80,10 +80,19 @@ public class BuoyModel: NSObject {
         }
     }
     
+    public func fetchBuoyStationInfo(stationId: String, callback: @escaping (GTLRStation_ApiApiMessagesStationMessage)->Void) {
+        let stationQuery = GTLRStationQuery_Info.query(withStationId: stationId)
+        self.fetchAPIData(query: stationQuery) { (ticket, response, error) in
+            guard error == nil, let stationInfo = response as? GTLRStation_ApiApiMessagesStationMessage else {
+                print(error!)
+                return
+            }
+                
+            callback(stationInfo)
+        }
+    }
+    
     public func fetchLatestBuoyData(stationId: String, units: String, callback: @escaping (GTLRStation_ApiApiMessagesDataMessage)->Void) {
-        objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
-        
         let latestDataQuery = GTLRStationQuery_Data.query(withUnits: units, stationId: stationId)
         self.fetchAPIData(query: latestDataQuery) { (ticket, response, error) in
             guard error == nil, let newData = response as? GTLRStation_ApiApiMessagesDataMessage else {

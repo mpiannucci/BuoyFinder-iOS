@@ -18,8 +18,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var locationLabel: UILabel!
     
     let cacheManager = CachedBuoyManager()
-    var variable = BuoyDataItem.Variable.waves
-    var units = Units.english
+    var variable: String = "WAVES"
+    var units = kGTLRStationUnitsEnglish
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +27,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let userDefaults = UserDefaults.init(suiteName: "group.com.mpiannucci.BuoyFinder")
         
         if let unit = userDefaults?.string(forKey: "units") {
-            self.units = Units(rawValue: unit)!
+            self.units = unit
+            self.cacheManager.setDefaultUnits(newUnits: unit)
         }
         
         if let defaultBuoyID = userDefaults?.string(forKey: "defaultBuoy") {
             if !self.cacheManager.checkDefaultBuoyID(buoyID: defaultBuoyID) {
-                self.cacheManager.getDefaultBuoy(buoyID: defaultBuoyID) {
+                self.cacheManager.getDefaultBuoy(buoyId: defaultBuoyID) {
                     (_) in
-                    self.cacheManager.defaultBuoy?.units = self.units
                     self.updateUI()
                 }
             }
         }
         
         if let todayVariable = userDefaults?.string(forKey: "todayVariable") {
-            self.variable = BuoyDataItem.Variable(rawValue: todayVariable)!
+            self.variable = todayVariable
         }
-        
-        updateUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,27 +62,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func updateUI() {
         DispatchQueue.main.async {
-            if let buoy = self.cacheManager.defaultBuoy {
-                if let data = buoy.latestData {
-                    self.dataVariableLabel.text = self.variable.rawValue.capitalized
-                    self.dataLabel.text = self.variableDataText(dataVariable: self.variable, data: data)
-                    let formatter = DateFormatter()
-                    formatter.timeStyle = .short
-                    formatter.dateStyle = .short
-                    self.locationLabel.text = buoy.name + ": " + formatter.string(from: data.date)
-                }
+            guard let buoy = self.cacheManager.defaultBuoy, let data = buoy.data?.first else {
+                return
             }
+            
+            self.dataVariableLabel.text = self.variable.capitalized
+            self.dataLabel.text = data.waveSummary?.simpleDescription
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            formatter.dateStyle = .short
+            self.locationLabel.text = buoy.name! + ": " + formatter.string(from: data.date!.date)
         }
     }
     
-    func variableDataText(dataVariable: BuoyDataItem.Variable, data: BuoyDataItem) -> String {
-        switch dataVariable {
-        case .wind:
+    func variableDataText(dataVariable: String, data: GTLRStation_ApiApiMessagesDataMessage) -> String {
+        switch dataVariable.uppercased() {
+        case "WIND":
             return data.windSummary
-        case .waves:
-            return data.waveSummary?.simpleDescription() ?? ""
-        case .pressure:
+        case "WAVES":
+            return data.waveSummary?.simpleDescription ?? ""
+        case "PRESSURE":
             return data.pressureSummary
+        default:
+            return ""
         }
     }
 }

@@ -181,6 +181,28 @@ extension GTLRStation_ApiApiMessagesStationMessage {
             return first.date!.date.compare(second.date!.date) == .orderedDescending
         })
     }
+    
+    public func setData(newData: [GTLRStation_ApiApiMessagesDataMessage]) {
+        self.data = newData
+        self.data!.sort(by: { (first, second) -> Bool in
+            return first.date!.date.compare(second.date!.date) == .orderedDescending
+        })
+    }
+}
+
+extension Double {
+    var degreesToRadians: Double {
+        get {
+            return self * .pi / 180
+        }
+    }
+    
+    var radiansToDegrees: Double {
+        get {
+            return self * 180 / .pi
+            
+        }
+    }
 }
 
 extension UIColor {

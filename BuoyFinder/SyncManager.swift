@@ -36,7 +36,7 @@ public class SyncManager {
         }
     }
     
-    public private(set) var todayVariable: BuoyDataItem.Variable = .waves
+    public private(set) var todayVariable: String = "WAVES"
     
     // Data cache states
     private let userDefaults = UserDefaults(suiteName: "group.com.mpiannucci.BuoyFinder")
@@ -119,8 +119,8 @@ public class SyncManager {
         NotificationCenter.default.post(name: SyncManager.syncDataUpdatedNotification, object: nil)
     }
     
-    public func changeTodayVariable(newVariable: BuoyDataItem.Variable) {
-        if self.todayVariable == newVariable {
+    public func changeTodayVariable(newVariable: String) {
+        if self.todayVariable.uppercased() == newVariable.uppercased() {
             return
         }
         
@@ -193,8 +193,8 @@ public class SyncManager {
         }
         
         if let newTodayVariable = self.latestSnapshot?.childSnapshot(forPath: self.todayVariableKey).value as? String {
-            if newTodayVariable != self.todayVariable.rawValue {
-                self.todayVariable = BuoyDataItem.Variable(rawValue: newTodayVariable)!
+            if newTodayVariable != self.todayVariable {
+                self.todayVariable = newTodayVariable
                 changed = true
             }
         }
@@ -256,8 +256,8 @@ public class SyncManager {
         }
         
         if let newTodayVariable = userDefaults?.value(forKey: self.todayVariableKey) as? String {
-            if newTodayVariable != self.todayVariable.rawValue {
-                self.todayVariable = BuoyDataItem.Variable(rawValue: newTodayVariable)!
+            if newTodayVariable != self.todayVariable {
+                self.todayVariable = newTodayVariable
                 changed = true
             }
         }
@@ -321,9 +321,9 @@ public class SyncManager {
     }
     
     private func saveTodayVariable() {
-        self.userDefaults?.setValue(self.todayVariable.rawValue, forKey: self.todayVariableKey)
+        self.userDefaults?.setValue(self.todayVariable, forKey: self.todayVariableKey)
         if self.userRef != nil {
-            self.userRef!.child(self.todayVariableKey).setValue(self.todayVariable.rawValue as NSString)
+            self.userRef!.child(self.todayVariableKey).setValue(self.todayVariable as NSString)
         }
     }
     
@@ -340,7 +340,7 @@ public class SyncManager {
         self.initialView = .explore
         self.favoriteBuoyIds = []
         self.defaultBuoyId = ""
-        self.todayVariable = .waves
+        self.todayVariable = "WAVES"
         saveData()
     }
     

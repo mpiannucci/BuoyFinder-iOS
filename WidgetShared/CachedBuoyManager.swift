@@ -15,69 +15,72 @@ import BuoyFinderDataKit
 
 public class CachedBuoyManager {
     
-    public var defaultBuoy: Buoy? = nil
+    public var defaultBuoy: GTLRStation_ApiApiMessagesStationMessage? = nil
+    public var defaultUnits: String = kGTLRStationUnitsEnglish
     
     public init() {
         self.restoreFromCache()
     }
     
     public func checkDefaultBuoyID(buoyID: String) -> Bool {
-        if let buoy = self.defaultBuoy {
-            if buoy.stationID == buoyID{
-                return true
-            }
+        guard let buoy = defaultBuoy else {
+            return false
         }
         
-        return false
-    }
-    
-    public func getDefaultBuoy(buoyID: String, updateHandler: @escaping ((Buoy?) -> Void)) {
-        BuoyNetworkClient.fetchBuoyStationInfo(stationID: buoyID) { (buoy) in
-            self.defaultBuoy = buoy
-            if let defBuoy = self.defaultBuoy {
-                BuoyNetworkClient.fetchLatestBuoyData(buoy: defBuoy) {
-                    (_) in
-                    updateHandler(defBuoy)
-                }
-            }
+        if buoy.stationId == buoyID {
+            return true
+        } else {
+            return false
         }
     }
     
-    public func fetchUpdate(forceUpdate: Bool, updateHandler: @escaping ((Buoy?) -> Void)) {
+    public func setDefaultUnits(newUnits: String) {
+        self.defaultUnits = newUnits
+    }
+    
+    public func getDefaultBuoy(buoyId: String, updateHandler: @escaping (GTLRStation_ApiApiMessagesDataMessage) -> Void) {
+        BuoyModel.sharedModel.fetchBuoyStationInfo(stationId: buoyId ) { station in
+            self.defaultBuoy = station
+            
+            // TODO: Get units from userdefaults
+            self.fetchUpdate(forceUpdate: true, updateHandler: updateHandler)
+        }
+    }
+    
+    public func fetchUpdate(forceUpdate: Bool, updateHandler: @escaping (GTLRStation_ApiApiMessagesDataMessage) -> Void) {
         var needsUpdate = forceUpdate
         
-        if let buoy = self.defaultBuoy {
-            if let nextUpdateTime = buoy.nextUpdateTime {
-                if Date.init() > nextUpdateTime {
-                    needsUpdate = true
-                } else if buoy.latestData == nil {
-                    needsUpdate = true
-                }
-            } else if buoy.needsUpdate {
-                needsUpdate = true
-            }
-            
-            if needsUpdate {
-                BuoyNetworkClient.fetchLatestBuoyData(buoy: buoy, callback: { (_) in
-                    self.saveToCache()
-                    updateHandler(buoy)
-                    
-                    BuoyNetworkClient.fetchNextUpdateTime(buoy: buoy, callback: { (_) in
-                        self.saveToCache()
-                    })
-                })
-                
-            }
+        guard let buoy = self.defaultBuoy else {
+            return
+        }
+    
+        if let lastUpdateTime = buoy.latestUpdateTime, let _ = buoy.data?.first {
+            needsUpdate = lastUpdateTime.timeIntervalSinceNow > 30*60
         } else {
-            updateHandler(self.defaultBuoy)
+            needsUpdate = true
+        }
+        
+        if !needsUpdate {
+            return
+        }
+        
+        // TODO: Get the units from settings
+        BuoyModel.sharedModel.fetchLatestBuoyData(stationId: buoy.stationId!, units: self.defaultUnits) { newData in
+            self.defaultBuoy!.setData(newData: [newData])
+            self.saveToCache()
+            updateHandler(newData)
         }
     }
     
     public func restoreFromCache() {
         let defaults = UserDefaults.standard
         if let rawDefaultBuoy = defaults.object(forKey: "defaultBuoyCache") {
-            self.defaultBuoy = NSKeyedUnarchiver.unarchiveObject(with: rawDefaultBuoy as! Data) as? Buoy
+            self.defaultBuoy = NSKeyedUnarchiver.unarchiveObject(with: rawDefaultBuoy as! Data) as? GTLRStation_ApiApiMessagesStationMessage
         }
+        if let rawDefaultUnit = defaults.object(forKey: "defaultUnitCache") {
+            self.defaultUnits = NSKeyedUnarchiver.unarchiveObject(with: rawDefaultUnit as! Data) as! String!
+        }
+        defaults.synchronize()
     }
     
     public func saveToCache() {
@@ -85,6 +88,8 @@ public class CachedBuoyManager {
         if let buoy = self.defaultBuoy {
             defaults.set(NSKeyedArchiver.archivedData(withRootObject: buoy), forKey: "defaultBuoyCache")
         }
+        defaults.set(NSKeyedArchiver.archivedData(withRootObject: self.defaultUnits), forKey: "defaultUnitCache")
+        defaults.synchronize()
     }
     
 }

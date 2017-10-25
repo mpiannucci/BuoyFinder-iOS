@@ -61,21 +61,9 @@
 		34E5E0331ED0DF2700560E4D /* BuoyFinderWatchDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E5E0311ED0DF2700560E4D /* BuoyFinderWatchDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34E5E0361ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; };
 		34E5E0371ED0DF2700560E4D /* BuoyFinderWatchDataKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
-		34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
 		34E5E0441ED0E02E00560E4D /* BuoyFinderDataKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		34E5E0451ED0E02E00560E4D /* BuoyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B176FC1E02303F007E211E /* BuoyModel.swift */; };
-		34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */; };
-		34E5E0471ED0E02E00560E4D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF211DED1E690084AE86 /* Location.swift */; };
-		34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
-		34E5E0491ED0E02E00560E4D /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
 		34E5E04A1ED0E40C00560E4D /* CachedBuoyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345FEF6C1ECB4839002D970B /* CachedBuoyManager.swift */; };
-		34F154381DFCB9F10041B072 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F154361DFCB6B60041B072 /* Units.swift */; };
-		34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */; };
-		34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1D1DED1B190084AE86 /* Swell.swift */; };
-		34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF1F1DED1E010084AE86 /* Buoy.swift */; };
-		34F5AF221DED1E690084AE86 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF211DED1E690084AE86 /* Location.swift */; };
-		34F5AF241DED236A0084AE86 /* BuoyNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */; };
 		50EB474232AE3FFD94AC1C98 /* Pods_BuoyFinderWatchDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39FBAD79973709391B0BE01 /* Pods_BuoyFinderWatchDataKit.framework */; };
 		6B737D15AA6EDCB4EAACE9CB /* Pods_BuoyFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE0B12AD46398E9105A255F /* Pods_BuoyFinder.framework */; };
 		992DFEF76D4B1869AECB8F59 /* Pods_BuoyFinderTodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4080C04C5F3B6717BBB029CA /* Pods_BuoyFinderTodayExtension.framework */; };
@@ -247,12 +235,6 @@
 		34E5E02F1ED0DF2600560E4D /* BuoyFinderWatchDataKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BuoyFinderWatchDataKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34E5E0311ED0DF2700560E4D /* BuoyFinderWatchDataKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuoyFinderWatchDataKit.h; sourceTree = "<group>"; };
 		34E5E0321ED0DF2700560E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		34F154361DFCB6B60041B072 /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Units.swift; path = BuoyFinderDataKit/Units.swift; sourceTree = "<group>"; };
-		34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyDataItem.swift; path = BuoyFinderDataKit/BuoyDataItem.swift; sourceTree = "<group>"; };
-		34F5AF1D1DED1B190084AE86 /* Swell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Swell.swift; path = BuoyFinderDataKit/Swell.swift; sourceTree = "<group>"; };
-		34F5AF1F1DED1E010084AE86 /* Buoy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Buoy.swift; path = BuoyFinderDataKit/Buoy.swift; sourceTree = "<group>"; };
-		34F5AF211DED1E690084AE86 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = BuoyFinderDataKit/Location.swift; sourceTree = "<group>"; };
-		34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BuoyNetworkClient.swift; path = BuoyFinderDataKit/BuoyNetworkClient.swift; sourceTree = "<group>"; };
 		4080C04C5F3B6717BBB029CA /* Pods_BuoyFinderTodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BuoyFinderTodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4518F8027ED9E45AF6A16DC8 /* Pods-BuoyFinderWatchDataKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinderWatchDataKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinderWatchDataKit/Pods-BuoyFinderWatchDataKit.release.xcconfig"; sourceTree = "<group>"; };
 		6FE0039DB6F7D412501CC29D /* Pods-BuoyFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BuoyFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-BuoyFinder/Pods-BuoyFinder.release.xcconfig"; sourceTree = "<group>"; };
@@ -406,14 +388,8 @@
 				34B01AC81F95A2FF008E9528 /* GTLRStationQuery.m */,
 				34B01AC71F95A2FF008E9528 /* GTLRStationService.h */,
 				34B01AC41F95A2FF008E9528 /* GTLRStationService.m */,
-				34F5AF1F1DED1E010084AE86 /* Buoy.swift */,
-				34F5AF1A1DED19B40084AE86 /* BuoyDataItem.swift */,
 				34E562D21DECD783006F1C67 /* BuoyFinderDataKit.h */,
 				34B176FC1E02303F007E211E /* BuoyModel.swift */,
-				34F5AF231DED23690084AE86 /* BuoyNetworkClient.swift */,
-				34F5AF211DED1E690084AE86 /* Location.swift */,
-				34F5AF1D1DED1B190084AE86 /* Swell.swift */,
-				34F154361DFCB6B60041B072 /* Units.swift */,
 				34B01AD81F96E458008E9528 /* Extensions.swift */,
 			);
 			name = BuoyFinderDataKit;
@@ -1077,17 +1053,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34F5AF201DED1E010084AE86 /* Buoy.swift in Sources */,
-				34F154381DFCB9F10041B072 /* Units.swift in Sources */,
 				34B01AD41F95A2FF008E9528 /* GTLRStationQuery.m in Sources */,
-				34F5AF1C1DED19C60084AE86 /* BuoyDataItem.swift in Sources */,
 				34B01ACC1F95A2FF008E9528 /* GTLRStationService.m in Sources */,
 				34B01AD01F95A2FF008E9528 /* GTLRStationObjects.m in Sources */,
-				34F5AF221DED1E690084AE86 /* Location.swift in Sources */,
-				34F5AF1E1DED1B190084AE86 /* Swell.swift in Sources */,
 				34B176FD1E02303F007E211E /* BuoyModel.swift in Sources */,
 				34B01AD91F96E458008E9528 /* Extensions.swift in Sources */,
-				34F5AF241DED236A0084AE86 /* BuoyNetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,17 +1084,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34E5E0421ED0E02E00560E4D /* Buoy.swift in Sources */,
 				34E5E0451ED0E02E00560E4D /* BuoyModel.swift in Sources */,
 				34B01AD51F95A2FF008E9528 /* GTLRStationQuery.m in Sources */,
-				34E5E0471ED0E02E00560E4D /* Location.swift in Sources */,
 				34B01ACD1F95A2FF008E9528 /* GTLRStationService.m in Sources */,
 				34B01AD11F95A2FF008E9528 /* GTLRStationObjects.m in Sources */,
-				34E5E0491ED0E02E00560E4D /* Units.swift in Sources */,
-				34E5E0461ED0E02E00560E4D /* BuoyNetworkClient.swift in Sources */,
-				34E5E0431ED0E02E00560E4D /* BuoyDataItem.swift in Sources */,
 				34B01ADA1F96E458008E9528 /* Extensions.swift in Sources */,
-				34E5E0481ED0E02E00560E4D /* Swell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
