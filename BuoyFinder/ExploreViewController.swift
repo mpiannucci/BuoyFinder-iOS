@@ -90,7 +90,7 @@ class ExploreViewController: UIViewController {
             for (_, station) in BuoyModel.sharedModel.buoys {
                 let marker = GMSMarker()
                 if station.active?.boolValue ?? false {
-                    if station.stationType == kGTLRStationBuoyTypeBuoy || station.program?.contains("NDBC") ?? false {
+                    if station.stationType?.uppercased() == kGTLRStationBuoyTypeBuoy || station.program?.contains("NDBC") ?? false {
                         marker.icon = GMSMarker.markerImage(with: UIColor.green.darker())
                     } else {
                         marker.icon = GMSMarker.markerImage(with: UIColor.blue.darker())
@@ -141,7 +141,7 @@ extension ExploreViewController: GMSMapViewDelegate {
             let location = GTLRStation_ApiApiMessagesLocationMessage()
             location.latitude = NSNumber.init(value: position.target.latitude)
             location.longitude = NSNumber.init(value: position.target.longitude)
-            self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 120, units: SyncManager.instance.units)
+            self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 80.0, units: SyncManager.instance.units)
             
             DispatchQueue.main.sync {
                 self.nearbyBuoysTable.reloadData()

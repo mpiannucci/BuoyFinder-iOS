@@ -97,15 +97,20 @@ class BuoyViewController: UIViewController {
         
         // Clear existing markers and create the marker for our location
         let marker = GMSMarker()
+        if buoy.active?.boolValue ?? false {
+            if buoy.stationType?.uppercased() == kGTLRStationBuoyTypeBuoy || buoy.program?.contains("NDBC") ?? false {
+                marker.icon = GMSMarker.markerImage(with: UIColor.green.darker())
+            } else {
+                marker.icon = GMSMarker.markerImage(with: UIColor.blue.darker())
+            }
+        } else {
+            marker.icon = GMSMarker.markerImage(with: UIColor.red.darker())
+        }
         marker.position = CLLocation(latitude: buoy.location!.latitude!.doubleValue, longitude: buoy.location!.longitude!.doubleValue).coordinate
         marker.title = "Station: " + buoy.stationId!
         marker.snippet = buoy.program ?? ""
         marker.map = mapView
-        
         self.mapView.selectedMarker = marker
-        
-        // Set the units to match the settings
-        //self.buoy?.unit = SyncManager.instance.units
         
         // Try to update the table...
         if let newWeatherData = buoy.data?.first?.weatherData {

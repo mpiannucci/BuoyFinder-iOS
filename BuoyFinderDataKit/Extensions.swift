@@ -49,13 +49,22 @@ extension GTLRStation_ApiApiMessagesUnitLabelMessage {
 extension GTLRStation_ApiApiMessagesSwellMessage {
     public var simpleDescription: String {
         get {
-            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length)  + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + self.compassDirection!
+            guard let waveHeight = self.waveHeight, let unit = self.unit, let period = self.period, let compassDirection = self.compassDirection else {
+                return ""
+            }
+            
+            return String(format: "%.01f", waveHeight.doubleValue) + " " + unit.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length)  + " @ " + String(format: "%.01f", period.doubleValue) + " s " + compassDirection
         }
     }
     
     public var detailedDescription: String {
         get {
-            return String(format: "%.01f", self.waveHeight!.doubleValue) + " " + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length) + " @ " + String(format: "%.01f", self.period!.doubleValue) + " s " + String(format: "%3.0f", self.direction!.doubleValue) + self.unit!.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Direction) + " " + self.compassDirection!
+            guard let waveHeight = self.waveHeight, let unit = self.unit, let period = self.period,
+                let compassDirection = self.compassDirection, let direction = self.direction else {
+                return ""
+            }
+            
+            return String(format: "%.01f", waveHeight.doubleValue) + " " + unit.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Length) + " @ " + String(format: "%.01f", period.doubleValue) + " s " + String(format: "%3.0f", direction.doubleValue) + unit.label(measurement: kGTLRStation_ApiApiMessagesMeasurementLabelMessage_Measurement_Direction) + " " + compassDirection
         }
     }
 }
@@ -169,9 +178,12 @@ extension GTLRStation_ApiApiMessagesStationMessage {
     
     public func addData(newData: GTLRStation_ApiApiMessagesDataMessage) {
         guard let _ = self.data else {
+            print("\(newData.waveSummary!.waveHeight!.doubleValue)")
             self.data = [newData]
             return
         }
+        
+        print("\(newData.waveSummary!.waveHeight!.doubleValue)")
         
         self.data!.append(newData)
         self.data = self.data?.filter({ (data) -> Bool in
