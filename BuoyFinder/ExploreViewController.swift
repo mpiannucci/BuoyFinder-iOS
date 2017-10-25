@@ -20,6 +20,9 @@ class ExploreViewController: UIViewController {
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var nearbyBuoys: [GTLRStation_ApiApiMessagesStationMessage] = []
+    let validBuoyMarker = GMSMarker.markerImage(with: UIColor.green.darker())
+    let validFixedMarker = GMSMarker.markerImage(with: UIColor.blue.darker())
+    let invalidMarker = GMSMarker.markerImage(with: UIColor.red.darker())
     
     var selectedBuoyStation: String = ""
 
@@ -91,12 +94,12 @@ class ExploreViewController: UIViewController {
                 let marker = GMSMarker()
                 if station.active?.boolValue ?? false {
                     if station.stationType?.uppercased() == kGTLRStationBuoyTypeBuoy || station.program?.contains("NDBC") ?? false {
-                        marker.icon = GMSMarker.markerImage(with: UIColor.green.darker())
+                        marker.icon = self.validBuoyMarker
                     } else {
-                        marker.icon = GMSMarker.markerImage(with: UIColor.blue.darker())
+                        marker.icon = self.validFixedMarker
                     }
                 } else {
-                    marker.icon = GMSMarker.markerImage(with: UIColor.red.darker())
+                    marker.icon = self.invalidMarker
                 }
                 marker.position = CLLocation(latitude: station.location!.latitude!.doubleValue, longitude: station.location!.longitude!.doubleValue).coordinate
                 marker.title = station.name
@@ -141,9 +144,9 @@ extension ExploreViewController: GMSMapViewDelegate {
             let location = GTLRStation_ApiApiMessagesLocationMessage()
             location.latitude = NSNumber.init(value: position.target.latitude)
             location.longitude = NSNumber.init(value: position.target.longitude)
-            self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 80.0, units: SyncManager.instance.units)
+            self.nearbyBuoys = BuoyModel.sharedModel.nearbyBuoys(location: location, radius: 120.0, units: SyncManager.instance.units)
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.nearbyBuoysTable.reloadData()
             }
         }
