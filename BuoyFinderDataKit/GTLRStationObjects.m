@@ -30,10 +30,10 @@ NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Metric = @"MET
 
 @implementation GTLRStation_ApiApiMessagesDataMessage
 @dynamic airTemperature, averagePeriod, date, dewpointTemperature,
-         directionSpectraPlot, energySpectraPlot, pressure, pressureTendency,
-         steepness, swellComponents, units, waterLevel, waterTemperature,
-         waveSpectra, waveSummary, windCompassDirection, windDirection,
-         windGust, windSpeed;
+         directionSpectraPlot, energySpectraPlot, maximumBreakingHeight,
+         minimumBreakingHeight, pressure, pressureTendency, steepness,
+         swellComponents, units, waterLevel, waterTemperature, waveSpectra,
+         waveSummary, windCompassDirection, windDirection, windGust, windSpeed;
 
 + (NSDictionary<NSString *, NSString *> *)propertyToJSONKeyMap {
   NSDictionary<NSString *, NSString *> *map = @{
@@ -42,6 +42,8 @@ NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Metric = @"MET
     @"dewpointTemperature" : @"dewpoint_temperature",
     @"directionSpectraPlot" : @"direction_spectra_plot",
     @"energySpectraPlot" : @"energy_spectra_plot",
+    @"maximumBreakingHeight" : @"maximum_breaking_height",
+    @"minimumBreakingHeight" : @"minimum_breaking_height",
     @"pressureTendency" : @"pressure_tendency",
     @"swellComponents" : @"swell_components",
     @"waterLevel" : @"water_level",

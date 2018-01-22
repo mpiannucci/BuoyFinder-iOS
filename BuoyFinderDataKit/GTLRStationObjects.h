@@ -86,6 +86,20 @@ GTLR_EXTERN NSString * const kGTLRStation_ApiApiMessagesUnitLabelMessage_Unit_Me
 @property(nonatomic, copy, nullable) NSString *energySpectraPlot;
 
 /**
+ *  maximumBreakingHeight
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *maximumBreakingHeight;
+
+/**
+ *  minimumBreakingHeight
+ *
+ *  Uses NSNumber of doubleValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *minimumBreakingHeight;
+
+/**
  *  pressure
  *
  *  Uses NSNumber of doubleValue.
