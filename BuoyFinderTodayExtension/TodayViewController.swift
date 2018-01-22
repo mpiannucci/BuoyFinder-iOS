@@ -15,7 +15,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet weak var dataVariableLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationButton: UIButton!
     
     let cacheManager = CachedBuoyManager()
     var variable: String = "WAVES"
@@ -60,6 +60,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.newData)
     }
     
+    @IBAction func forceUpdate(_ sender: Any) {
+        self.cacheManager.fetchUpdate(forceUpdate: true) { (_) in
+            self.updateUI()
+        }
+    }
+    
     func updateUI() {
         DispatchQueue.main.async {
             guard let buoy = self.cacheManager.defaultBuoy, let data = buoy.data?.first else {
@@ -71,7 +77,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let formatter = DateFormatter()
             formatter.timeStyle = .short
             formatter.dateStyle = .short
-            self.locationLabel.text = buoy.name! + ": " + formatter.string(from: data.date!.date)
+            self.locationButton.setTitle(buoy.name! + ": " + formatter.string(from: data.date!.date), for: UIControlState.normal) 
         }
     }
     

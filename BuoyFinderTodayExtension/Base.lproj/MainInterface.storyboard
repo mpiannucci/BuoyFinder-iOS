@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,12 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRt-Id-arl">
-                                <rect key="frame" x="16" y="81" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzr-Z4-LHU">
                                 <rect key="frame" x="16" y="37" width="288" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -43,18 +37,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QzU-Tf-01X">
+                                <rect key="frame" x="16" y="72" width="288" height="30"/>
+                                <state key="normal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="forceUpdate:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="AkR-Na-rFV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="trailing" secondItem="cRt-Id-arl" secondAttribute="trailing" id="9Va-My-EfW"/>
+                            <constraint firstItem="QzU-Tf-01X" firstAttribute="leading" secondItem="bzr-Z4-LHU" secondAttribute="leading" id="77c-hf-evE"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="QzU-Tf-01X" secondAttribute="bottom" constant="8" symbolic="YES" id="9HC-bv-NqA"/>
                             <constraint firstItem="p4k-vQ-WMy" firstAttribute="trailing" secondItem="bzr-Z4-LHU" secondAttribute="trailing" id="BJA-VN-mu8"/>
                             <constraint firstItem="p4k-vQ-WMy" firstAttribute="leading" secondItem="bzr-Z4-LHU" secondAttribute="leading" id="C9s-ul-Z39"/>
                             <constraint firstItem="bzr-Z4-LHU" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="EaG-MA-n03"/>
-                            <constraint firstItem="cRt-Id-arl" firstAttribute="top" secondItem="bzr-Z4-LHU" secondAttribute="bottom" constant="8" symbolic="YES" id="Ux4-Aj-cmz"/>
+                            <constraint firstItem="QzU-Tf-01X" firstAttribute="trailing" secondItem="bzr-Z4-LHU" secondAttribute="trailing" id="T8i-lg-219"/>
                             <constraint firstItem="p4k-vQ-WMy" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="VzT-bC-13z"/>
-                            <constraint firstItem="bzr-Z4-LHU" firstAttribute="leading" secondItem="cRt-Id-arl" secondAttribute="leading" id="aFi-FP-q3N"/>
                             <constraint firstItem="bzr-Z4-LHU" firstAttribute="top" secondItem="p4k-vQ-WMy" secondAttribute="bottom" constant="8" symbolic="YES" id="bJj-2V-T95"/>
                             <constraint firstItem="p4k-vQ-WMy" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="fih-C2-Pkf"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="cRt-Id-arl" secondAttribute="bottom" constant="8" symbolic="YES" id="fob-gh-NBA"/>
                             <constraint firstItem="p4k-vQ-WMy" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="kGX-5k-lN6"/>
                         </constraints>
                     </view>
@@ -67,7 +69,7 @@
                     <connections>
                         <outlet property="dataLabel" destination="bzr-Z4-LHU" id="1WM-sZ-ryN"/>
                         <outlet property="dataVariableLabel" destination="p4k-vQ-WMy" id="uIY-AW-Yel"/>
-                        <outlet property="locationLabel" destination="cRt-Id-arl" id="pIZ-3e-yhT"/>
+                        <outlet property="locationButton" destination="QzU-Tf-01X" id="Gb2-dr-Z1S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>

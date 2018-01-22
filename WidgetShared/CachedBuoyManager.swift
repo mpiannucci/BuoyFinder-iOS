@@ -55,7 +55,8 @@ public class CachedBuoyManager {
         }
     
         if let lastUpdateTime = buoy.latestUpdateTime, let _ = buoy.data?.first {
-            needsUpdate = lastUpdateTime.timeIntervalSinceNow > 30*60
+            let updateInterval = abs(lastUpdateTime.timeIntervalSinceNow)
+            needsUpdate = updateInterval > 30*60
         } else {
             needsUpdate = true
         }
